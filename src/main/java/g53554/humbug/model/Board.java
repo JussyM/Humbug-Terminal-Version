@@ -1,5 +1,7 @@
 package g53554.humbug.model;
 
+import static g53554.humbug.model.SquareType.*;
+
 /**
  * The board contains squares that may have animal or not It represented by an
  * arrays of two dimensions
@@ -26,12 +28,11 @@ public class Board {
      * @return board
      */
     public static Board getInitBoard() {
-        Board board = new Board(new Square[3][3]);
-        board.squares[0][0] = new Square(SquareType.GRASS);
-        board.squares[1][0] = new Square(SquareType.GRASS);
-        board.squares[1][1] = new Square(SquareType.GRASS);
-        board.squares[2][1] = new Square(SquareType.GRASS);
-        board.squares[2][2] = new Square(SquareType.STAR);
+        Board board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
         return board;
     }
 
@@ -46,8 +47,20 @@ public class Board {
             throw new IllegalArgumentException("La postion est null  On ne peut"
                     + " pas savoir si le squareType est une Star ou pas");
         }
+        if (position.getRow() < 0 || position.getRow() > squares.length) {
+            return false;
+
+        }
+        if (position.getColumn() < 0
+                || position.getColumn() > squares[position.getRow()].length) {
+            return false;
+
+        }
+        if (squares[position.getRow()][position.getColumn()] == null) {
+            return false;
+        }
         return squares[position.getRow()][position.getColumn()].getType()
-                == SquareType.STAR;
+                == SquareType.GRASS;
 
     }
 
@@ -62,8 +75,11 @@ public class Board {
             throw new IllegalArgumentException("La position est null donc on ne"
                     + " peut pas préciser le SquareType");
         }
-        return squares[position.getRow()][position.getColumn()].getType();
+        if (squares[position.getRow()][position.getColumn()] == null) {
+            throw  new IllegalArgumentException("");
+        }
 
+        return squares[position.getRow()][position.getColumn()].getType();
     }
 
     /**
