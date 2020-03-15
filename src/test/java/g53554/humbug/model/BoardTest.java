@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g53554.humbug.model;
 
 import static g53554.humbug.model.SquareType.*;
@@ -10,7 +5,6 @@ import static g53554.humbug.model.SquareType.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -18,20 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class BoardTest {
 
-    private Board board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
-
-    @BeforeEach
-    public void setUp() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
-    }
+    private final Board board = new Board(new Square[][]{
+        {new Square(GRASS), new Square(GRASS), null},
+        {null, new Square(GRASS), new Square(GRASS)},
+        {null, null, new Square(STAR)}
+    });
 
     /**
      * Test of isInside method, of class Board.

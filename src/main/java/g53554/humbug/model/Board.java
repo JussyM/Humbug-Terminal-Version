@@ -17,7 +17,7 @@ public class Board {
      *
      * @param squares
      */
-    public Board(Square[][] squares) {
+    Board(Square[][] squares) {
         this.squares = squares;
     }
 
@@ -60,7 +60,9 @@ public class Board {
             return false;
         }
         return squares[position.getRow()][position.getColumn()].getType()
-                == SquareType.GRASS;
+                == SquareType.GRASS
+                || squares[position.getRow()][position.getColumn()].getType()
+                == SquareType.STAR;
 
     }
 
@@ -76,7 +78,7 @@ public class Board {
                     + " peut pas préciser le SquareType");
         }
         if (squares[position.getRow()][position.getColumn()] == null) {
-            throw  new IllegalArgumentException("");
+            throw new IllegalArgumentException("La case ne fait ref à rien ");
         }
 
         return squares[position.getRow()][position.getColumn()].getType();
