@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author jj
  */
-public class View implements InterfaceView{
+public class View implements InterfaceView {
 
     /**
      * Display the board on the level 1 of the game
@@ -26,44 +26,14 @@ public class View implements InterfaceView{
         for (int i = 0; i < Sboard.length; i++) {
             for (int j = 0; j < Sboard[i].length; j++) {
                 Position position = new Position(i, j);
-                if (i <= 0 && board.isInside(position)
-                        && board.getSquareType(position)
-                        == SquareType.GRASS) {
-                    System.out.println(ColorCode.GREEN_BACKGROUND
-                            + "|  |" + "  |" + ColorCode.toDefault);
-                    System.out.println(ColorCode.GREEN_BACKGROUND
-                            + "|  |" + "  |" + ColorCode.toDefault);
+                if (boardIsInside1(board, position, i)) {
+                    displayFirstBoardSquare(j);
+                } else if (boardIsInside2(board, position, i)) {
+                    displaySecondBoardSquare(j, Sboard, i);
 
-                    if (j == 1) {
-                        System.out.println("__________");
-                    }
-                } else if (i > 0 && board.isInside(position)
-                        && board.getSquareType(position)
-                        == SquareType.GRASS) {
-                    System.out.println(ColorCode.toDefault
-                            + "   " + ColorCode.GREEN_BACKGROUND
-                            + "|  |" + "  |" + ColorCode.toDefault);
-                    System.out.println(ColorCode.toDefault
-                            + "   " + ColorCode.GREEN_BACKGROUND
-                            + "|  |" + "  |" + ColorCode.toDefault);
-                    if (j == Sboard[i].length - 1) {
-                        System.out.println("__________");
-                    }
+                } else if (boardIsInside3(board, position)) {
+                    displayThirdBoardSquare();
 
-                } else if (board.isInside(position)
-                        && board.getSquareType(position)
-                        == SquareType.STAR) {
-
-                    System.out.println(ColorCode.toDefault
-                            + "      " + ColorCode.GREEN_BACKGROUND
-                            + "|  |" + ColorCode.toDefault);
-                    System.out.println(ColorCode.toDefault
-                            + "      " + ColorCode.GREEN_BACKGROUND
-                            + "|  |" + ColorCode.toDefault);
-                    System.out.println(ColorCode.toDefault
-                            + "      " + ColorCode.GREEN_BACKGROUND
-                            + "|  |" + ColorCode.toDefault);
-                    System.out.println("      " + "____");
                 }
 
             }
@@ -72,7 +42,104 @@ public class View implements InterfaceView{
     }
 
     /**
-     * Display a an error message if occure 
+     * It display the fisrt Square board
+     *
+     * @param j
+     */
+    private void displayFirstBoardSquare(int j) {
+        System.out.println(ColorCode.GREEN_BACKGROUND
+                + "|  |" + "  |" + ColorCode.toDefault);
+        System.out.println(ColorCode.GREEN_BACKGROUND
+                + "|  |" + "  |" + ColorCode.toDefault);
+
+        if (j == 1) {
+            System.out.println("__________");
+        }
+
+    }
+
+    /**
+     * Display The second Square board
+     *
+     * @param j
+     * @param sBoard
+     * @param i
+     */
+    private void displaySecondBoardSquare(int j, String[][] sBoard, int i) {
+        System.out.println(ColorCode.toDefault
+                + "   " + ColorCode.GREEN_BACKGROUND
+                + "|  |" + "  |" + ColorCode.toDefault);
+        System.out.println(ColorCode.toDefault
+                + "   " + ColorCode.GREEN_BACKGROUND
+                + "|  |" + "  |" + ColorCode.toDefault);
+        if (j == sBoard[i].length - 1) {
+            System.out.println("__________");
+        }
+
+    }
+
+    /**
+     * Verify if the SquareType is Star And if the position is inside the board
+     *
+     * @param board
+     * @param position
+     * @return boolean
+     */
+    private boolean boardIsInside3(Board board, Position position) {
+        return board.isInside(position)
+                && board.getSquareType(position)
+                == SquareType.STAR;
+    }
+
+    /**
+     * Display the third part
+     */
+    private void displayThirdBoardSquare() {
+        System.out.println(ColorCode.toDefault
+                + "      " + ColorCode.GREEN_BACKGROUND
+                + "|  |" + ColorCode.toDefault);
+        System.out.println(ColorCode.toDefault
+                + "      " + ColorCode.GREEN_BACKGROUND
+                + "|  |" + ColorCode.toDefault);
+        System.out.println(ColorCode.toDefault
+                + "      " + ColorCode.GREEN_BACKGROUND
+                + "|  |" + ColorCode.toDefault);
+        System.out.println("      " + "____");
+
+    }
+
+    /**
+     * Verify if the SquareType is grass And if the position is inside the board
+     *
+     * @param board
+     * @param position
+     * @param i
+     * @return boolean
+     */
+    private boolean boardIsInside1(Board board, Position position, int i) {
+        return i <= 0 && board.isInside(position)
+                && board.getSquareType(position)
+                == SquareType.GRASS;
+
+    }
+
+    /**
+     * Verify if the SquareType is grass And if the position is inside the board
+     *
+     * @param board
+     * @param position
+     * @param i
+     * @return boolean
+     */
+    private boolean boardIsInside2(Board board, Position position, int i) {
+        return i > 0 && board.isInside(position)
+                && board.getSquareType(position)
+                == SquareType.GRASS;
+    }
+
+    /**
+     * Display a an error message if occure
+     *
      * @param message
      */
     @Override
@@ -170,10 +237,10 @@ public class View implements InterfaceView{
         return found;
     }
 
-//    public static void main(String[] args) {
-//        View v = new View();
-//        v.displayBoard(Board.getInitBoard());
-//        //  v.askPosition();
-//        //  System.out.println(v.askDirection());
-//    }
+    public static void main(String[] args) {
+        View v = new View();
+        v.displayBoard(Board.getInitBoard());
+        //  v.askPosition();
+        //  System.out.println(v.askDirection());
+    }
 }
