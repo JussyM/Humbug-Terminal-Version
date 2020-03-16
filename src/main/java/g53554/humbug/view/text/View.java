@@ -12,13 +12,14 @@ import java.util.Scanner;
  *
  * @author jj
  */
-public class View {
+public class View implements InterfaceView{
 
     /**
      * Display the board on the level 1 of the game
      *
      * @param board
      */
+    @Override
     public void displayBoard(Board board) {
         String[][] Sboard = new String[board.getNbRow()][board.getNbColumn()];
         System.out.println("_______");
@@ -74,6 +75,7 @@ public class View {
      * Display a an error message if occure 
      * @param message
      */
+    @Override
     public void displayError(String message) {
         System.out.println(message);
     }
@@ -83,6 +85,7 @@ public class View {
      *
      * @return
      */
+    @Override
     public Position askPosition() {
         System.out.println("Entrez une ligne valide: ");
         int lg = valideValue();
@@ -112,6 +115,7 @@ public class View {
      *
      * @return direction or null
      */
+    @Override
     public Direction askDirection() {
         String input = valideDirection();
         switch (input) {
