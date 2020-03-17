@@ -66,6 +66,9 @@ public class Board {
 
     }
 
+   
+    
+
     /**
      * return the squareType at the position given as args
      *
@@ -83,6 +86,7 @@ public class Board {
 
         return squares[position.getRow()][position.getColumn()].getType();
     }
+    
 
     /**
      * return the number of row on the board

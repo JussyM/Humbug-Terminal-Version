@@ -1,9 +1,11 @@
-package g53554.humbug.view.text;
+package g53554.humbug.model;
 
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
 import g53554.humbug.model.SquareType;
+import g53554.humbug.view.text.ColorCode;
+import g53554.humbug.view.text.InterfaceView;
 import java.util.Scanner;
 
 /**
@@ -22,7 +24,7 @@ public class View implements InterfaceView {
     @Override
     public void displayBoard(Board board) {
         String[][] Sboard = new String[board.getNbRow()][board.getNbColumn()];
-        System.out.println("_______");
+        System.out.println("▬▬▬▬▬▬▬");
         for (int i = 0; i < Sboard.length; i++) {
             for (int j = 0; j < Sboard[i].length; j++) {
                 Position position = new Position(i, j);
@@ -47,13 +49,13 @@ public class View implements InterfaceView {
      * @param j
      */
     private void displayFirstBoardSquare(int j) {
-        System.out.println(ColorCode.GREEN_BACKGROUND
+        System.out.println(ColorCode.CYAN_BACKGROUND
                 + "|  |" + "  |" + ColorCode.toDefault);
-        System.out.println(ColorCode.GREEN_BACKGROUND
+        System.out.println(ColorCode.CYAN_BACKGROUND
                 + "|  |" + "  |" + ColorCode.toDefault);
 
         if (j == 1) {
-            System.out.println("__________");
+            System.out.println("▬▬▬▬▬▬▬▬▬▬");
         }
 
     }
@@ -67,13 +69,13 @@ public class View implements InterfaceView {
      */
     private void displaySecondBoardSquare(int j, String[][] sBoard, int i) {
         System.out.println(ColorCode.toDefault
-                + "   " + ColorCode.GREEN_BACKGROUND
+                + "   " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + "  |" + ColorCode.toDefault);
         System.out.println(ColorCode.toDefault
-                + "   " + ColorCode.GREEN_BACKGROUND
+                + "   " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + "  |" + ColorCode.toDefault);
         if (j == sBoard[i].length - 1) {
-            System.out.println("__________");
+            System.out.println("▬▬▬▬▬▬▬▬▬▬");
         }
 
     }
@@ -96,15 +98,15 @@ public class View implements InterfaceView {
      */
     private void displayThirdBoardSquare() {
         System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.GREEN_BACKGROUND
+                + "      " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + ColorCode.toDefault);
         System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.GREEN_BACKGROUND
+                + "      " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + ColorCode.toDefault);
         System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.GREEN_BACKGROUND
+                + "      " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + ColorCode.toDefault);
-        System.out.println("      " + "____");
+        System.out.println("      " + "▬▬▬▬");
 
     }
 

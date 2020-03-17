@@ -1,15 +1,12 @@
-package g53554.humbug.model.animals;
+package g53554.humbug.model;
 
-import g53554.humbug.model.Animal;
 import static g53554.humbug.model.SquareType.GRASS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import g53554.humbug.model.Board;
-import g53554.humbug.model.Direction;
-import g53554.humbug.model.Position;
-import g53554.humbug.model.Snail;
+import static g53554.humbug.model.SquareType.STAR;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -17,17 +14,28 @@ import g53554.humbug.model.Snail;
  */
 public class SnailTest {
 
-    private Board board = Board.getInitBoard();
-    private Animal[] animals = new Animal[]{
-        new Snail(new Position(0, 0)),
-        new Snail(new Position(1, 2))
-    };
+    private Board board;
+    private Animal[] animals;
+
+    @BeforeEach
+    public void setUp() {
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
+        animals = new Animal[]{
+            new Snail(new Position(0, 0)),
+            new Snail(new Position(1, 2))
+        };
+    }
 
     /**
      * Test of move method, of class Snail.
      */
     @Test
     public void testMove() {
+        //setUp();
         System.out.println("move_general");
         Snail instance = (Snail) animals[0];
         Position expResult = new Position(0, 1); //.next(Direction.EAST);
@@ -40,6 +48,7 @@ public class SnailTest {
      */
     @Test
     public void testMove_next_notfree() {
+      //  setUp();
         System.out.println("move next case not free");
         Snail instance = (Snail) animals[0];
         animals[1].setPositionOnBoard(new Position(0, 1));
@@ -53,6 +62,7 @@ public class SnailTest {
      */
     @Test
     public void testMove_next_onstar() {
+      //  setUp();
         System.out.println("move next on star");
         Snail instance = (Snail) animals[1];
         Position expResult = new Position(2, 2);
@@ -67,6 +77,7 @@ public class SnailTest {
      */
     @Test
     public void testMove_next_notinside_2() {
+      //  setUp();
         System.out.println("move next case null");
         Snail instance = (Snail) animals[0];
         Position expResult = null; // move and fall
