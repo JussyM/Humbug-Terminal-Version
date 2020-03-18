@@ -4,6 +4,8 @@ import g53554.humbug.model.Animal;
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
+import g53554.humbug.model.Snail;
+import g53554.humbug.model.Spider;
 import g53554.humbug.model.SquareType;
 import java.util.Scanner;
 
@@ -23,121 +25,59 @@ public class View implements InterfaceView {
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
-        String[][] Sboard = new String[board.getNbRow()][board.getNbColumn()];
+        String[][] sBoard = new String[board.getNbRow()][board.getNbColumn()];
         System.out.println("▬▬▬▬▬▬▬");
-        for (int i = 0; i < Sboard.length; i++) {
-            for (int j = 0; j < Sboard[i].length; j++) {
+        for (int i = 0; i < sBoard.length; i++) {
+            for (int j = 0; j < sBoard[i].length; j++) {
                 Position position = new Position(i, j);
-                if (boardIsInside1(board, position, i)) {
-                    displayFirstBoardSquare(j);
-                } else if (boardIsInside2(board, position, i)) {
-                    displaySecondBoardSquare(j, Sboard, i);
+                for (Animal animal : animals) {
+                    if (i <= 0 && board.isInside(position)
+                            && board.getSquareType(position)
+                            == SquareType.GRASS
+                            && animal.getPositionOnBoard().equals(position)) {
+                        System.out.println(ColorCode.CYAN_BACKGROUND
+                                + "|  |" + "  |" + ColorCode.toDefault);
+                        System.out.println(ColorCode.CYAN_BACKGROUND
+                                + "|" + "S" + " |" + "  |" + ColorCode.toDefault);
+                        System.out.println(ColorCode.CYAN_BACKGROUND
+                                + "|  |" + "  |" + ColorCode.toDefault);
 
-                } else if (boardIsInside3(board, position)) {
-                    displayThirdBoardSquare();
+                        System.out.println("▬▬▬▬▬▬▬▬▬▬");
 
+                    }
+                    if (i > 0 && board.isInside(position)
+                            && board.getSquareType(position)
+                            == SquareType.GRASS) {
+                        System.out.println(ColorCode.toDefault
+                                + "   " + ColorCode.CYAN_BACKGROUND
+                                + "|  |" + "  |" + ColorCode.toDefault);
+                        System.out.println(ColorCode.toDefault
+                                + "   " + ColorCode.CYAN_BACKGROUND
+                                + "|  |" + "  |" + ColorCode.toDefault);
+
+                        if (j == sBoard[i].length - 1) {
+                            System.out.println("▬▬▬▬▬▬▬▬▬▬");
+
+                        }
+                    } else if (board.isInside(position)
+                            && board.getSquareType(position)
+                            == SquareType.STAR) {
+                        System.out.println(ColorCode.toDefault
+                                + "      " + ColorCode.CYAN_BACKGROUND
+                                + "| " + " |" + ColorCode.toDefault);
+                        System.out.println(ColorCode.toDefault
+                                + "      " + ColorCode.CYAN_BACKGROUND
+                                + "| "+"*"+"|" + ColorCode.toDefault);
+                        System.out.println(ColorCode.toDefault
+                                + "      " + ColorCode.CYAN_BACKGROUND
+                                + "|  |" + ColorCode.toDefault);
+                        System.out.println("      " + "▬▬▬▬");
+
+                    }
                 }
-
             }
-
-        }
-    }
-
-    /**
-     * It display the fisrt Square board
-     *
-     * @param j
-     */
-    private void displayFirstBoardSquare(int j) {
-
-        System.out.println(ColorCode.CYAN_BACKGROUND
-                + "| " + "\uD83D\uDC0C" + " |" + "  |" + ColorCode.toDefault);
-        System.out.println(ColorCode.CYAN_BACKGROUND
-                + "|  |" + "  |" + ColorCode.toDefault);
-
-        if (j == 1) {
-            System.out.println("▬▬▬▬▬▬▬▬▬▬");
         }
 
-    }
-
-    /**
-     * Display The second Square board
-     *
-     * @param j
-     * @param sBoard
-     * @param i
-     */
-    private void displaySecondBoardSquare(int j, String[][] sBoard, int i) {
-        System.out.println(ColorCode.toDefault
-                + "   " + ColorCode.CYAN_BACKGROUND
-                + "|  |" + "  |" + ColorCode.toDefault);
-        System.out.println(ColorCode.toDefault
-                + "   " + ColorCode.CYAN_BACKGROUND
-                + "|  |" + "  |" + ColorCode.toDefault);
-        if (j == sBoard[i].length - 1) {
-            System.out.println("▬▬▬▬▬▬▬▬▬▬");
-        }
-
-    }
-
-    /**
-     * Verify if the SquareType is Star And if the position is inside the board
-     *
-     * @param board
-     * @param position
-     * @return boolean
-     */
-    private boolean boardIsInside3(Board board, Position position) {
-        return board.isInside(position)
-                && board.getSquareType(position)
-                == SquareType.STAR;
-    }
-
-    /**
-     * Display the third part
-     */
-    private void displayThirdBoardSquare() {
-        System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.CYAN_BACKGROUND
-                + "| *" + "|" + ColorCode.toDefault);
-        System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.CYAN_BACKGROUND
-                + "|  |" + ColorCode.toDefault);
-        System.out.println(ColorCode.toDefault
-                + "      " + ColorCode.CYAN_BACKGROUND
-                + "|  |" + ColorCode.toDefault);
-        System.out.println("      " + "▬▬▬▬");
-
-    }
-
-    /**
-     * Verify if the SquareType is grass And if the position is inside the board
-     *
-     * @param board
-     * @param position
-     * @param i
-     * @return boolean
-     */
-    private boolean boardIsInside1(Board board, Position position, int i) {
-        return i <= 0 && board.isInside(position)
-                && board.getSquareType(position)
-                == SquareType.GRASS;
-
-    }
-
-    /**
-     * Verify if the SquareType is grass And if the position is inside the board
-     *
-     * @param board
-     * @param position
-     * @param i
-     * @return boolean
-     */
-    private boolean boardIsInside2(Board board, Position position, int i) {
-        return i > 0 && board.isInside(position)
-                && board.getSquareType(position)
-                == SquareType.GRASS;
     }
 
     /**
@@ -146,7 +86,8 @@ public class View implements InterfaceView {
      * @param message
      */
     @Override
-    public void displayError(String message) {
+    public void displayError(String message
+    ) {
         System.out.println(message);
     }
 
@@ -241,8 +182,10 @@ public class View implements InterfaceView {
     }
 
     public static void main(String[] args) {
+        Animal[] animals = new Animal[]{
+            new Spider(new Position(0, 0)),};
         View v = new View();
-        v.displayBoard(Board.getInitBoard());
+        v.displayBoard(Board.getInitBoard(), animals);
 //        v.displayBoard(Board.getInitBoard());
 //        //  v.askPosition();
 //        //  System.out.println(v.askDirection());
