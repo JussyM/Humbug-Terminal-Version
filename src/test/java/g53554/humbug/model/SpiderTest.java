@@ -113,7 +113,7 @@ public class SpiderTest {
     public void testMove_passOnStar() {
         System.out.println("move and pass on star without win");
         board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(STAR), new Square(GRASS), 
+            {new Square(GRASS), new Square(STAR), new Square(GRASS),
                 new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}

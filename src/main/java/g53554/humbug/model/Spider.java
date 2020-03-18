@@ -122,12 +122,4 @@ public class Spider extends Animal {
         return found;
     }
 
-    public Spider() {
-        super(null);
-    }
-
-    public static void main(String[] args) {
-
-    }
-
 }
