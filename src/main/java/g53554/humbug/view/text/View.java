@@ -1,11 +1,9 @@
-package g53554.humbug.model;
+package g53554.humbug.view.text;
 
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
 import g53554.humbug.model.SquareType;
-import g53554.humbug.view.text.ColorCode;
-import g53554.humbug.view.text.InterfaceView;
 import java.util.Scanner;
 
 /**

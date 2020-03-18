@@ -3,8 +3,8 @@ package g53554.humbug.model;
 import static g53554.humbug.model.SquareType.*;
 
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *

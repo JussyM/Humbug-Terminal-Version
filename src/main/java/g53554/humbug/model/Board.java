@@ -37,6 +37,15 @@ public class Board {
     }
 
     /**
+     *
+     * @param position
+     */
+
+    public void setOnGrass(Position position) {
+        this.squares[position.getRow()][position.getColumn()].setType(GRASS);
+    }
+
+    /**
      * return a boolean true if the squareType is a star but false if not
      *
      * @param position
@@ -47,7 +56,7 @@ public class Board {
             throw new IllegalArgumentException("La postion est null  On ne peut"
                     + " pas savoir si le squareType est une Star ou pas");
         }
-        if (position.getRow() < 0 || position.getRow() > squares.length) {
+        if (position.getRow() < 0 || position.getRow() >= squares.length) {
             return false;
 
         }
@@ -66,9 +75,6 @@ public class Board {
 
     }
 
-   
-    
-
     /**
      * return the squareType at the position given as args
      *
@@ -86,7 +92,6 @@ public class Board {
 
         return squares[position.getRow()][position.getColumn()].getType();
     }
-    
 
     /**
      * return the number of row on the board

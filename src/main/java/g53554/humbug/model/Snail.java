@@ -10,6 +10,7 @@ package g53554.humbug.model;
 public class Snail extends Animal {
 
     /**
+     * Snail simple constructor
      *
      * @param positionOnBoard
      */
@@ -18,41 +19,52 @@ public class Snail extends Animal {
     }
 
     /**
+     * this method apply the move according to snail capacity return a new
+     * postion if he can move return a null if he falls out and also return his
+     * old position if an animal is on his new position
      *
      * @param board
      * @param direction
      * @param animal
-     * @return
+     * @return new position
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animal) {
-        Position instance = super.getPositionOnBoard();
+        Position snailPos = super.getPositionOnBoard();
 
-        if (!board.isInside(instance.next(direction))) {
+        if (!board.isInside(snailPos.next(direction))) {
+            super.setPositionOnBoard(null);
             return null;
-        } else if (board.isInside(instance.next(direction))
-                && board.getSquareType(instance.next(direction))
-                == SquareType.GRASS && isFree(instance.next(direction), animal)) {
-            return instance.next(direction);
 
-        } else if (board.isInside(instance.next(direction))
-                && board.getSquareType(instance.next(direction))
+        } else if (board.isInside(snailPos.next(direction))
+                && board.getSquareType(snailPos.next(direction))
+                == SquareType.GRASS && isFree(snailPos.next(direction), animal)) {
+            return snailPos.next(direction);
+
+        } else if (board.isInside(snailPos.next(direction))
+                && board.getSquareType(snailPos.next(direction))
                 == SquareType.STAR) {
             super.setOnStar(true);
-            super.setPositionOnBoard(instance.next(direction));
-            SquareType type = board.getSquareType(instance);
-
+            super.setPositionOnBoard(snailPos.next(direction));
+            board.setOnGrass(snailPos.next(direction));
             return super.getPositionOnBoard();
 
+        } else if (board.isInside(snailPos.next(direction))
+                && board.getSquareType(snailPos.next(direction))
+                == SquareType.GRASS && !isFree(snailPos.next(direction),
+                        animal)) {
+            return snailPos;
         }
         return null;
+
     }
 
     /**
+     * return a boolean true if the animal is on the board and false if not
      *
      * @param position
      * @param animal
-     * @return
+     * @return found
      */
     private boolean isFree(Position position, Animal... animal) {
         int i = 0;
@@ -65,18 +77,6 @@ public class Snail extends Animal {
 
         }
         return found;
-    }
-
-    public static void main(String[] args) {
-        Animal[] animals = new Animal[]{
-            new Snail(new Position(0, 0)),
-            new Snail(new Position(1, 2))};
-        Snail instance = (Snail) animals[1];
-        //       Position expResult = new Position(2, 2);
-        Position result = instance.move(Board.getInitBoard(),
-                Direction.SOUTH, animals);
-        System.out.println(result.getRow());
-        System.out.println(result.getColumn());
     }
 
 }

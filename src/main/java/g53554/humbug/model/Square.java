@@ -28,5 +28,13 @@ public class Square {
         return type;
     }
 
-    
+    /**
+     *
+     * @param type
+     */
+
+    public void setType(SquareType type) {
+        this.type = type;
+    }
+
 }
