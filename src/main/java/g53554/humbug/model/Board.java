@@ -40,7 +40,6 @@ public class Board {
      *
      * @param position
      */
-
     public void setOnGrass(Position position) {
         this.squares[position.getRow()][position.getColumn()].setType(GRASS);
     }

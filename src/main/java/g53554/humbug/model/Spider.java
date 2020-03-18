@@ -2,13 +2,11 @@ package g53554.humbug.model;
 
 /**
  * This class represent the Spider that move on the board while their's no
- * barriers
+ * barriers or animal to stop him
  *
  * @author jj
  */
 public class Spider extends Animal {
-
-    private Position savepos;
 
     /**
      * simple spider constructor
@@ -20,41 +18,50 @@ public class Spider extends Animal {
     }
 
     /**
+     * return a new postion of the spider according to the direction if a animal
+     * can stop him if any animal can't stop him the method return null
      *
      * @param board
      * @param direction
      * @param animals
-     * @return
+     * @return new position or null
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position spiderPos = super.getPositionOnBoard();
-        Position[] spiderPacours = spiderParcours(board, direction, spiderPos);
-        if (isFree(spiderPacours, animals)) {
+        Position[] spiderPacours = spiderParcours(board, direction, spiderPos); // return all the position of the spider in an array
+        Position spiderNextPosition = allPositionAreFree(spiderPacours, animals);
+        if (spiderNextPosition == null) {
             super.setPositionOnBoard(null);
             return null;
+        } else {
+            if (board.isInside(spiderNextPosition)
+                    && board.getSquareType(spiderNextPosition)
+                    == SquareType.GRASS
+                    && isSquareisFree(spiderNextPosition, animals)) {
+                return spiderNextPosition;
 
-        } else if (!board.isInside(savepos)) {
-            return null;
-        } else if (board.isInside(savepos)
-                && board.getSquareType(savepos)
-                == SquareType.GRASS) {
+            } else if (board.isInside(spiderNextPosition)
+                    && board.getSquareType(spiderNextPosition)
+                    == SquareType.STAR) {
+                super.setOnStar(true);
+                super.setPositionOnBoard(spiderNextPosition);
+                board.setOnGrass(spiderNextPosition);
+                return super.getPositionOnBoard();
+            } else if (board.isInside(spiderNextPosition)
+                    && board.getSquareType(spiderNextPosition)
+                    == SquareType.GRASS
+                    && !isSquareisFree(spiderNextPosition, animals)) {
+                return spiderPos;
 
-            return spiderPos = savepos;
-        } else if (board.isInside(savepos)
-                && board.getSquareType(savepos)
-                == SquareType.STAR) {
-            super.setOnStar(true);
-            super.setPositionOnBoard(savepos);
-            board.setOnGrass(savepos);
-            return super.getPositionOnBoard();
-
+            }
         }
+
         return null;
     }
 
     /**
-     * Return an araays of all the spider position according to a direction
+     * Return an arrays of all the spider position according to a direction
      *
      * @param board
      * @param direction
@@ -78,25 +85,48 @@ public class Spider extends Animal {
      * @param animal
      * @return
      */
-    private boolean isFree(Position[] position, Animal... animal) {
-        Position animalPos;
-        boolean found = true;
-        int i = 0;
-        int j = 0;
-        while (i < animal.length && found) {
-            animalPos = animal[i].getPositionOnBoard();
-            while (j < position.length && found) {
-                if (position[j].equals(animalPos)) {
-                    savepos = position[j - 1];
-                    found = false;
+    private Position allPositionAreFree(Position[] position,
+            Animal... animal) {
+        for (int i = 0; i < position.length; i++) {
+            for (Animal animal1 : animal) {
+                if (position[i].equals(animal1.getPositionOnBoard())) {
+                    if (i - 1 < 0) {
+                        return position[i];
+                    }
+                    return position[i - 1];
                 }
-
             }
-            j++;
+        }
+
+        return null;
+
+    }
+
+    /**
+     * return a boolean true if the animal is on the board and false if not
+     *
+     * @param position
+     * @param animal
+     * @return found
+     */
+    private boolean isSquareisFree(Position position, Animal... animal) {
+        int i = 0;
+        boolean found = true;
+        while (i < animal.length && found) {
+            if (animal[i].getPositionOnBoard().equals(position)) {
+                found = false;
+            }
+            i++;
 
         }
-        i++;
         return found;
+    }
+
+    public Spider() {
+        super(null);
+    }
+
+    public static void main(String[] args) {
 
     }
 

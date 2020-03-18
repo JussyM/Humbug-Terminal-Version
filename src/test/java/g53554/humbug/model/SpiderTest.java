@@ -50,6 +50,7 @@ public class SpiderTest {
      */
     @Test
     public void testMove_endline() {
+        setUp();
         System.out.println("move end line and fall");
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
@@ -67,6 +68,7 @@ public class SpiderTest {
      */
     @Test
     public void testMove_tootheranimal() {
+        setUp();
         System.out.println("move to other animal");
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS)},

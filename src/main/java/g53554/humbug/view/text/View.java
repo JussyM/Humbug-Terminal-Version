@@ -1,5 +1,6 @@
 package g53554.humbug.view.text;
 
+import g53554.humbug.model.Animal;
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
@@ -18,9 +19,10 @@ public class View implements InterfaceView {
      * Display the board on the level 1 of the game
      *
      * @param board
+     * @param animals
      */
     @Override
-    public void displayBoard(Board board) {
+    public void displayBoard(Board board, Animal... animals) {
         String[][] Sboard = new String[board.getNbRow()][board.getNbColumn()];
         System.out.println("▬▬▬▬▬▬▬");
         for (int i = 0; i < Sboard.length; i++) {
@@ -47,8 +49,9 @@ public class View implements InterfaceView {
      * @param j
      */
     private void displayFirstBoardSquare(int j) {
+
         System.out.println(ColorCode.CYAN_BACKGROUND
-                + "|  |" + "  |" + ColorCode.toDefault);
+                + "| " + "\uD83D\uDC0C" + " |" + "  |" + ColorCode.toDefault);
         System.out.println(ColorCode.CYAN_BACKGROUND
                 + "|  |" + "  |" + ColorCode.toDefault);
 
@@ -97,7 +100,7 @@ public class View implements InterfaceView {
     private void displayThirdBoardSquare() {
         System.out.println(ColorCode.toDefault
                 + "      " + ColorCode.CYAN_BACKGROUND
-                + "|  |" + ColorCode.toDefault);
+                + "| *" + "|" + ColorCode.toDefault);
         System.out.println(ColorCode.toDefault
                 + "      " + ColorCode.CYAN_BACKGROUND
                 + "|  |" + ColorCode.toDefault);
@@ -240,7 +243,9 @@ public class View implements InterfaceView {
     public static void main(String[] args) {
         View v = new View();
         v.displayBoard(Board.getInitBoard());
-        //  v.askPosition();
-        //  System.out.println(v.askDirection());
+//        v.displayBoard(Board.getInitBoard());
+//        //  v.askPosition();
+//        //  System.out.println(v.askDirection());
+        //       View.displayBoard2(Board.getInitBoard());
     }
 }
