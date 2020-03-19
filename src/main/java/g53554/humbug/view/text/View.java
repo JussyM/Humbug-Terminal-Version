@@ -7,6 +7,7 @@ import g53554.humbug.model.Position;
 import g53554.humbug.model.Snail;
 import g53554.humbug.model.Spider;
 import g53554.humbug.model.SquareType;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -151,6 +152,9 @@ public class View implements InterfaceView {
      * @return input
      */
     private String valideDirection() {
+        String[] direction = {"north", "east", "west", "south"};
+        System.out.println("Direction Possible: " + Arrays.toString(direction));
+
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         while (!correct(input)) {
@@ -190,5 +194,12 @@ public class View implements InterfaceView {
 //        //  v.askPosition();
 //        //  System.out.println(v.askDirection());
         //       View.displayBoard2(Board.getInitBoard());
+    }
+
+    /**
+     *
+     */
+    public void displayHelp() {
+
     }
 }

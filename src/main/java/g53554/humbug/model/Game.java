@@ -7,7 +7,7 @@ package g53554.humbug.model;
  */
 public class Game implements Model {
 
-    private final Board board = Board.getInitBoard();
+    private Board board;
     private Animal[] animals;
 
     /**
@@ -17,7 +17,7 @@ public class Game implements Model {
      */
     @Override
     public Board getBoard() {
-        return board;
+        return this.board = Board.getInitBoard();
     }
 
     /**
@@ -27,7 +27,13 @@ public class Game implements Model {
      */
     @Override
     public Animal[] animals() {
-        return animals;
+        Animal[] animals = new Animal[]{
+            new Snail(new Position(0, 0)),};
+        return this.animals = animals;
+    }
+
+    public Animal[] getAnimals() {
+        return animals();
     }
 
     /**
@@ -42,12 +48,17 @@ public class Game implements Model {
     }
 
     /**
+     * return a boolean if all the animal are on star the they win
      *
-     * @return
+     * @return boolean
      */
     @Override
     public boolean levelIsOver() {
-        return false;
+        int i = 0;
+        while (i < animals().length && animals()[i].isOnStar()) {
+            i++;
+        }
+        return animals().length == i;
     }
 
     /**
@@ -57,6 +68,21 @@ public class Game implements Model {
      */
     @Override
     public void move(Position position, Direction direction) {
+        if (position == null || direction == null) {
+            throw new IllegalArgumentException("Position ou direction null");
+        }
+        int i = 0;
+        boolean move = false;
+        while (i < animals().length && !move) {
+            if (animals()[i].move(board, direction, animals) == null) {
+                System.out.println("L'animal est sortie du jeu");
+                move = true;
+            } else {
+                animals()[i].move(board, direction, animals);
+                move = true;
+            }
+            i++;
+        }
 
     }
 
