@@ -67,7 +67,7 @@ public class View implements InterfaceView {
                                 + "| " + " |" + ColorCode.toDefault);
                         System.out.println(ColorCode.toDefault
                                 + "      " + ColorCode.CYAN_BACKGROUND
-                                + "| "+"*"+"|" + ColorCode.toDefault);
+                                + "| " + "*" + "|" + ColorCode.toDefault);
                         System.out.println(ColorCode.toDefault
                                 + "      " + ColorCode.CYAN_BACKGROUND
                                 + "|  |" + ColorCode.toDefault);
