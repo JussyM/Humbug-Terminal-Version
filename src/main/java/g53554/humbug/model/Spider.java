@@ -80,10 +80,11 @@ public class Spider extends Animal {
     }
 
     /**
-     *
+     * return the position of the spider if an animal can stop him
+     * or retur null if not
      * @param position
      * @param animal
-     * @return
+     * @return position where the spider will stop at 
      */
     private Position allPositionAreFree(Position[] position,
             Animal... animal) {

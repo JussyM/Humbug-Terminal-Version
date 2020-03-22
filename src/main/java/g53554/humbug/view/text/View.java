@@ -4,8 +4,6 @@ import g53554.humbug.model.Animal;
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
-import g53554.humbug.model.Snail;
-import g53554.humbug.model.Spider;
 import g53554.humbug.model.SquareType;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,66 +17,135 @@ import java.util.Scanner;
 public class View implements InterfaceView {
 
     /**
-     * Display the board on the level 1 of the game
+     * Display The board of the game according to the level
      *
      * @param board
      * @param animals
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
-        String[][] sBoard = new String[board.getNbRow()][board.getNbColumn()];
-        System.out.println("▬▬▬▬▬▬▬");
-        for (int i = 0; i < sBoard.length; i++) {
-            for (int j = 0; j < sBoard[i].length; j++) {
-                Position position = new Position(i, j);
-                for (Animal animal : animals) {
-                    if (i <= 0 && board.isInside(position)
-                            && board.getSquareType(position)
-                            == SquareType.GRASS
-                            && animal.getPositionOnBoard().equals(position)) {
-                        System.out.println(ColorCode.CYAN_BACKGROUND
-                                + "|  |" + "  |" + ColorCode.toDefault);
-                        System.out.println(ColorCode.CYAN_BACKGROUND
-                                + "|" + "S" + " |" + "  |" + ColorCode.toDefault);
-                        System.out.println(ColorCode.CYAN_BACKGROUND
-                                + "|  |" + "  |" + ColorCode.toDefault);
+        String[][] boardArrays = initBoard(board, animals);
+        printSquareLine(boardArrays[0]);
+        System.out.println("");
+        displayBoardMethod(boardArrays);
+    }
 
-                        System.out.println("▬▬▬▬▬▬▬▬▬▬");
+    /**
+     * DisplayBoard Code
+     *
+     * @param boardArrays
+     */
+    private void displayBoardMethod(String[][] boardArrays) {
+        for (String[] boardPrint : boardArrays) {
+            for (int col = 0; col < boardPrint.length; col++) {
 
-                    }
-                    if (i > 0 && board.isInside(position)
-                            && board.getSquareType(position)
-                            == SquareType.GRASS) {
-                        System.out.println(ColorCode.toDefault
-                                + "   " + ColorCode.CYAN_BACKGROUND
-                                + "|  |" + "  |" + ColorCode.toDefault);
-                        System.out.println(ColorCode.toDefault
-                                + "   " + ColorCode.CYAN_BACKGROUND
-                                + "|  |" + "  |" + ColorCode.toDefault);
+                switch (boardPrint[col]) {
+                    case "GRASS":
 
-                        if (j == sBoard[i].length - 1) {
-                            System.out.println("▬▬▬▬▬▬▬▬▬▬");
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.GREEN_BACKGROUND
+                                + "[  ] " + TerminalColor.toDefault);
 
-                        }
-                    } else if (board.isInside(position)
-                            && board.getSquareType(position)
-                            == SquareType.STAR) {
-                        System.out.println(ColorCode.toDefault
-                                + "      " + ColorCode.CYAN_BACKGROUND
-                                + "| " + " |" + ColorCode.toDefault);
-                        System.out.println(ColorCode.toDefault
-                                + "      " + ColorCode.CYAN_BACKGROUND
-                                + "| " + "*" + "|" + ColorCode.toDefault);
-                        System.out.println(ColorCode.toDefault
-                                + "      " + ColorCode.CYAN_BACKGROUND
-                                + "|  |" + ColorCode.toDefault);
-                        System.out.println("      " + "▬▬▬▬");
+                        break;
+                    case "STAR":
+                        System.out.print(TerminalColor.GREEN_BACKGROUND
+                                + "[ ★ ]" + TerminalColor.toDefault);
+                        break;
+                    case "GRASS_A":
+                        System.out.print(TerminalColor.GREEN_BACKGROUND
+                                + "[S ] " + TerminalColor.toDefault);
 
-                    }
+                        break;
+                    case "STAR_A":
+                        System.out.println("\033[42m[   ]\033[0m");
+                        break;
+                    default:
+                        System.out.print(TerminalColor.WHITE_BACKGROUND
+                                + "[  ]" + TerminalColor.toDefault);
+                        break;
+                }
+                if (col == boardArrays[0].length - 1) {
+                    System.out.println("");
+                    printSquareLine(boardPrint);
+                    System.out.println("");
+
                 }
             }
         }
 
+    }
+
+    /**
+     * Turn the board into a String arrays and insert the value of each square
+     *
+     * @param board
+     * @param animals
+     * @return ARRAY_STRING
+     */
+    private String[][] initBoard(Board board, Animal... animals) {
+        String[][] boardArrays = new String[board.getNbRow()][board
+                .getNbColumn()];
+        for (int row = 0; row < boardArrays.length; row++) {
+            for (int col = 0; col < boardArrays[row].length; col++) {
+                Position position = new Position(row, col);
+                boolean animalIsPresent = animalIsPresent(position, animals);
+                if (board.isInside(position)
+                        && board.getSquareType(position) == SquareType.STAR
+                        && !animalIsPresent) {
+                    boardArrays[row][col] = "STAR";
+                } else if (board.isInside(position)
+                        && board.getSquareType(position) == SquareType.GRASS
+                        && !animalIsPresent) {
+                    boardArrays[row][col] = "GRASS";
+                } else if (board.isInside(position)
+                        && board.getSquareType(position) == SquareType.GRASS
+                        && animalIsPresent) {
+                    boardArrays[row][col] = "GRASS_A";
+                } else if (board.isInside(position)
+                        && board.getSquareType(position) == SquareType.STAR
+                        && animalIsPresent) {
+                    boardArrays[row][col] = "STAR_A";
+                } else {
+                    boardArrays[row][col] = "null";
+                }
+            }
+        }
+        return boardArrays;
+
+    }
+
+    /**
+     * print the line tha separate each endLine
+     *
+     * @param board
+     */
+    private void printSquareLine(String[] board) {
+        int i = 0;
+        while (i < board.length) {
+            System.out.print("▬▬▬▬▬");
+            i++;
+
+        }
+    }
+
+    /**
+     * Return a boolean if an animal is present
+     *
+     * @param position
+     * @param animal
+     * @return boolean true if animal is present false if not
+     */
+    private boolean animalIsPresent(Position position, Animal... animal) {
+        int i = 0;
+        boolean found = false;
+        while (i < animal.length && !found) {
+            if (animal[i].getPositionOnBoard().equals(position)) {
+                found = true;
+            }
+            i++;
+
+        }
+        return found;
     }
 
     /**
@@ -87,15 +154,14 @@ public class View implements InterfaceView {
      * @param message
      */
     @Override
-    public void displayError(String message
-    ) {
-        System.out.println(message);
+    public void displayError(String message) {
+        System.err.print(message);
     }
 
     /**
      * Ask the postion to the user
      *
-     * @return
+     * @return new position
      */
     @Override
     public Position askPosition() {
@@ -185,21 +251,17 @@ public class View implements InterfaceView {
         return found;
     }
 
-    public static void main(String[] args) {
-        Animal[] animals = new Animal[]{
-            new Spider(new Position(0, 0)),};
-        View v = new View();
-        v.displayBoard(Board.getInitBoard(), animals);
-//        v.displayBoard(Board.getInitBoard());
-//        //  v.askPosition();
-//        //  System.out.println(v.askDirection());
-        //       View.displayBoard2(Board.getInitBoard());
-    }
-
     /**
-     *
+     * Display The game begin
      */
+    @Override
     public void displayHelp() {
+        System.out.println(TerminalColor.toGreen("*****************************"
+                + "*"));
+        System.out.println(TerminalColor.toRed("***********HUMBUG***********"
+                + "**"));
+        System.out.println(TerminalColor.toGreen("****************************"
+                + "**" + "\n"));
 
     }
 }

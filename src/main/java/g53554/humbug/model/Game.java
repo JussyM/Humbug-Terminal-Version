@@ -1,14 +1,15 @@
 package g53554.humbug.model;
 
 /**
- * This class
+ * Gme class that start the game and apply the moves and the changes
  *
  * @author jj
  */
 public class Game implements Model {
 
-    private Board board;
-    private Animal[] animals;
+    private Board board = Board.getInitBoard();
+    private Animal[] animals = new Animal[]{
+        new Snail(new Position(0, 0)),};
 
     /**
      * return the board of the game
@@ -17,7 +18,7 @@ public class Game implements Model {
      */
     @Override
     public Board getBoard() {
-        return this.board = Board.getInitBoard();
+        return this.board;
     }
 
     /**
@@ -27,16 +28,12 @@ public class Game implements Model {
      */
     @Override
     public Animal[] animals() {
-        Animal[] animals = new Animal[]{
-            new Snail(new Position(0, 0)),};
-        return this.animals = animals;
-    }
 
-    public Animal[] getAnimals() {
-        return animals();
+        return this.animals;
     }
 
     /**
+     * Start the game according to the level
      *
      * @param level
      */
@@ -62,6 +59,7 @@ public class Game implements Model {
     }
 
     /**
+     * Move the animal from one position to another according to the direction
      *
      * @param position
      * @param direction
@@ -74,11 +72,11 @@ public class Game implements Model {
         int i = 0;
         boolean move = false;
         while (i < animals().length && !move) {
-            if (animals()[i].move(board, direction, animals) == null) {
+            Position movePos = animals()[i].move(board, direction, animals);
+            if (movePos == null) {
                 System.out.println("L'animal est sortie du jeu");
                 move = true;
             } else {
-                animals()[i].move(board, direction, animals);
                 move = true;
             }
             i++;

@@ -37,6 +37,8 @@ public class Board {
     }
 
     /**
+     * Set the square from star to grass according to the position given as an
+     * argument
      *
      * @param position
      */
@@ -45,7 +47,8 @@ public class Board {
     }
 
     /**
-     * return a boolean true if the squareType is a star but false if not
+     * return a boolean true if the squareType is a star but false if not throw
+     * some exception if the square is null
      *
      * @param position
      * @return boolean
@@ -75,7 +78,8 @@ public class Board {
     }
 
     /**
-     * return the squareType at the position given as args
+     * return the squareType at the position given as args throw some exception
+     * if the square is null
      *
      * @param position
      * @return SquareType

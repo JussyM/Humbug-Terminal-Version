@@ -16,6 +16,7 @@ public class Controller {
     private InterfaceView view;
 
     /**
+     * Controller constructor
      *
      * @param game
      * @param view
@@ -29,14 +30,22 @@ public class Controller {
         this.view = view;
     }
 
+    /**
+     * Start game method he initialized all the animals on the board initialized
+     * the board and display it
+     */
     public void startGame() {
         game.startLevel(1);
+        view.displayHelp();
         do {
             view.displayBoard(game.getBoard(), game.animals());
+
             Position pos = view.askPosition();
             Direction dir = view.askDirection();
             game.move(pos, dir);
         } while (!game.levelIsOver());
+
+        view.displayBoard(game.getBoard(), game.animals());
 
     }
 

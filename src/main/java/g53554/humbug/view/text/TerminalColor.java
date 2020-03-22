@@ -4,14 +4,14 @@ package g53554.humbug.view.text;
  *
  * @author jj
  */
-public class ColorCode {
+public class TerminalColor {
 
     /**
      * This method build the Bash default color
      *
      * @return La couleur default.
      */
-    private String toDefault() {
+    private static String toDefault() {
         return "\033[0m";
     }
 
@@ -21,7 +21,7 @@ public class ColorCode {
      * @param a The String that has to be color
      * @return The String already colored
      */
-    public String toBlack(String a) {
+    public static String toBlack(String a) {
         return "\033[30m" + a + toDefault();
     }
 
@@ -31,7 +31,7 @@ public class ColorCode {
      * @param a The String that has to be color
      * @return The String already colored
      */
-    public String toRed(String a) {
+    public static String toRed(String a) {
         return "\033[31m" + a + toDefault();
     }
 
@@ -41,7 +41,7 @@ public class ColorCode {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public String toGreen(String a) {
+    public static String toGreen(String a) {
         return "\033[32m" + a + toDefault();
     }
 
@@ -51,7 +51,7 @@ public class ColorCode {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public String toYellow(String a) {
+    public static String toYellow(String a) {
         return "\033[33m" + a + toDefault();
     }
 
@@ -61,7 +61,7 @@ public class ColorCode {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public String toBlue(String a) {
+    public static  String toBlue(String a) {
         return "\033[34m" + a + toDefault();
     }
 
@@ -71,7 +71,7 @@ public class ColorCode {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public String toPurple(String a) {
+    public static  String toPurple(String a) {
         return "\033[35m" + a + toDefault();
     }
 
@@ -81,7 +81,7 @@ public class ColorCode {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public String toCyan(String a) {
+    public static  String toCyan(String a) {
         return "\033[36m" + a + toDefault();
     }
 
@@ -142,7 +142,7 @@ public class ColorCode {
     // Bold High Intensity
     public String BLACK_BOLD_BRIGHT = "\033[1;90m"; // BLACK
     public String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
-    public String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
+    public  String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
     public String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
     public String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE

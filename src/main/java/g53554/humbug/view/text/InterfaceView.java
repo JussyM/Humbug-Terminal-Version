@@ -41,4 +41,10 @@ public interface InterfaceView {
      */
     void displayError(String message);
 
+    /**
+     * Display the game name 
+     */
+
+    void displayHelp();
+
 }

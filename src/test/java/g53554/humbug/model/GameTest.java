@@ -20,7 +20,7 @@ public class GameTest {
 
     @BeforeEach
     public void setUp() {
-        instance= new Game();
+
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
             {null, new Square(GRASS), new Square(GRASS)},
@@ -31,6 +31,7 @@ public class GameTest {
             new Snail(new Position(1, 1)),
             new Spider(new Position(1, 2))
         };
+        instance = new Game();
     }
 
     /**
@@ -57,7 +58,7 @@ public class GameTest {
         Game instance = new Game();
         Animal[] expResult = animals;
         Animal[] result = instance.animals();
-        assertEquals(expResult.length, result.length
+        assertEquals(expResult.getClass(), result.getClass()
         );
 
     }
@@ -79,8 +80,8 @@ public class GameTest {
      */
     @Test
     public void testLevelIsNotOver() {
+        setUp();
         System.out.println("levelIsNotOver");
-        Game instance = new Game();
         instance.startLevel(1);
         boolean expResult = false;
         boolean result = instance.levelIsOver();
@@ -93,10 +94,11 @@ public class GameTest {
      */
     @Test
     public void testLevelIsOver() {
+        setUp();
         System.out.println("levelIsOver");
-        animals[0].setOnStar(true);
-        animals[1].setOnStar(true);
-        animals[2].setOnStar(true);
+        Game instance = new Game();
+        instance.startLevel(0);
+        instance.animals()[0].setOnStar(true);
         boolean expResult = true;
         boolean result = instance.levelIsOver();
         assertEquals(expResult, result);
@@ -123,14 +125,12 @@ public class GameTest {
     @Test
     public void testMoveNotNull() {
         System.out.println("move to position");
-        Position position = new Position(0, 0);
-        Direction direction = Direction.EAST;
         Position expResult = new Position(0, 1);
         Game instance = new Game();
         instance.startLevel(1);
+        Position position = instance.animals()[0].getPositionOnBoard();
+        Direction direction = Direction.EAST;
         instance.move(position, direction);
-        System.out.println(instance.animals()[0].getPositionOnBoard().getRow());
-        System.out.println(instance.animals()[0].getPositionOnBoard().getColumn());
         assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
 
     }

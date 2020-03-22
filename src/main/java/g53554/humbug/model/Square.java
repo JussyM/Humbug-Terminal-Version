@@ -29,7 +29,7 @@ public class Square {
     }
 
     /**
-     *
+     * setter for type 
      * @param type
      */
 
