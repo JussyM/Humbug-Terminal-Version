@@ -25,6 +25,8 @@ public class View implements InterfaceView {
     @Override
     public void displayBoard(Board board, Animal... animals) {
         String[][] boardArrays = initBoard(board, animals);
+        printColPosition(boardArrays[0]);
+        System.out.println("");
         printSquareLine(boardArrays[0]);
         System.out.println("");
         displayBoardMethod(boardArrays);
@@ -36,6 +38,7 @@ public class View implements InterfaceView {
      * @param boardArrays
      */
     private void displayBoardMethod(String[][] boardArrays) {
+        int i = 0;
         for (String[] boardPrint : boardArrays) {
             for (int col = 0; col < boardPrint.length; col++) {
 
@@ -49,11 +52,11 @@ public class View implements InterfaceView {
                         break;
                     case "STAR":
                         System.out.print(TerminalColor.GREEN_BACKGROUND
-                                + "[ ★ ]" + TerminalColor.toDefault);
+                                + "[ ★ ]" + TerminalColor.toDefault + " ");
                         break;
                     case "GRASS_A":
                         System.out.print(TerminalColor.GREEN_BACKGROUND
-                                + "[S ] " + TerminalColor.toDefault);
+                                + "[ S ]" + TerminalColor.toDefault);
 
                         break;
                     case "STAR_A":
@@ -63,15 +66,43 @@ public class View implements InterfaceView {
                         System.out.print(TerminalColor.WHITE_BACKGROUND
                                 + "[  ]" + TerminalColor.toDefault);
                         break;
+
                 }
                 if (col == boardArrays[0].length - 1) {
+                    printLinePosition(i++);
                     System.out.println("");
                     printSquareLine(boardPrint);
+
                     System.out.println("");
 
                 }
             }
         }
+
+    }
+
+    /**
+     * Print each column position
+     *
+     * @param board
+     */
+    private void printColPosition(String[] board) {
+        for (int i = 0; i < board.length; i++) {
+            System.out.printf(" " + TerminalColor.CYAN_BACKGROUND + "[%02d]"
+                    + TerminalColor.toDefault, i);
+
+        }
+
+    }
+
+    /**
+     * Rpint line position
+     *
+     * @param i
+     */
+    private void printLinePosition(int i) {
+        System.out.printf("   " + TerminalColor.CYAN_BACKGROUND + "[%02d]"
+                + TerminalColor.toDefault, i);
 
     }
 
@@ -155,7 +186,7 @@ public class View implements InterfaceView {
      */
     @Override
     public void displayError(String message) {
-        System.err.print(message);
+        System.err.print(TerminalColor.toRed(message));
     }
 
     /**

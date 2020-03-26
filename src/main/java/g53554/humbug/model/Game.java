@@ -72,14 +72,14 @@ public class Game implements Model {
         int i = 0;
         boolean move = false;
         while (i < animals().length && !move) {
-            Position movePos = animals()[i].move(board, direction, animals);
+            Position movePos = animals()[i].move(board, direction, animals());
             if (movePos == null) {
-                System.out.println("L'animal est sortie du jeu");
                 move = true;
             } else {
                 move = true;
             }
             i++;
+
         }
 
     }
