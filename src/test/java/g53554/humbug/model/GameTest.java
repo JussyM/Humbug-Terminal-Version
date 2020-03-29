@@ -96,11 +96,11 @@ public class GameTest {
     public void testLevelIsOver() {
         setUp();
         System.out.println("levelIsOver");
-        Game instance = new Game();
-        instance.startLevel(0);
-        instance.animals()[0].setOnStar(true);
+        Game ins = new Game();
+        ins.startLevel(0);
+        ins.animals()[0].setOnStar(true);
         boolean expResult = true;
-        boolean result = instance.levelIsOver();
+        boolean result = ins.levelIsOver();
         assertEquals(expResult, result);
 
     }

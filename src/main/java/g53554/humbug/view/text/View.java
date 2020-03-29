@@ -4,6 +4,8 @@ import g53554.humbug.model.Animal;
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
 import g53554.humbug.model.Position;
+import g53554.humbug.model.Snail;
+import g53554.humbug.model.Spider;
 import g53554.humbug.model.SquareType;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -24,10 +26,9 @@ public class View implements InterfaceView {
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
-        String[][] boardArrays = initBoard(board, animals);
+        String[][] boardArrays = boardExtend(initBoard(board, animals));
         printColPosition(boardArrays[0]);
         System.out.println("");
-        printSquareLine(boardArrays[0]);
         System.out.println("");
         displayBoardMethod(boardArrays);
     }
@@ -44,35 +45,57 @@ public class View implements InterfaceView {
 
                 switch (boardPrint[col]) {
                     case "GRASS":
-
                         System.out.print(TerminalColor.toDefault
-                                + TerminalColor.GREEN_BACKGROUND
-                                + "[  ] " + TerminalColor.toDefault);
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
 
                         break;
                     case "STAR":
-                        System.out.print(TerminalColor.GREEN_BACKGROUND
+                        System.out.print(TerminalColor.YELLOW_BACKGROUND
                                 + "[ ★ ]" + TerminalColor.toDefault + " ");
                         break;
                     case "GRASS_A":
-                        System.out.print(TerminalColor.GREEN_BACKGROUND
+                        System.out.print(TerminalColor.YELLOW_BACKGROUND
                                 + "[ S ]" + TerminalColor.toDefault);
 
                         break;
-                    case "STAR_A":
-                        System.out.println("\033[42m[   ]\033[0m");
+                    case "GRASS_A_T":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
+                        break;
+                    case "GRASS_T":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
+                        break;
+                    case "GRASS_A_T_D":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
+                        break;
+                    case "GRASS_T_D":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
+                        break;
+                    case "STAR_T_D":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
+                        break;
+                    case "STAR_T":
+                        System.out.print(TerminalColor.toDefault
+                                + TerminalColor.YELLOW_BACKGROUND
+                                + "[   ]" + TerminalColor.toDefault);
                         break;
                     default:
                         System.out.print(TerminalColor.WHITE_BACKGROUND
-                                + "[  ]" + TerminalColor.toDefault);
+                                + "     " + TerminalColor.toDefault);
                         break;
 
                 }
                 if (col == boardArrays[0].length - 1) {
-                    printLinePosition(i++);
-                    System.out.println("");
-                    printSquareLine(boardPrint);
-
                     System.out.println("");
 
                 }
@@ -92,17 +115,6 @@ public class View implements InterfaceView {
                     + TerminalColor.toDefault, i);
 
         }
-
-    }
-
-    /**
-     * Rpint line position
-     *
-     * @param i
-     */
-    private void printLinePosition(int i) {
-        System.out.printf("   " + TerminalColor.CYAN_BACKGROUND + "[%02d]"
-                + TerminalColor.toDefault, i);
 
     }
 
@@ -146,16 +158,53 @@ public class View implements InterfaceView {
     }
 
     /**
-     * print the line tha separate each endLine
+     * Extend The String Board From 3*3 size to 12*3 size
      *
-     * @param board
+     * @param sBoard
+     * @return new Board
      */
-    private void printSquareLine(String[] board) {
-        int i = 0;
-        while (i < board.length) {
-            System.out.print("▬▬▬▬▬");
-            i++;
+    private String[][] boardExtend(String[][] sBoard) {
+        String[][] board = new String[sBoard.length * 4][sBoard.length];
+        changeNull(board);
+        board[1] = sBoard[0];
+        board[4] = sBoard[1];
+        board[7] = sBoard[2];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                switch (board[i][j]) {
+                    case "GRASS_A":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "GRASS":
+                        board[i - 1][j] = "GRASS_T";
+                        board[i + 1][j] = "GRASS_T_D";
+                        break;
+                    case "STAR":
+                        board[i - 1][j] = "STAR_T";
+                        board[i + 1][j] = "STAR_T_D";
+                        break;
+                    default:
+                        break;
+                }
 
+            }
+
+        }
+
+        return board;
+    }
+
+    /**
+     * Change the null value to avoie nullPointeurException
+     *
+     * @param tab
+     */
+    private void changeNull(String[][] tab) {
+        for (String[] tab1 : tab) {
+            for (int j = 0; j < tab1.length; j++) {
+                tab1[j] = "nothing";
+            }
         }
     }
 
@@ -294,5 +343,15 @@ public class View implements InterfaceView {
         System.out.println(TerminalColor.toGreen("****************************"
                 + "**" + "\n"));
 
+    }
+
+    public static void main(String[] args) {
+        View v = new View();
+        Animal[] animals = new Animal[]{
+            new Snail(new Position(0, 0)),
+            new Snail(new Position(0, 1)),
+            new Snail(new Position(1, 1)),
+            new Spider(new Position(1, 2)),};
+        v.displayBoard(Board.getInitBoard(), animals);
     }
 }

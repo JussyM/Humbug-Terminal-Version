@@ -11,7 +11,7 @@ import g53554.humbug.view.text.InterfaceView;
  * @author jj
  */
 public class Controller {
-    
+
     private Model game;
     private InterfaceView view;
 
@@ -40,18 +40,19 @@ public class Controller {
         try {
             do {
                 view.displayBoard(game.getBoard(), game.animals());
-                
+
                 Position pos = view.askPosition();
                 Direction dir = view.askDirection();
                 game.move(pos, dir);
             } while (!game.levelIsOver());
-            
+
             view.displayBoard(game.getBoard(), game.animals());
-            
+
         } catch (NullPointerException e) {
+
             view.displayError("L'animal est sortie du jeu");
-            
+
         }
-        
+
     }
 }

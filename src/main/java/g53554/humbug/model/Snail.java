@@ -43,7 +43,7 @@ public class Snail extends Animal {
                 == SquareType.GRASS && isFree(snailPos.next(direction), 
                         animal)) {
             super.setPositionOnBoard(snailPos.next(direction));
-            return snailPos.next(direction);
+            return super.getPositionOnBoard();
 
         } else if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))

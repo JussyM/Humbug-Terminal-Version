@@ -72,12 +72,19 @@ public class Game implements Model {
         int i = 0;
         boolean move = false;
         while (i < animals().length && !move) {
-            Position movePos = animals()[i].move(board, direction, animals());
-            if (movePos == null) {
-                move = true;
+            if (!animals()[i].getPositionOnBoard().equals(position)) {
+                System.out.println("");
+                System.out.println("Pas d'animal dans cette case ");
             } else {
-                move = true;
+                Position movePos = animals()[i].move(board, direction, animals());
+                if (movePos == null) {
+                    move = true;
+                } else {
+                    
+                    move = true;
+                }
             }
+
             i++;
 
         }
