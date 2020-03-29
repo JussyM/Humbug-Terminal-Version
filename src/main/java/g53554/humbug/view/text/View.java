@@ -73,6 +73,7 @@ public class View implements InterfaceView {
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
                                 + "[   ]" + TerminalColor.toDefault);
+
                         break;
                     case "GRASS_T_D":
                         System.out.print(TerminalColor.toDefault
@@ -345,13 +346,4 @@ public class View implements InterfaceView {
 
     }
 
-    public static void main(String[] args) {
-        View v = new View();
-        Animal[] animals = new Animal[]{
-            new Snail(new Position(0, 0)),
-            new Snail(new Position(0, 1)),
-            new Snail(new Position(1, 1)),
-            new Spider(new Position(1, 2)),};
-        v.displayBoard(Board.getInitBoard(), animals);
-    }
 }
