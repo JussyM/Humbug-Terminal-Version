@@ -18,8 +18,8 @@ public class Controller {
     /**
      * Controller constructor
      *
-     * @param game
-     * @param view
+     * @param game class that initialized the game
+     * @param view class that printOut the game board and animals
      */
     public Controller(Model game, InterfaceView view) {
         if (game == null || view == null) {

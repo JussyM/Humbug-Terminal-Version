@@ -31,29 +31,28 @@ public class Snail extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animal) {
         Position snailPos = super.getPositionOnBoard();
-      
 
         if (!board.isInside(snailPos.next(direction))) {
-          
+
             super.setPositionOnBoard(null);
             return null;
-
-        } else if (board.isInside(snailPos.next(direction))
+        }
+        if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))
-                == SquareType.GRASS && isFree(snailPos.next(direction), 
+                == SquareType.GRASS && isFree(snailPos.next(direction),
                         animal)) {
             super.setPositionOnBoard(snailPos.next(direction));
             return super.getPositionOnBoard();
-
-        } else if (board.isInside(snailPos.next(direction))
+        }
+        if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))
                 == SquareType.STAR) {
             super.setOnStar(true);
             super.setPositionOnBoard(snailPos.next(direction));
             board.setOnGrass(snailPos.next(direction));
             return super.getPositionOnBoard();
-
-        } else if (board.isInside(snailPos.next(direction))
+        }
+        if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))
                 == SquareType.GRASS && !isFree(snailPos.next(direction),
                         animal)) {

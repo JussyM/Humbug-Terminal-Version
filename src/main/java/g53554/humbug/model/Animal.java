@@ -14,7 +14,7 @@ public abstract class Animal {
     /**
      * Simple constructor of Animal
      *
-     * @param positionOnBoard
+     * @param positionOnBoard is the position of the animals on the board
      */
     public Animal(Position positionOnBoard) {
         this.positionOnBoard = positionOnBoard;
@@ -42,7 +42,7 @@ public abstract class Animal {
     /**
      * Setter for onStar
      *
-     * @param onStar
+     * @param onStar boolean that change the attribut
      */
     public void setOnStar(boolean onStar) {
         this.onStar = onStar;
@@ -51,7 +51,7 @@ public abstract class Animal {
     /**
      * Setter for Position on board
      *
-     * @param positionOnBoard
+     * @param positionOnBoard is the position of the animals on the board
      */
     public void setPositionOnBoard(Position positionOnBoard) {
         this.positionOnBoard = positionOnBoard;
@@ -63,12 +63,12 @@ public abstract class Animal {
      * return his old position but if he move and fall out of the board the
      * position will return null
      *
-     * @param bord
-     * @param direction
-     * @param animal
-     * @return new position 
+     * @param board of the game 
+     * @param direction of the animals
+     * @param animals arrays of the animals of the game 
+     * @return new position
      */
-    public abstract Position move(Board bord,
-            Direction direction, Animal... animal);
+    public abstract Position move(Board board,
+            Direction direction, Animal... animals);
 
 }

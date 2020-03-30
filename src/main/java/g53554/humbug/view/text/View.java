@@ -47,52 +47,57 @@ public class View implements InterfaceView {
                     case "GRASS":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
-
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     case "STAR":
                         System.out.print(TerminalColor.YELLOW_BACKGROUND
-                                + "[ ★ ]" + TerminalColor.toDefault + " ");
+                                + "{ ★ }" + TerminalColor.toDefault + " ");
                         break;
-                    case "GRASS_A":
+                    case "Snail":
                         System.out.print(TerminalColor.YELLOW_BACKGROUND
-                                + "[ S ]" + TerminalColor.toDefault);
+                                + "{ E }" + TerminalColor.toDefault);
 
                         break;
+                    case "Spider":
+                        System.out.print(TerminalColor.YELLOW_BACKGROUND
+                                + "{ A }" + TerminalColor.toDefault);
+
+                        break;
+
                     case "GRASS_A_T":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     case "GRASS_T":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     case "GRASS_A_T_D":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
 
                         break;
                     case "GRASS_T_D":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     case "STAR_T_D":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     case "STAR_T":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
-                                + "[   ]" + TerminalColor.toDefault);
+                                + "{   }" + TerminalColor.toDefault);
                         break;
                     default:
-                        System.out.print(TerminalColor.WHITE_BACKGROUND
-                                + "     " + TerminalColor.toDefault);
+                        System.out.print(
+                                "     ");
                         break;
 
                 }
@@ -141,14 +146,20 @@ public class View implements InterfaceView {
                         && board.getSquareType(position) == SquareType.GRASS
                         && !animalIsPresent) {
                     boardArrays[row][col] = "GRASS";
+
                 } else if (board.isInside(position)
                         && board.getSquareType(position) == SquareType.GRASS
                         && animalIsPresent) {
-                    boardArrays[row][col] = "GRASS_A";
-                } else if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.STAR
-                        && animalIsPresent) {
-                    boardArrays[row][col] = "STAR_A";
+                    for (Animal animal1 : animals) {
+                        if (animal1.getPositionOnBoard().equals(position)
+                                && animal1 instanceof Snail) {
+                            boardArrays[row][col] = "Snail";
+                        } else if (animal1.getPositionOnBoard().equals(position)
+                                && animal1 instanceof Spider) {
+                            boardArrays[row][col] = "Spider";
+                        }
+                    }
+
                 } else {
                     boardArrays[row][col] = "null";
                 }
@@ -173,7 +184,11 @@ public class View implements InterfaceView {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 switch (board[i][j]) {
-                    case "GRASS_A":
+                    case "Spider":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                        case "Snail":
                         board[i - 1][j] = "GRASS_A_T";
                         board[i + 1][j] = "GRASS_A_T_D";
                         break;
@@ -221,6 +236,7 @@ public class View implements InterfaceView {
         boolean found = false;
         while (i < animal.length && !found) {
             if (animal[i].getPositionOnBoard().equals(position)) {
+
                 found = true;
             }
             i++;

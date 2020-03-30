@@ -7,9 +7,9 @@ package g53554.humbug.model;
  */
 public class Game implements Model {
 
-    private Board board = Board.getInitBoard();
-    private Animal[] animals = new Animal[]{
-        new Snail(new Position(0, 0)),};
+    private Board board;
+
+    private Animal[] animals;
 
     /**
      * return the board of the game
@@ -18,6 +18,7 @@ public class Game implements Model {
      */
     @Override
     public Board getBoard() {
+        board = Board.getInitBoard();
         return this.board;
     }
 
@@ -28,6 +29,9 @@ public class Game implements Model {
      */
     @Override
     public Animal[] animals() {
+        animals = new Animal[]{
+            new Spider(new Position(0, 1)),
+            new Snail(new Position(2, 1))};
 
         return this.animals;
     }
@@ -80,7 +84,7 @@ public class Game implements Model {
                 if (movePos == null) {
                     move = true;
                 } else {
-                    
+
                     move = true;
                 }
             }
