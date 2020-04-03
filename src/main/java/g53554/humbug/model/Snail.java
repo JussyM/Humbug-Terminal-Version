@@ -23,13 +23,13 @@ public class Snail extends Animal {
      * postion if he can move return a null if he falls out and also return his
      * old position if an animal is on his new position
      *
-     * @param board
-     * @param direction
-     * @param animal
-     * @return new position
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays of animals
+     * @return new position or null
      */
     @Override
-    public Position move(Board board, Direction direction, Animal... animal) {
+    public Position move(Board board, Direction direction, Animal... animals) {
         Position snailPos = super.getPositionOnBoard();
 
         if (!board.isInside(snailPos.next(direction))) {
@@ -40,7 +40,7 @@ public class Snail extends Animal {
         if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))
                 == SquareType.GRASS && isFree(snailPos.next(direction),
-                        animal)) {
+                        animals)) {
             super.setPositionOnBoard(snailPos.next(direction));
             return super.getPositionOnBoard();
         }
@@ -55,31 +55,22 @@ public class Snail extends Animal {
         if (board.isInside(snailPos.next(direction))
                 && board.getSquareType(snailPos.next(direction))
                 == SquareType.GRASS && !isFree(snailPos.next(direction),
-                        animal)) {
+                        animals) && !animalsIsOnStar(snailPos.next(direction),
+                        animals)) {
             return snailPos;
         }
-        return null;
-
-    }
-
-    /**
-     * return a boolean true if the animal is on the board and false if not
-     *
-     * @param position
-     * @param animal
-     * @return found
-     */
-    private boolean isFree(Position position, Animal... animal) {
-        int i = 0;
-        boolean found = true;
-        while (i < animal.length && found) {
-            if (animal[i].getPositionOnBoard().equals(position)) {
-                found = false;
-            }
-            i++;
-
+        if (board.isInside(snailPos.next(direction))
+                && board.getSquareType(snailPos.next(direction))
+                == SquareType.GRASS
+                && !isFree(snailPos.next(direction), animals)
+                && animalsIsOnStar(snailPos.next(direction), animals)) {
+            super.setPositionOnBoard(snailPos.next(direction));
+            Animal prens = animalOnNextSquare(snailPos.next(direction),
+                    animals);
+            prens.setPositionOnBoard(null);
+            return super.getPositionOnBoard();
         }
-        return found;
+        return null;
     }
 
 }

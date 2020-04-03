@@ -10,17 +10,6 @@ import static g53554.humbug.model.SquareType.*;
  */
 public class Board {
 
-    private Square[][] squares;
-
-    /**
-     * Board constructor
-     *
-     * @param squares represente each square of the board
-     */
-    Board(Square[][] squares) {
-        this.squares = squares;
-    }
-
     /**
      * return a new board of 3 row and 3 column with some SquareType initialized
      * at some certain position according to the first level of the game
@@ -30,10 +19,22 @@ public class Board {
     public static Board getInitBoard() {
         Board board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, new Square(GRASS), new Square(STAR)}
+            {new Square(GRASS), new Square(GRASS), new Square(STAR)},
+            {new Square(GRASS), new Square(GRASS), new Square(STAR)}
         });
+
         return board;
+    }
+
+    private Square[][] squares;
+
+    /**
+     * Board constructor
+     *
+     * @param squares represente each square of the board
+     */
+    Board(Square[][] squares) {
+        this.squares = squares;
     }
 
     /**
@@ -51,7 +52,7 @@ public class Board {
      * some exception if the square is null
      *
      * @param position if the position is inside the board
-     * @return boolean true or false 
+     * @return boolean true or false
      */
     public boolean isInside(Position position) {
         if (position == null) {
@@ -78,7 +79,7 @@ public class Board {
      * return the squareType at the position given as args throw some exception
      * if the square is null
      *
-     * @param position position that need verification 
+     * @param position position that need verification
      * @return SquareType
      */
     public SquareType getSquareType(Position position) {
@@ -96,7 +97,7 @@ public class Board {
     /**
      * return the number of row on the board
      *
-     * @return nbRow
+     * @return nbRow of the board
      */
     public int getNbRow() {
         return squares.length;
@@ -106,7 +107,7 @@ public class Board {
     /**
      * return the number of column on the board
      *
-     * @return nbColumn
+     * @return nbColumn of the board
      */
     public int getNbColumn() {
         return squares[0].length;

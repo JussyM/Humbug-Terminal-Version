@@ -97,7 +97,7 @@ public class GameTest {
         Game ins = new Game();
         ins.startLevel(0);
         ins.animals()[0].setOnStar(true);
-        ins.animals()[1].setOnStar(true);
+     //   ins.animals()[1].setOnStar(true);
         boolean expResult = true;
         boolean result = ins.levelIsOver();
         assertEquals(expResult, result);
@@ -112,39 +112,39 @@ public class GameTest {
         System.out.println("move");
         Position position = null;
         Direction direction = null;
-        Game instance = new Game();
+        Game ins = new Game();
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            instance.move(position, direction);
+            ins.move(position, direction);
         });
     }
 
-//    /**
-//     * Test of move method, of class Game.
-//     */
-//    @Test
-//    public void testMoveNotNullSnail() {
-//        System.out.println("move to position");
-//        Position expResult = new Position(0, 1);
-//        Game instance = new Game();
-//        instance.startLevel(1);
-//        Position position = instance.animals()[0].getPositionOnBoard();
-//        Direction direction = Direction.EAST;
-//        instance.move(position, direction);
-//        assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
-//
-//    }
-     @Test
-    public void testMoveNotNullSpider() {
-//        setUp();
+    /**
+     * Test of move method, of class Game.
+     */
+    @Test
+    public void testMoveNotNullSnail() {
         System.out.println("move to position");
-        Position expResult = new Position(1, 1);
+        Position expResult = new Position(0, 1);
         Game instance = new Game();
         instance.startLevel(1);
         Position position = instance.animals()[0].getPositionOnBoard();
-        Direction direction = Direction.SOUTH;
+        Direction direction = Direction.EAST;
         instance.move(position, direction);
         assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
 
     }
+//     @Test
+//    public void testMoveNotNullSpider() {
+////        setUp();
+//        System.out.println("move to position");
+//        Position expResult = new Position(1, 1);
+//        Game instance = new Game();
+//        instance.startLevel(1);
+//        Position position = instance.animals()[0].getPositionOnBoard();
+//        Direction direction = Direction.SOUTH;
+//        instance.move(position, direction);
+//        assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
+//
+//    }
 
 }

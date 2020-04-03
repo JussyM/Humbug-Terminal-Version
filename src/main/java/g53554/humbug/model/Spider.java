@@ -11,7 +11,7 @@ public class Spider extends Animal {
     /**
      * simple spider constructor
      *
-     * @param positionOnBoard
+     * @param positionOnBoard of animals on the board
      */
     public Spider(Position positionOnBoard) {
         super(positionOnBoard);
@@ -21,9 +21,9 @@ public class Spider extends Animal {
      * return a new postion of the spider according to the direction if a animal
      * can stop him if any animal can't stop him the method return null
      *
-     * @param board
-     * @param direction
-     * @param animals
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays of animals
      * @return new position or null
      */
     @Override
@@ -55,7 +55,7 @@ public class Spider extends Animal {
         if (board.isInside(spiderNextPosition)
                 && board.getSquareType(spiderNextPosition)
                 == SquareType.GRASS
-                && isSquareisFree(spiderNextPosition, animals)) {
+                && isFree(spiderNextPosition, animals)) {
             super.setPositionOnBoard(spiderNextPosition);
             return super.getPositionOnBoard();
 
@@ -71,9 +71,20 @@ public class Spider extends Animal {
         if (board.isInside(spiderNextPosition)
                 && board.getSquareType(spiderNextPosition)
                 == SquareType.GRASS
-                && !isSquareisFree(spiderNextPosition, animals)) {
+                && !isFree(spiderNextPosition, animals)
+                && !animalsIsOnStar(spiderNextPosition, animals)) {
             return spiderPos;
 
+        }
+        if (board.isInside(spiderNextPosition)
+                && board.getSquareType(spiderNextPosition)
+                == SquareType.GRASS
+                && !isFree(spiderNextPosition, animals)
+                && animalsIsOnStar(spiderNextPosition, animals)) {
+            super.setPositionOnBoard(spiderNextPosition);
+            animalOnNextSquare(spiderNextPosition, animals)
+                    .setPositionOnBoard(null);
+            return super.getPositionOnBoard();
         }
 
         return null;
@@ -83,9 +94,9 @@ public class Spider extends Animal {
      * Return an arrays of all the spider column position according to a
      * direction
      *
-     * @param board
-     * @param direction
-     * @param spiderPosActuelle
+     * @param board of the game
+     * @param direction of the animal next position
+     * @param spiderPosActuelle Position of the spider
      * @return arrays of position
      */
     private Position[] spiderParcoursCol(Board board,
@@ -102,10 +113,10 @@ public class Spider extends Animal {
     /**
      * Return an arrays of all the spider row position according to a direction
      *
-     * @param board
-     * @param direction
-     * @param spiderPosActuelle
-     * @return array of position
+     * @param board of the game
+     * @param direction of the animal next position
+     * @param spiderPosActuelle Position of the spider
+     * @return arrays of position
      */
     private Position[] spiderParcoursRow(Board board,
             Direction direction, Position spiderPosActuelle) {
@@ -116,51 +127,6 @@ public class Spider extends Animal {
 
         }
         return spider;
-    }
-
-    /**
-     * return the position of the spider if an animal can stop him or retur null
-     * if not
-     *
-     * @param position
-     * @param animal
-     * @return position where the spider will stop at
-     */
-    private Position allPositionAreFree(Position[] position,
-            Animal... animal) {
-        for (int i = 0; i < position.length; i++) {
-            for (Animal animal1 : animal) {
-                if (position[i].equals(animal1.getPositionOnBoard())) {
-                    if (i - 1 < 0) {
-                        return position[i];
-                    }
-                    return position[i - 1];
-                }
-            }
-        }
-
-        return null;
-
-    }
-
-    /**
-     * return a boolean true if the animal is on the board and false if not
-     *
-     * @param position
-     * @param animal
-     * @return found
-     */
-    private boolean isSquareisFree(Position position, Animal... animal) {
-        int i = 0;
-        boolean found = true;
-        while (i < animal.length && found) {
-            if (animal[i].getPositionOnBoard().equals(position)) {
-                found = false;
-            }
-            i++;
-
-        }
-        return found;
     }
 
 }

@@ -22,10 +22,13 @@ public class SnailTest {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
             {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
+            {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
             new Snail(new Position(0, 0)),
+            new Snail(new Position(1, 2)),
+            new Snail(new Position(2, 0)),
+            new Snail(new Position(2, 1)),
             new Snail(new Position(1, 2))
         };
     }
@@ -83,6 +86,21 @@ public class SnailTest {
         Position expResult = null; // move and fall
         Position result = instance.move(board, Direction.WEST, animals);
         assertEquals(expResult, result);
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testMove_next_animalIsInside() {
+        setUp();
+        System.out.println("move next when animal isPresent");
+        Snail instance = (Snail) animals[2];
+        animals[3].setOnStar(true);
+        Position expResult = new Position(2, 1);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+
     }
 
 }

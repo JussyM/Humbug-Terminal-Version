@@ -39,11 +39,11 @@ public class View implements InterfaceView {
      * @param boardArrays
      */
     private void displayBoardMethod(String[][] boardArrays) {
-        int i = 0;
-        for (String[] boardPrint : boardArrays) {
-            for (int col = 0; col < boardPrint.length; col++) {
+        int line;
+        for (line = 0; line < boardArrays.length; line++) {
+            for (int col = 0; col < boardArrays[line].length; col++) {
 
-                switch (boardPrint[col]) {
+                switch (boardArrays[line][col]) {
                     case "GRASS":
                         System.out.print(TerminalColor.toDefault
                                 + TerminalColor.YELLOW_BACKGROUND
@@ -51,7 +51,7 @@ public class View implements InterfaceView {
                         break;
                     case "STAR":
                         System.out.print(TerminalColor.YELLOW_BACKGROUND
-                                + "{ ★ }" + TerminalColor.toDefault + " ");
+                                + "{ ★ }" + TerminalColor.toDefault);
                         break;
                     case "Snail":
                         System.out.print(TerminalColor.YELLOW_BACKGROUND
@@ -176,11 +176,9 @@ public class View implements InterfaceView {
      * @return new Board
      */
     private String[][] boardExtend(String[][] sBoard) {
-        String[][] board = new String[sBoard.length * 4][sBoard.length];
+        String[][] board = new String[sBoard.length * 5][sBoard[0].length];
         changeNull(board);
-        board[1] = sBoard[0];
-        board[4] = sBoard[1];
-        board[7] = sBoard[2];
+        assignedArrays(sBoard, board);
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 switch (board[i][j]) {
@@ -188,7 +186,7 @@ public class View implements InterfaceView {
                         board[i - 1][j] = "GRASS_A_T";
                         board[i + 1][j] = "GRASS_A_T_D";
                         break;
-                        case "Snail":
+                    case "Snail":
                         board[i - 1][j] = "GRASS_A_T";
                         board[i + 1][j] = "GRASS_A_T_D";
                         break;
@@ -209,6 +207,20 @@ public class View implements InterfaceView {
         }
 
         return board;
+    }
+
+    /**
+     * Full out each part of the board
+     *
+     * @param sBoard
+     * @param board
+     */
+    private void assignedArrays(String[][] sBoard, String[][] board) {
+        int index = 1;
+        for (String[] sBoard1 : sBoard) {
+            board[index] = sBoard1;
+            index += 3;
+        }
     }
 
     /**

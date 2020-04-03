@@ -15,36 +15,37 @@ public interface InterfaceView {
     /**
      * Display the board on the level 1 of the game
      *
-     * @param board
-     * @param animals
+     * @param board of the game 
+     * @param animals arrays of the animals 
      */
     void displayBoard(Board board, Animal... animals);
 
     /**
      * Ask a position for the user and return a valid position
      *
-     * @return position
+     * @return position of the animal choosen 
      */
     Position askPosition();
 
     /**
      * ask a valid direction for the animal to move
      *
-     * @return direction
-     */
+     * @return direction of the animals 
+     */ 
     Direction askDirection();
 
     /**
      * print out the error according to the message
      *
-     * @param message
+     * @param message of the errors
      */
     void displayError(String message);
 
     /**
-     * Display the game name 
+     * Display the game name  and help 
      */
 
     void displayHelp();
+    
 
 }
