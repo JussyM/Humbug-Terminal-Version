@@ -144,7 +144,7 @@ public abstract class Animal {
     /**
      * Return the animal on the next Square
      *
-     * @param position of the
+     * @param position next position 
      * @param animals arrays of animals
      * @return animal at the next Square
      */

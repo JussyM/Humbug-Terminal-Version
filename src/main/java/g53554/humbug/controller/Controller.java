@@ -49,7 +49,6 @@ public class Controller {
                 }
                 Direction direction = view.askDirection();
                 game.move(position, direction);
-              
 
             } while (!game.levelIsOver());
 
@@ -64,10 +63,12 @@ public class Controller {
     }
 
     /**
+     * Verify if the position given as argument is correct and if their's an
+     * animal at that position
      *
-     * @param position
-     * @param animals
-     * @return
+     * @param position given by the usr
+     * @param animals arrays of all the animals of the game
+     * @return boolean true if correct false if not
      */
     private boolean positionValable(Position position, Animal... animals) {
         for (Animal animal : animals) {

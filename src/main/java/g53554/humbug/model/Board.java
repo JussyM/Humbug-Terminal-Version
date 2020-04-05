@@ -17,10 +17,11 @@ public class Board {
      * @return board of the game
      */
     public static Board getInitBoard() {
+        
         Board board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
-            {new Square(GRASS), new Square(GRASS), new Square(STAR)},
-            {new Square(GRASS), new Square(GRASS), new Square(STAR)}
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
         });
 
         return board;
