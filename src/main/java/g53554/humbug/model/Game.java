@@ -75,7 +75,7 @@ public class Game implements Model {
     @Override
     public boolean levelIsOver() {
         int i = 0;
-        while (i < animals().length && animals()[i].isOnStar()) {
+        while (i <= animals().length && animals()[i].isOnStar()) {
             i++;
         }
         return animals().length == i;

@@ -53,6 +53,7 @@ public class Controller {
             } while (!game.levelIsOver());
 
             view.displayBoard(game.getBoard(), game.animals());
+            view.displayWinner();
 
         } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
 

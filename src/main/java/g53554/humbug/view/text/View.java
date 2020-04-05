@@ -449,4 +449,12 @@ public class View implements InterfaceView {
 
     }
 
+    /**
+     * Display win message
+     */
+    @Override
+    public void displayWinner() {
+        System.out.println(TerminalColor.toBlue("WIN"));
+    }
+
 }

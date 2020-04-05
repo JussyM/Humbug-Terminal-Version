@@ -15,23 +15,23 @@ public interface InterfaceView {
     /**
      * Display the board on the level 1 of the game
      *
-     * @param board of the game 
-     * @param animals arrays of the animals 
+     * @param board of the game
+     * @param animals arrays of the animals
      */
     void displayBoard(Board board, Animal... animals);
 
     /**
      * Ask a position for the user and return a valid position
      *
-     * @return position of the animal choosen 
+     * @return position of the animal choosen
      */
     Position askPosition();
 
     /**
      * ask a valid direction for the animal to move
      *
-     * @return direction of the animals 
-     */ 
+     * @return direction of the animals
+     */
     Direction askDirection();
 
     /**
@@ -42,10 +42,14 @@ public interface InterfaceView {
     void displayError(String message);
 
     /**
-     * Display the game name  and help 
+     * Display the game name and help
+     */
+    void displayHelp();
+
+    /**
+     *Display win message 
      */
 
-    void displayHelp();
-    
+    void displayWinner();
 
 }
