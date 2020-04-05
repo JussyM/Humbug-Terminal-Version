@@ -39,9 +39,10 @@ public class GameTest {
     public void testGetBoard() {
         setUp();
         System.out.println("getBoard");
-        Game instance = new Game();
+        Game ins = new Game();
+        ins.startLevel(0);
         Board expResult = Board.getInitBoard();
-        Board result = instance.getBoard();
+        Board result = ins.getBoard();
         assertEquals(expResult.getClass(), result.getClass());
 
     }
@@ -54,6 +55,7 @@ public class GameTest {
         setUp();
         System.out.println("animals");
         Game ins = new Game();
+        ins.startLevel(0);
         Animal[] expResult = animals;
         Animal[] result = ins.animals();
         assertEquals(expResult.getClass(), result.getClass()

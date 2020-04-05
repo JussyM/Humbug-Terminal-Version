@@ -19,14 +19,6 @@ import java.util.Scanner;
  */
 public class View implements InterfaceView {
 
-    public static void main(String[] args) {
-        View v = new View();
-        Game g = new Game();
-        g.startLevel(0);
-        v.displayBoard(Board.getInitBoard(), g.animals());
-
-    }
-
     /**
      * Display The board of the game according to the level
      *
