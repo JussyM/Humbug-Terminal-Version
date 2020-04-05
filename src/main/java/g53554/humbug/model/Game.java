@@ -32,7 +32,13 @@ public class Game implements Model {
      */
     @Override
     public Animal[] animals() {
-        this.animals = animalStillOnBoard(List.of(animals));
+        Animal[] animalStillActive = animalStillOnBoard(List.of(animals));
+        if (animalStillActive.length == 0) {
+            return this.animals;
+        } else {
+
+            this.animals = animalStillOnBoard(List.of(animals));
+        }
 
         return this.animals;
     }
@@ -43,10 +49,11 @@ public class Game implements Model {
      * @param level of each games
      */
     @Override
-    public void startLevel(int level) {
+    public void startLevel(int level
+    ) {
         board = Board.getInitBoard();
         animals = new Animal[]{
-            new Snail(new Position(0, 0)),};
+            new Snail(new Position(0, 1)),};
 
     }
 
@@ -75,7 +82,7 @@ public class Game implements Model {
     @Override
     public boolean levelIsOver() {
         int i = 0;
-        while (i <= animals().length && animals()[i].isOnStar()) {
+        while (i < animals().length && animals()[i].isOnStar()) {
             i++;
         }
         return animals().length == i;
