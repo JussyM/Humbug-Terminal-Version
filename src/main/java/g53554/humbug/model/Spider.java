@@ -29,22 +29,8 @@ public class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position spiderPos = super.getPositionOnBoard();
-        Position[] spiderPacours = null;
-        switch (direction) {
-            case EAST:
-                spiderPacours = spiderParcoursCol(board, direction, spiderPos);
-                break;
-            case WEST:
-                spiderPacours = spiderParcoursCol(board, direction, spiderPos);
-                break;
-            case SOUTH:
-                spiderPacours = spiderParcoursRow(board, direction, spiderPos);
-                break;
-            case NORTH:
-                spiderPacours = spiderParcoursRow(board, direction, spiderPos);
-                break;
+        Position[] spiderPacours = spiderParcours(direction, board, spiderPos);
 
-        }
         Position spiderNextPosition = allPositionAreFree(spiderPacours,
                 animals);
 
@@ -52,34 +38,23 @@ public class Spider extends Animal {
             super.setPositionOnBoard(null);
             return null;
         }
-        if (board.isInside(spiderNextPosition)
-                && board.getSquareType(spiderNextPosition)
-                == SquareType.GRASS
-                && isFree(spiderNextPosition, animals)) {
+        if (insideAndFreeGrass(board, spiderNextPosition, animals)) {
             super.setPositionOnBoard(spiderNextPosition);
             return super.getPositionOnBoard();
 
         }
-        if (board.isInside(spiderNextPosition)
-                && board.getSquareType(spiderNextPosition)
-                == SquareType.STAR) {
+        if (insideAndStar(board, spiderNextPosition, animals)) {
             super.setOnStar(true);
             super.setPositionOnBoard(spiderNextPosition);
             board.setOnGrass(spiderNextPosition);
             return super.getPositionOnBoard();
         }
-        if (board.isInside(spiderNextPosition)
-                && board.getSquareType(spiderNextPosition)
-                == SquareType.GRASS
-                && !isFree(spiderNextPosition, animals)
+        if (!insideAndFreeGrass(board, spiderNextPosition, animals)
                 && !animalsIsOnStar(spiderNextPosition, animals)) {
             return spiderPos;
 
         }
-        if (board.isInside(spiderNextPosition)
-                && board.getSquareType(spiderNextPosition)
-                == SquareType.GRASS
-                && !isFree(spiderNextPosition, animals)
+        if (!insideAndFreeGrass(board, spiderNextPosition, animals)
                 && animalsIsOnStar(spiderNextPosition, animals)) {
             super.setPositionOnBoard(spiderNextPosition);
             animalOnNextSquare(spiderNextPosition, animals)
@@ -88,6 +63,36 @@ public class Spider extends Animal {
         }
 
         return null;
+    }
+
+    /**
+     * Return an arrays of position of the spider according to the direction
+     *
+     * @param direction of the animal
+     * @param board of the game
+     * @param position spider position
+     * @return array of position
+     */
+    private Position[] spiderParcours(Direction direction, Board board,
+            Position position) {
+        Position[] spiderParcour = null;
+        switch (direction) {
+            case EAST:
+                spiderParcour = spiderParcoursCol(board, direction, position);
+                break;
+            case WEST:
+                spiderParcour = spiderParcoursCol(board, direction, position);
+                break;
+            case SOUTH:
+                spiderParcour = spiderParcoursRow(board, direction, position);
+                break;
+            case NORTH:
+                spiderParcour = spiderParcoursRow(board, direction, position);
+                break;
+
+        }
+        return spiderParcour;
+
     }
 
     /**

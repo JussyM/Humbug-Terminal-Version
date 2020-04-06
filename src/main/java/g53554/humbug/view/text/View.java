@@ -98,8 +98,8 @@ public class View implements InterfaceView {
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         default:
-                            System.out.print(
-                                    "     ");
+                            System.out.print(TerminalColor.WHITE_BACKGROUND
+                                    + "     " + TerminalColor.toDefault);
                             break;
 
                     }

@@ -32,37 +32,27 @@ public class Snail extends Animal {
     public Position move(Board board, Direction direction, Animal... animals) {
         Position snailPos = super.getPositionOnBoard();
 
-        if (!board.isInside(snailPos.next(direction))) {
+        if (!isInside(board, snailPos.next(direction))) {
 
             super.setPositionOnBoard(null);
             return null;
         }
-        if (board.isInside(snailPos.next(direction))
-                && board.getSquareType(snailPos.next(direction))
-                == SquareType.GRASS && isFree(snailPos.next(direction),
-                        animals)) {
+        if (insideAndFreeGrass(board, snailPos.next(direction), animals)) {
             super.setPositionOnBoard(snailPos.next(direction));
             return super.getPositionOnBoard();
         }
-        if (board.isInside(snailPos.next(direction))
-                && board.getSquareType(snailPos.next(direction))
-                == SquareType.STAR) {
+        if (insideAndStar(board, snailPos.next(direction), animals)) {
             super.setOnStar(true);
             super.setPositionOnBoard(snailPos.next(direction));
             board.setOnGrass(snailPos.next(direction));
             return super.getPositionOnBoard();
         }
-        if (board.isInside(snailPos.next(direction))
-                && board.getSquareType(snailPos.next(direction))
-                == SquareType.GRASS && !isFree(snailPos.next(direction),
-                        animals) && !animalsIsOnStar(snailPos.next(direction),
+        if (!insideAndFreeGrass(board, snailPos.next(direction), animals)
+                && !animalsIsOnStar(snailPos.next(direction),
                         animals)) {
             return snailPos;
         }
-        if (board.isInside(snailPos.next(direction))
-                && board.getSquareType(snailPos.next(direction))
-                == SquareType.GRASS
-                && !isFree(snailPos.next(direction), animals)
+        if (!insideAndFreeGrass(board, snailPos.next(direction), animals)
                 && animalsIsOnStar(snailPos.next(direction), animals)) {
             super.setPositionOnBoard(snailPos.next(direction));
             Animal prens = animalOnNextSquare(snailPos.next(direction),
