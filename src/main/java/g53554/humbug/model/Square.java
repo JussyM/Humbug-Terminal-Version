@@ -9,6 +9,10 @@ package g53554.humbug.model;
 public class Square {
 
     private SquareType type;
+    private boolean northWall;
+    private boolean eastWall;
+    private boolean southWall;
+    private boolean westWall;
 
     /**
      * Constructor of the square on the board
@@ -17,6 +21,46 @@ public class Square {
      */
     public Square(SquareType type) {
         this.type = type;
+        this.northWall = false;
+        this.eastWall = false;
+        this.southWall = false;
+        this.westWall = false;
+    }
+
+    /**
+     * Setter for northWall
+     *
+     * @param northWall boolean that change the attribut
+     */
+    public void setNorthWall(boolean northWall) {
+        this.northWall = northWall;
+    }
+
+    /**
+     * Setter for eastWall
+     *
+     * @param eastWall boolean that change the attribut
+     */
+    public void setEastWall(boolean eastWall) {
+        this.eastWall = eastWall;
+    }
+
+    /**
+     * Setter for southWall
+     *
+     * @param southWall boolean that change the attribut
+     */
+    public void setSouthWall(boolean southWall) {
+        this.southWall = southWall;
+    }
+
+    /**
+     * Setter for westWall
+     *
+     * @param westWall boolean that change the attribut
+     */
+    public void setWestWall(boolean westWall) {
+        this.westWall = westWall;
     }
 
     /**
@@ -35,6 +79,39 @@ public class Square {
      */
     public void setType(SquareType type) {
         this.type = type;
+    }
+
+    /**
+     * Verify if the direction has wall or not
+     *
+     * @param direction given as args
+     * @return boolean true /false
+     */
+    public boolean hasWall(Direction direction) {
+        switch (direction) {
+            case NORTH:
+                if (northWall) {
+                    return true;
+                }
+                break;
+            case SOUTH:
+                if (southWall) {
+                    return true;
+                }
+                break;
+            case EAST:
+                if (eastWall) {
+                    return true;
+                }
+                break;
+            case WEST:
+                if (westWall) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+
     }
 
 }

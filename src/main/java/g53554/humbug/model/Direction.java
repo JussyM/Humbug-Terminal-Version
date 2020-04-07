@@ -40,4 +40,24 @@ public enum Direction {
         this.deltaColumn = deltaColumn;
     }
 
+    /**
+     * return the opposite direction
+     *
+     * @return opposite direction or null
+     */
+    public Direction opposite() {
+        switch (this) {
+            case NORTH:
+                return SOUTH;
+            case SOUTH:
+                return NORTH;
+            case EAST:
+                return WEST;
+            case WEST:
+                return EAST;
+
+        }
+        return null;
+    }
+
 }

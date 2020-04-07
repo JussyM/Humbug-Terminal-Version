@@ -96,10 +96,13 @@ public abstract class Animal {
      * if not
      *
      * @param position arrays of all the position of the spider
+     * @param board of the game
+     * @param direction of the animal
      * @param animals arrays of the animals
      * @return position where the spider will stop at
      */
-    protected Position allPositionAreFree(Position[] position,
+    protected Position allPositionAreFree(Position[] position, Board board,
+            Direction direction,
             Animal... animals) {
         for (int i = 0; i < position.length; i++) {
             for (Animal animal1 : animals) {
@@ -108,6 +111,7 @@ public abstract class Animal {
                         return position[i];
                     }
                     return position[i - 1];
+
                 }
             }
         }
@@ -145,7 +149,7 @@ public abstract class Animal {
      * @param animals arrays of animals
      * @return animal at the next Square
      */
-    protected Animal animalOnNextSquare(Position position, Animal... animals) {
+    private Animal animalOnNextSquare(Position position, Animal... animals) {
         Animal animalNext = null;
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {
@@ -153,6 +157,17 @@ public abstract class Animal {
             }
         }
         return animalNext;
+    }
+
+    /**
+     * Set the state of the animal who's onStar
+     *
+     * @param position animal nextPosition
+     * @param animals arrays of animal
+     */
+    protected void setAnimalStates(Position position, Animal... animals) {
+        this.setPositionOnBoard(position);
+        animalOnNextSquare(position, animals).setPositionOnBoard(null);
     }
 
     /**
@@ -170,15 +185,17 @@ public abstract class Animal {
      * verify if the position board is inside and free
      *
      * @param board of the game
-     * @param position next Position of the animal
+     * @param animalNextPosition next Position of the animal
+     * @param direction of the animal
      * @param animals arrays of all the animals
      * @return true / false
      */
-    protected boolean insideAndFreeGrass(Board board, Position position,
+    protected boolean insideAndFreeGrass(Board board,
+            Position animalNextPosition, Direction direction,
             Animal... animals) {
-        return isInside(board, position)
-                && board.getSquareType(position) == SquareType.GRASS
-                && isFree(position, animals);
+        return isInside(board, animalNextPosition)
+                && board.getSquareType(animalNextPosition) == SquareType.GRASS
+                && isFree(animalNextPosition, animals);
 
     }
 
@@ -187,14 +204,183 @@ public abstract class Animal {
      *
      * @param board of the game
      * @param position next Position of the animal
+     * @param direction next animal direction
      * @param animals arrays of all the animals
      * @return true / false
      */
     protected boolean insideAndStar(Board board, Position position,
+            Direction direction,
             Animal... animals) {
         return isInside(board, position)
                 && board.getSquareType(position) == SquareType.STAR;
 
+    }
+
+    /**
+     * set animal state if it drop on Star square
+     *
+     * @param position next Position of the animal
+     * @param board of the game
+     */
+    protected void setAnimalState(Position position, Board board) {
+        this.setOnStar(true);
+        this.setPositionOnBoard(position);
+        board.setOnGrass(position);
+    }
+
+    /**
+     * verifie if the square has wall according to the right and the opposite
+     * direction
+     *
+     * @param position next Position of the board
+     * @param direction of animal
+     * @param board of the game
+     * @return true\false
+     */
+    private boolean hasWall(Position position, Direction direction,
+            Board board) {
+        if (board.isInside(position)) {
+            return board.getSquares()[positionOnBoard.
+                    getRow()][positionOnBoard.getColumn()].hasWall(direction)
+                    || board.getSquares()[position.
+                            getRow()][position.
+                                    getColumn()].hasWall(direction.opposite());
+
+        }
+        return false;
+
+    }
+
+    /**
+     * return the nextposition of all the animals of the game
+     *
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays of animals
+     * @return Next Position of the animal
+     */
+    protected Position animalsNextPosition(Board board, Direction direction,
+            Animal... animals) {
+        Position[] spiderParcours = spiderParcours(direction, board,
+                positionOnBoard);
+        var instance = allPositionAreFree(spiderParcours,
+                board, direction, animals);
+        Position animalNextPosition = null;
+        for (Animal animal : animals) {
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof Snail) {
+                if (hasWall(positionOnBoard.next(direction),
+                        direction, board)) {
+                    animalNextPosition = positionOnBoard;
+                    break;
+
+                } else {
+                    animalNextPosition = positionOnBoard.next(direction);
+                    break;
+
+                }
+
+            }
+
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof Spider) {
+                if (instance != null) {
+                    if (hasWall(instance, direction, board)) {
+                        animalNextPosition = positionOnBoard;
+                        break;
+                    } else {
+                        animalNextPosition = instance;
+                        break;
+                    }
+
+                } else {
+                    animalNextPosition = null;
+                    break;
+                }
+
+            }
+        }
+        return animalNextPosition;
+
+    }
+
+    /**
+     * Return an arrays of position of the spider according to the direction
+     *
+     * @param direction of the animal
+     * @param board of the game
+     * @param position spider position
+     * @return array of position
+     */
+    private Position[] spiderParcours(Direction direction, Board board,
+            Position position) {
+        Position[] spiderParcour = null;
+        switch (direction) {
+            case EAST:
+                spiderParcour = spiderParcoursCol(board, direction, position);
+                break;
+            case WEST:
+                spiderParcour = spiderParcoursCol(board, direction, position);
+                break;
+            case SOUTH:
+                spiderParcour = spiderParcoursRow(board, direction, position);
+                break;
+            case NORTH:
+                spiderParcour = spiderParcoursRow(board, direction, position);
+                break;
+
+        }
+        return spiderParcour;
+
+    }
+
+    /**
+     * Return an arrays of all the spider column position according to a
+     * direction
+     *
+     * @param board of the game
+     * @param direction of the animal next position
+     * @param spiderPosActuelle Position of the spider
+     * @return arrays of position
+     */
+    private Position[] spiderParcoursCol(Board board,
+            Direction direction, Position spiderPosActuelle) {
+        Position[] spider = new Position[board.getNbColumn()];
+        for (int i = 0; i < spider.length; i++) {
+            spider[i] = spiderPosActuelle.next(direction);
+            spiderPosActuelle = spider[i];
+
+        }
+        return spider;
+    }
+
+    /**
+     * Return an arrays of all the spider row position according to a direction
+     *
+     * @param board of the game
+     * @param direction of the animal next position
+     * @param spiderPosActuelle Position of the spider
+     * @return arrays of position
+     */
+    private Position[] spiderParcoursRow(Board board,
+            Direction direction, Position spiderPosActuelle) {
+        Position[] spider = new Position[board.getNbRow()];
+        for (int i = 0; i < spider.length; i++) {
+            spider[i] = spiderPosActuelle.next(direction);
+            spiderPosActuelle = spider[i];
+
+        }
+        return spider;
+    }
+
+    /**
+     * Verify if the next Position is Equal to the position on the board
+     *
+     * @param position nextPosition of the animal
+     * @return true/false
+     */
+    protected boolean positionAreEquals(Position position) {
+        return position.equals(positionOnBoard);
     }
 
 }

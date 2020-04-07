@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author jj
  */
 public class SpiderTest {
-
+    
     private Board board;
     private Animal[] animals;
-
+    
     @BeforeEach
     public void setUp() {
         board = new Board(new Square[][]{
@@ -108,7 +108,7 @@ public class SpiderTest {
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
     }
-
+    
     @Test
     public void testMove_passOnStar() {
         System.out.println("move and pass on star without win");
@@ -129,7 +129,7 @@ public class SpiderTest {
         assertFalse(animals[0].isOnStar());
         assertFalse(board.getSquareType(new Position(0, 1)) == GRASS);
     }
-
+    
     @Test
     public void testMove_nextOnStar() {
         System.out.println("move, next on star and win");
@@ -151,4 +151,53 @@ public class SpiderTest {
         assertEquals(GRASS, board.getSquareType(result));
     }
 
+    /**
+     * test When square Has Wall_On_East
+     */
+    @Test
+    public void testWhenHasWall_On_East() {
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(STAR), new Square(GRASS),
+                new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS), null},
+            {null, null, new Square(STAR), null}
+        });
+        animals = new Animal[]{
+            new Spider(new Position(0, 0)),
+            new Snail(new Position(0, 3))
+        };
+        System.out.println("Test when has wall on east");
+        Spider instance = (Spider) animals[0];
+        Position expResult = new Position(0, 0);
+        board.getSquares()[expResult.getRow()][expResult.getColumn()]
+                .setEastWall(true);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * test When square Has Wall_On_Opposite_Direction
+     */
+    @Test
+    public void testWhenHasWall_On_Opposite_Direction() {
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(STAR), new Square(GRASS),
+                new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS), null},
+            {null, null, new Square(STAR), null}
+        });
+        animals = new Animal[]{
+            new Spider(new Position(0, 0)),
+            new Snail(new Position(0, 2))
+        };
+        System.out.println("Test when has wall on opposite direction");
+        Spider instance = (Spider) animals[0];
+        Position expResult = new Position(0, 0);
+        board.getSquares()[expResult.next(Direction.EAST)
+                .getRow()][expResult.next(Direction.EAST).getColumn()]
+                .setWestWall(true);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+    
 }

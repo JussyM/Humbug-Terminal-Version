@@ -28,110 +28,45 @@ public class Spider extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position spiderPos = super.getPositionOnBoard();
-        Position[] spiderPacours = spiderParcours(direction, board, spiderPos);
-
-        Position spiderNextPosition = allPositionAreFree(spiderPacours,
-                animals);
-
+        var spiderNextPosition = animalsNextPosition(board, direction, animals);
         if (spiderNextPosition == null) {
             super.setPositionOnBoard(null);
             return null;
         }
-        if (insideAndFreeGrass(board, spiderNextPosition, animals)) {
-            super.setPositionOnBoard(spiderNextPosition);
+        if (positionAreEquals(spiderNextPosition)) {
             return super.getPositionOnBoard();
+        } else {
+            if (!isInside(board, spiderNextPosition)) {
+                super.setPositionOnBoard(null);
+                return null;
+            }
+            if (insideAndFreeGrass(board, spiderNextPosition,
+                    direction, animals)) {
+                super.setPositionOnBoard(spiderNextPosition);
+                return super.getPositionOnBoard();
 
-        }
-        if (insideAndStar(board, spiderNextPosition, animals)) {
-            super.setOnStar(true);
-            super.setPositionOnBoard(spiderNextPosition);
-            board.setOnGrass(spiderNextPosition);
-            return super.getPositionOnBoard();
-        }
-        if (!insideAndFreeGrass(board, spiderNextPosition, animals)
-                && !animalsIsOnStar(spiderNextPosition, animals)) {
-            return spiderPos;
+            }
 
-        }
-        if (!insideAndFreeGrass(board, spiderNextPosition, animals)
-                && animalsIsOnStar(spiderNextPosition, animals)) {
-            super.setPositionOnBoard(spiderNextPosition);
-            animalOnNextSquare(spiderNextPosition, animals)
-                    .setPositionOnBoard(null);
-            return super.getPositionOnBoard();
+            if (insideAndStar(board, spiderNextPosition, direction, animals)) {
+                setAnimalState(spiderNextPosition, board);
+                return super.getPositionOnBoard();
+            }
+
+            if (!insideAndFreeGrass(board, spiderNextPosition,
+                    direction, animals)
+                    && !animalsIsOnStar(spiderNextPosition, animals)) {
+                return super.getPositionOnBoard();
+
+            }
+            if (!insideAndFreeGrass(board, spiderNextPosition,
+                    direction, animals)
+                    && animalsIsOnStar(spiderNextPosition, animals)) {
+                setAnimalStates(spiderNextPosition, animals);
+                return super.getPositionOnBoard();
+            }
+
         }
 
         return null;
     }
-
-    /**
-     * Return an arrays of position of the spider according to the direction
-     *
-     * @param direction of the animal
-     * @param board of the game
-     * @param position spider position
-     * @return array of position
-     */
-    private Position[] spiderParcours(Direction direction, Board board,
-            Position position) {
-        Position[] spiderParcour = null;
-        switch (direction) {
-            case EAST:
-                spiderParcour = spiderParcoursCol(board, direction, position);
-                break;
-            case WEST:
-                spiderParcour = spiderParcoursCol(board, direction, position);
-                break;
-            case SOUTH:
-                spiderParcour = spiderParcoursRow(board, direction, position);
-                break;
-            case NORTH:
-                spiderParcour = spiderParcoursRow(board, direction, position);
-                break;
-
-        }
-        return spiderParcour;
-
-    }
-
-    /**
-     * Return an arrays of all the spider column position according to a
-     * direction
-     *
-     * @param board of the game
-     * @param direction of the animal next position
-     * @param spiderPosActuelle Position of the spider
-     * @return arrays of position
-     */
-    private Position[] spiderParcoursCol(Board board,
-            Direction direction, Position spiderPosActuelle) {
-        Position[] spider = new Position[board.getNbColumn()];
-        for (int i = 0; i < spider.length; i++) {
-            spider[i] = spiderPosActuelle.next(direction);
-            spiderPosActuelle = spider[i];
-
-        }
-        return spider;
-    }
-
-    /**
-     * Return an arrays of all the spider row position according to a direction
-     *
-     * @param board of the game
-     * @param direction of the animal next position
-     * @param spiderPosActuelle Position of the spider
-     * @return arrays of position
-     */
-    private Position[] spiderParcoursRow(Board board,
-            Direction direction, Position spiderPosActuelle) {
-        Position[] spider = new Position[board.getNbRow()];
-        for (int i = 0; i < spider.length; i++) {
-            spider[i] = spiderPosActuelle.next(direction);
-            spiderPosActuelle = spider[i];
-
-        }
-        return spider;
-    }
-
 }

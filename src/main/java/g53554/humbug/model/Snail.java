@@ -30,36 +30,43 @@ public class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position snailPos = super.getPositionOnBoard();
+        var snailNextpos = animalsNextPosition(board, direction, animals);
+        if (positionAreEquals(snailNextpos)) {
+            return super.getPositionOnBoard();
+        } else {
+            if (!isInside(board, snailNextpos)) {
 
-        if (!isInside(board, snailPos.next(direction))) {
+                super.setPositionOnBoard(null);
+                return null;
+            }
+            if (insideAndFreeGrass(board, snailNextpos,
+                    direction, animals)) {
 
-            super.setPositionOnBoard(null);
-            return null;
+                super.setPositionOnBoard(snailNextpos);
+                return super.getPositionOnBoard();
+            }
+            if (insideAndStar(board, snailNextpos,
+                    direction, animals)) {
+                setAnimalState(snailNextpos, board);
+                return super.getPositionOnBoard();
+            }
+
+            if (!insideAndFreeGrass(board, snailNextpos,
+                    direction, animals)
+                    && !animalsIsOnStar(snailNextpos,
+                            animals)) {
+                return super.getPositionOnBoard();
+            }
+            if (!insideAndFreeGrass(board, snailNextpos,
+                    direction, animals)
+                    && animalsIsOnStar(snailNextpos, animals)) {
+
+                setAnimalStates(snailNextpos, animals);
+                return super.getPositionOnBoard();
+            }
+
         }
-        if (insideAndFreeGrass(board, snailPos.next(direction), animals)) {
-            super.setPositionOnBoard(snailPos.next(direction));
-            return super.getPositionOnBoard();
-        }
-        if (insideAndStar(board, snailPos.next(direction), animals)) {
-            super.setOnStar(true);
-            super.setPositionOnBoard(snailPos.next(direction));
-            board.setOnGrass(snailPos.next(direction));
-            return super.getPositionOnBoard();
-        }
-        if (!insideAndFreeGrass(board, snailPos.next(direction), animals)
-                && !animalsIsOnStar(snailPos.next(direction),
-                        animals)) {
-            return snailPos;
-        }
-        if (!insideAndFreeGrass(board, snailPos.next(direction), animals)
-                && animalsIsOnStar(snailPos.next(direction), animals)) {
-            super.setPositionOnBoard(snailPos.next(direction));
-            Animal prens = animalOnNextSquare(snailPos.next(direction),
-                    animals);
-            prens.setPositionOnBoard(null);
-            return super.getPositionOnBoard();
-        }
+
         return null;
     }
 

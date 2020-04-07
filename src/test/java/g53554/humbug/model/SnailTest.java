@@ -103,4 +103,36 @@ public class SnailTest {
 
     }
 
+    /**
+     * Test when animal has wall on the east
+     */
+    @Test
+    public void test_When_animal_hasWall() {
+        setUp();
+        System.out.println("test_When_animal_hasWall");
+        Snail instance = (Snail) animals[0];
+        board.getSquares()[instance.getPositionOnBoard().
+                getRow()][instance.getPositionOnBoard().
+                        getColumn()].setEastWall(true);
+        Position expResult = new Position(0, 0);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test when animal has wall on the opposition direction
+     */
+    @Test
+    public void test_When_animal_hasWall_Opposite_Direction() {
+        setUp();
+        System.out.println("test_When_animal_hasWall_OppositeDirection");
+        Snail instance = (Snail) animals[0];
+        board.getSquares()[instance.getPositionOnBoard().next(Direction.EAST).
+                getRow()][instance.getPositionOnBoard().next(Direction.EAST).
+                        getColumn()].setWestWall(true);
+        Position expResult = new Position(0, 0);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+
 }

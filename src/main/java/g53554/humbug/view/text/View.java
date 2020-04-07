@@ -3,7 +3,6 @@ package g53554.humbug.view.text;
 import g53554.humbug.model.Animal;
 import g53554.humbug.model.Board;
 import g53554.humbug.model.Direction;
-import g53554.humbug.model.Game;
 import g53554.humbug.model.Position;
 import g53554.humbug.model.Snail;
 import g53554.humbug.model.Spider;
@@ -241,6 +240,20 @@ public class View implements InterfaceView {
         }
         return boardArrays;
 
+    }
+
+    /**
+     *
+     * @param board
+     * @param position
+     * @param direction
+     * @return
+     */
+
+    private boolean hasWall(Board board, Position position,
+            Direction direction) {
+        return board.getSquares()[position.
+                getRow()][position.getColumn()].hasWall(direction);
     }
 
     /**
