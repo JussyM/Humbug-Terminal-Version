@@ -1,13 +1,8 @@
 package g53554.humbug.view.text;
 
-import g53554.humbug.model.Animal;
-import g53554.humbug.model.Board;
-import g53554.humbug.model.Direction;
-import g53554.humbug.model.Position;
-import g53554.humbug.model.Snail;
-import g53554.humbug.model.Spider;
-import g53554.humbug.model.SquareType;
+import g53554.humbug.model.*;
 import java.util.Arrays;
+
 import java.util.Scanner;
 
 /**
@@ -312,7 +307,7 @@ public class View implements InterfaceView {
     }
 
     /**
-     * Change the null value of the extend board to avoie nullPointeurException
+     * Change the null value of the extend board to avoid nullPointeurException
      *
      * @param tab extend board
      */
@@ -356,7 +351,7 @@ public class View implements InterfaceView {
     }
 
     /**
-     * Ask the postion to the user
+     * Ask the position to the user
      *
      * @return new position
      */
@@ -386,7 +381,7 @@ public class View implements InterfaceView {
     }
 
     /**
-     * Ask a direction and return a direction fgiven by the user
+     * Ask a direction and return a direction given by the user
      *
      * @return direction or null
      */

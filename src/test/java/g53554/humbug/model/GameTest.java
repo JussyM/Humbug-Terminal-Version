@@ -99,7 +99,6 @@ public class GameTest {
         Game ins = new Game();
         ins.startLevel(0);
         ins.animals()[0].setOnStar(true);
-     //   ins.animals()[1].setOnStar(true);
         boolean expResult = true;
         boolean result = ins.levelIsOver();
         assertEquals(expResult, result);

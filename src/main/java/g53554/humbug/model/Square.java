@@ -91,7 +91,6 @@ public class Square {
         switch (direction) {
             case NORTH:
                 return northWall;
-
             case SOUTH:
                 return southWall;
             case EAST:
@@ -101,6 +100,39 @@ public class Square {
         }
         return false;
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isNorthWall() {
+        return northWall;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isEastWall() {
+        return eastWall;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isSouthWall() {
+        return southWall;
+    }
+
+    /**
+     *
+     * @return
+     */
+
+    public boolean isWestWall() {
+        return westWall;
     }
 
 }

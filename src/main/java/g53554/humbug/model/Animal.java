@@ -166,8 +166,8 @@ public abstract class Animal {
      * @param animals arrays of animal
      */
     protected void setAnimalStates(Position position, Animal... animals) {
-        this.setPositionOnBoard(position);
         animalOnNextSquare(position, animals).setPositionOnBoard(null);
+        this.setPositionOnBoard(position);
     }
 
     /**
@@ -263,8 +263,6 @@ public abstract class Animal {
             Animal... animals) {
         Position[] spiderParcours = spiderParcours(direction, board,
                 positionOnBoard);
-        var instance = allPositionAreFree(spiderParcours,
-                board, direction, animals);
         Position animalNextPosition = null;
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(positionOnBoard)
@@ -284,12 +282,34 @@ public abstract class Animal {
 
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Spider) {
-                if (instance != null) {
-                    if (hasWall(instance, direction, board)) {
+                var spiderNextPos = allPositionAreFree(spiderParcours,
+                        board, direction, animals);
+                if (spiderNextPos != null) {
+                    if (hasWall(spiderNextPos, direction, board)) {
                         animalNextPosition = positionOnBoard;
                         break;
                     } else {
-                        animalNextPosition = instance;
+                        animalNextPosition = spiderNextPos;
+                        break;
+                    }
+
+                } else {
+                    animalNextPosition = null;
+                    break;
+                }
+
+            }
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof GrassHopper) {
+                var grassHopperNextpos = grassHopperNextPosition(board,
+                        direction, animals);
+                if (grassHopperNextpos != null) {
+                    if (hasWall(grassHopperNextpos, direction, board)) {
+                        animalNextPosition = positionOnBoard;
+                        break;
+
+                    } else {
+                        animalNextPosition = grassHopperNextpos;
                         break;
                     }
 
@@ -381,6 +401,39 @@ public abstract class Animal {
      */
     protected boolean positionAreEquals(Position position) {
         return position.equals(positionOnBoard);
+    }
+
+    /**
+     * Return the next Position of the grassHopper
+     *
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays of animals
+     * @return grassHopper next position
+     */
+    private Position grassHopperNextPosition(Board board,
+            Direction direction, Animal... animals) {
+
+        Position[] grassHopperParcours = spiderParcours(direction,
+                board, positionOnBoard);
+        for (Position grassHopperPos : grassHopperParcours) {
+            if (isInside(board, grassHopperPos)) {
+                if (isFree(grassHopperPos, animals)) {
+                    if (!animalsIsOnStar(grassHopperPos, animals)) {
+                        return grassHopperPos;
+                    }
+
+                } else {
+                    if (animalsIsOnStar(grassHopperPos, animals)) {
+                        return grassHopperPos;
+
+                    }
+                }
+            }
+
+        }
+
+        return null;
     }
 
 }

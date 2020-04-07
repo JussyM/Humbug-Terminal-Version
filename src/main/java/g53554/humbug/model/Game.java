@@ -49,11 +49,10 @@ public class Game implements Model {
      * @param level of each games
      */
     @Override
-    public void startLevel(int level
-    ) {
+    public void startLevel(int level) {
         board = Board.getInitBoard();
         animals = new Animal[]{
-            new Snail(new Position(0, 1)),};
+            new Snail(new Position(0, 0)),};
 
     }
 

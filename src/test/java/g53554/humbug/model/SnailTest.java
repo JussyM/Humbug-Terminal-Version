@@ -135,4 +135,28 @@ public class SnailTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     *
+     */
+
+    @Test
+    public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
+        System.out.println("The animal can be moved to "
+                + "the Square where is an animal with the field IsOnStar==true");
+        Square[][] squares = {{new Square(GRASS), new Square(GRASS),
+            new Square(GRASS), new Square(GRASS)},
+        {new Square(GRASS), new Square(GRASS), new Square(GRASS),
+            new Square(GRASS)}};
+        Board boards = new Board(squares);
+        animals = new Animal[2];
+
+        animals[0] = new Snail(new Position(0, 2));
+        animals[0].setOnStar(true);
+        animals[1] = new Snail(new Position(0, 1));
+
+        Position expResult = new Position(0, 2);
+        Position result = animals[1].move(boards, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+
 }
