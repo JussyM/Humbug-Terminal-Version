@@ -90,25 +90,14 @@ public class Square {
     public boolean hasWall(Direction direction) {
         switch (direction) {
             case NORTH:
-                if (northWall) {
-                    return true;
-                }
-                break;
+                return northWall;
+
             case SOUTH:
-                if (southWall) {
-                    return true;
-                }
-                break;
+                return southWall;
             case EAST:
-                if (eastWall) {
-                    return true;
-                }
-                break;
+                return eastWall;
             case WEST:
-                if (westWall) {
-                    return true;
-                }
-                break;
+                return westWall;
         }
         return false;
 
