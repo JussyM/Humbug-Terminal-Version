@@ -78,7 +78,7 @@ public abstract class Animal {
      * @param animals arrays of animals
      * @return found boolean true if iit's free and false if not
      */
-    protected boolean isFree(Position position, Animal... animals) {
+    private boolean isFree(Position position, Animal... animals) {
         int i = 0;
         boolean found = true;
         while (i < animals.length && found) {
@@ -101,7 +101,7 @@ public abstract class Animal {
      * @param animals arrays of the animals
      * @return position where the spider will stop at
      */
-    protected Position allPositionAreFree(Position[] position, Board board,
+    private Position allPositionAreFree(Position[] position, Board board,
             Direction direction,
             Animal... animals) {
         for (int i = 0; i < position.length; i++) {
@@ -129,7 +129,7 @@ public abstract class Animal {
      * @param animals arrays of the animals
      * @return boolean found true/false
      */
-    protected boolean animalsIsOnStar(Position position, Animal... animals) {
+    private boolean animalsIsOnStar(Position position, Animal... animals) {
         int i = 0;
         boolean found = false;
         while (i < animals.length && !found) {
@@ -165,7 +165,7 @@ public abstract class Animal {
      * @param position animal nextPosition
      * @param animals arrays of animal
      */
-    protected void setAnimalStates(Position position, Animal... animals) {
+    private void setAnimalStates(Position position, Animal... animals) {
         animalOnNextSquare(position, animals).setPositionOnBoard(null);
         this.setPositionOnBoard(position);
     }
@@ -177,7 +177,7 @@ public abstract class Animal {
      * @param position of the animal
      * @return true if is inside and false if not
      */
-    protected boolean isInside(Board board, Position position) {
+    private boolean isInside(Board board, Position position) {
         return board.isInside(position);
     }
 
@@ -190,8 +190,8 @@ public abstract class Animal {
      * @param animals arrays of all the animals
      * @return true / false
      */
-    protected boolean insideAndFreeGrass(Board board,
-            Position animalNextPosition, Direction direction,
+    private boolean insideAndFreeGrass(Board board,
+            Position animalNextPosition,
             Animal... animals) {
         return isInside(board, animalNextPosition)
                 && board.getSquareType(animalNextPosition) == SquareType.GRASS
@@ -208,7 +208,7 @@ public abstract class Animal {
      * @param animals arrays of all the animals
      * @return true / false
      */
-    protected boolean insideAndStar(Board board, Position position,
+    private boolean insideAndStar(Board board, Position position,
             Direction direction,
             Animal... animals) {
         return isInside(board, position)
@@ -222,7 +222,7 @@ public abstract class Animal {
      * @param position next Position of the animal
      * @param board of the game
      */
-    protected void setAnimalState(Position position, Board board) {
+    private void setAnimalState(Position position, Board board) {
         this.setOnStar(true);
         this.setPositionOnBoard(position);
         board.setOnGrass(position);
@@ -259,7 +259,7 @@ public abstract class Animal {
      * @param animals arrays of animals
      * @return Next Position of the animal
      */
-    protected Position animalsNextPosition(Board board, Direction direction,
+    private Position animalsNextPosition(Board board, Direction direction,
             Animal... animals) {
         Position[] spiderParcours = spiderParcours(direction, board,
                 positionOnBoard);
@@ -305,7 +305,7 @@ public abstract class Animal {
                         direction, animals);
                 if (grassHopperNextpos != null) {
                     if (hasWall(grassHopperNextpos, direction, board)) {
-                        animalNextPosition = positionOnBoard;
+                        animalNextPosition = grassHopperNextpos;
                         break;
 
                     } else {
@@ -319,6 +319,42 @@ public abstract class Animal {
                 }
 
             }
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof LadyBird) {
+                animalNextPosition = positionOnBoard.
+                        next(direction).next(direction);
+                if (hasWall(animalNextPosition, direction, board)
+                        || !isFree(animalNextPosition, animals)
+                        && !animalsIsOnStar(animalNextPosition, animals)) {
+                    animalNextPosition = positionOnBoard.next(direction);
+                    if (hasWall(animalNextPosition, direction, board)
+                            || !isFree(animalNextPosition, animals)
+                            && !animalsIsOnStar(animalNextPosition, animals)) {
+                        animalNextPosition = positionOnBoard;
+                        break;
+                    }
+
+                }
+            }
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof Bumblebee) {
+                var bumblebeeNextPosition = BumblebeeNextPosition(board,
+                        direction, animals);
+                if (bumblebeeNextPosition != null) {
+                    if (hasWall(bumblebeeNextPosition, direction, board)) {
+                        animalNextPosition = bumblebeeNextPosition;
+                        break;
+                    } else {
+                        animalNextPosition = bumblebeeNextPosition;
+                        break;
+                    }
+                } else {
+                    animalNextPosition = null;
+                    break;
+                }
+
+            }
+
         }
         return animalNextPosition;
 
@@ -399,7 +435,7 @@ public abstract class Animal {
      * @param position nextPosition of the animal
      * @return true/false
      */
-    protected boolean positionAreEquals(Position position) {
+    private boolean positionAreEquals(Position position) {
         return position.equals(positionOnBoard);
     }
 
@@ -429,6 +465,93 @@ public abstract class Animal {
 
                     }
                 }
+            }
+
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the next Position of Bumblebee
+     *
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays of animals
+     * @return grassHopper next position
+     */
+    private Position BumblebeeNextPosition(Board board,
+            Direction direction, Animal... animals) {
+        Position bumblebeeNextPos = positionOnBoard.next(direction).
+                next(direction);
+        if (isInside(board, bumblebeeNextPos)) {
+            if (isFree(bumblebeeNextPos, animals)) {
+                if (!animalsIsOnStar(bumblebeeNextPos, animals)) {
+                    return bumblebeeNextPos;
+                }
+
+            } else {
+                if (!animalsIsOnStar(bumblebeeNextPos, animals)) {
+                    return bumblebeeNextPos.next(direction);
+
+                } else {
+                    return bumblebeeNextPos;
+                }
+            }
+        } else {
+            bumblebeeNextPos = null;
+        }
+
+        return bumblebeeNextPos;
+    }
+
+    /**
+     * Return the nextPosition of each animals according to the animal that call
+     * him
+     *
+     * @param board of the game
+     * @param direction of the animal
+     * @param animals arrays that contain all the animal of he game
+     * @return next Position or null
+     */
+    protected Position animalsMove(Board board, Direction direction,
+            Animal... animals) {
+        var animalsNextPosition = animalsNextPosition(board, direction,
+                animals);
+        if (animalsNextPosition == null) {
+            this.setPositionOnBoard(null);
+            return null;
+        }
+        if (positionAreEquals(animalsNextPosition)) {
+            return this.getPositionOnBoard();
+        } else {
+            if (!isInside(board, animalsNextPosition)) {
+                this.setPositionOnBoard(null);
+                return null;
+            }
+            if (insideAndFreeGrass(board, animalsNextPosition,
+                    animals)) {
+                this.setPositionOnBoard(animalsNextPosition);
+                return this.getPositionOnBoard();
+
+            }
+
+            if (insideAndStar(board, animalsNextPosition, direction, animals)) {
+                setAnimalState(animalsNextPosition, board);
+                return this.getPositionOnBoard();
+            }
+
+            if (!insideAndFreeGrass(board, animalsNextPosition,
+                    animals)
+                    && !animalsIsOnStar(animalsNextPosition, animals)) {
+                return this.getPositionOnBoard();
+
+            }
+            if (!insideAndFreeGrass(board, animalsNextPosition,
+                    animals)
+                    && animalsIsOnStar(animalsNextPosition, animals)) {
+                setAnimalStates(animalsNextPosition, animals);
+                return this.getPositionOnBoard();
             }
 
         }

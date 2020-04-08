@@ -30,44 +30,6 @@ public class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        var snailNextpos = animalsNextPosition(board, direction, animals);
-        if (positionAreEquals(snailNextpos)) {
-            return super.getPositionOnBoard();
-        } else {
-            if (!isInside(board, snailNextpos)) {
-
-                super.setPositionOnBoard(null);
-                return null;
-            }
-            if (insideAndFreeGrass(board, snailNextpos,
-                    direction, animals)) {
-
-                super.setPositionOnBoard(snailNextpos);
-                return super.getPositionOnBoard();
-            }
-            if (insideAndStar(board, snailNextpos,
-                    direction, animals)) {
-                setAnimalState(snailNextpos, board);
-                return super.getPositionOnBoard();
-            }
-
-            if (!insideAndFreeGrass(board, snailNextpos,
-                    direction, animals)
-                    && !animalsIsOnStar(snailNextpos,
-                            animals)) {
-                return super.getPositionOnBoard();
-            }
-            if (!insideAndFreeGrass(board, snailNextpos,
-                    direction, animals)
-                    && animalsIsOnStar(snailNextpos, animals)) {
-
-                setAnimalStates(snailNextpos, animals);
-                return super.getPositionOnBoard();
-            }
-
-        }
-
-        return null;
+        return animalsMove(board, direction, animals);
     }
-
 }

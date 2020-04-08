@@ -7,8 +7,9 @@ package g53554.humbug.model;
 public class GrassHopper extends Animal {
 
     /**
+     * GrassHopper Constructor
      *
-     * @param positionOnBoard
+     * @param positionOnBoard of the animal on the board
      */
     public GrassHopper(Position positionOnBoard) {
         super(positionOnBoard);
@@ -26,48 +27,8 @@ public class GrassHopper extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        var grassHopperNextPosition = animalsNextPosition(board,
-                direction, animals);
-        if (grassHopperNextPosition == null) {
-            super.setPositionOnBoard(null);
-            return null;
-        }
-        if (positionAreEquals(grassHopperNextPosition)) {
-            return super.getPositionOnBoard();
-        } else {
-            if (!isInside(board, grassHopperNextPosition)) {
-                super.setPositionOnBoard(null);
-                return null;
-            }
-            if (insideAndFreeGrass(board, grassHopperNextPosition,
-                    direction, animals)) {
-                super.setPositionOnBoard(grassHopperNextPosition);
-                return super.getPositionOnBoard();
-
-            }
-
-            if (insideAndStar(board, grassHopperNextPosition,
-                    direction, animals)) {
-                setAnimalState(grassHopperNextPosition, board);
-                return super.getPositionOnBoard();
-            }
-
-            if (!insideAndFreeGrass(board, grassHopperNextPosition,
-                    direction, animals)
-                    && !animalsIsOnStar(grassHopperNextPosition, animals)) {
-                return super.getPositionOnBoard();
-
-            }
-            if (!insideAndFreeGrass(board, grassHopperNextPosition,
-                    direction, animals)
-                    && animalsIsOnStar(grassHopperNextPosition, animals)) {
-                setAnimalStates(grassHopperNextPosition, animals);
-                return super.getPositionOnBoard();
-            }
-
-        }
-
-        return null;
+       
+        return animalsMove(board, direction, animals);
     }
 
 }

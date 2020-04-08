@@ -28,45 +28,6 @@ public class Spider extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        var spiderNextPosition = animalsNextPosition(board, direction, animals);
-        if (spiderNextPosition == null) {
-            super.setPositionOnBoard(null);
-            return null;
-        }
-        if (positionAreEquals(spiderNextPosition)) {
-            return super.getPositionOnBoard();
-        } else {
-            if (!isInside(board, spiderNextPosition)) {
-                super.setPositionOnBoard(null);
-                return null;
-            }
-            if (insideAndFreeGrass(board, spiderNextPosition,
-                    direction, animals)) {
-                super.setPositionOnBoard(spiderNextPosition);
-                return super.getPositionOnBoard();
-
-            }
-
-            if (insideAndStar(board, spiderNextPosition, direction, animals)) {
-                setAnimalState(spiderNextPosition, board);
-                return super.getPositionOnBoard();
-            }
-
-            if (!insideAndFreeGrass(board, spiderNextPosition,
-                    direction, animals)
-                    && !animalsIsOnStar(spiderNextPosition, animals)) {
-                return super.getPositionOnBoard();
-
-            }
-            if (!insideAndFreeGrass(board, spiderNextPosition,
-                    direction, animals)
-                    && animalsIsOnStar(spiderNextPosition, animals)) {
-                setAnimalStates(spiderNextPosition, animals);
-                return super.getPositionOnBoard();
-            }
-
-        }
-
-        return null;
+        return animalsMove(board, direction, animals);
     }
 }

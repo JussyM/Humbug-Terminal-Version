@@ -4,7 +4,6 @@ import static g53554.humbug.model.SquareType.GRASS;
 import static g53554.humbug.model.SquareType.STAR;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -183,7 +182,7 @@ public class GrassHopperTest {
     @Test
     public void testWhenHasWall_On_East() {
         board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(STAR), new Square(GRASS),
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS),
                 new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
@@ -194,7 +193,7 @@ public class GrassHopperTest {
         };
         System.out.println("Test when has wall on east");
         GrassHopper instance = (GrassHopper) animals[0];
-        Position expResult = new Position(0, 0);
+        Position expResult = new Position(0, 1);
         board.getSquares()[expResult.getRow()][expResult.getColumn()]
                 .setEastWall(true);
         Position result = instance.move(board, Direction.EAST, animals);
@@ -207,7 +206,7 @@ public class GrassHopperTest {
     @Test
     public void testWhenHasWall_On_Opposite_Direction() {
         board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(STAR), new Square(GRASS),
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS),
                 new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
@@ -218,7 +217,7 @@ public class GrassHopperTest {
         };
         System.out.println("Test when has wall on opposite direction");
         GrassHopper instance = (GrassHopper) animals[0];
-        Position expResult = new Position(0, 0);
+        Position expResult = new Position(0, 1);
         board.getSquares()[expResult.next(Direction.EAST)
                 .getRow()][expResult.next(Direction.EAST).getColumn()]
                 .setWestWall(true);
