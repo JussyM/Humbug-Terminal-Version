@@ -22,7 +22,7 @@ public abstract class Animal {
     }
 
     /**
-     * Getter for Postion
+     * Getter for Position
      *
      * @return positionOnBoard position of the animal on the board
      */
@@ -33,7 +33,7 @@ public abstract class Animal {
     /**
      * getter for onStar
      *
-     * @return onStar booolean of animal that verifie if he's out or not
+     * @return onStar boolean of animal that verify if he's out or not
      */
     public boolean isOnStar() {
         return onStar;
@@ -42,7 +42,7 @@ public abstract class Animal {
     /**
      * Setter for onStar
      *
-     * @param onStar boolean that change the attribut
+     * @param onStar boolean that change the attribute
      */
     public void setOnStar(boolean onStar) {
         this.onStar = onStar;
@@ -92,8 +92,8 @@ public abstract class Animal {
     }
 
     /**
-     * return the position of the spider if an animal can stop him or retur null
-     * if not
+     * return the position of the spider if an animal can stop him or return
+     * null if not
      *
      * @param position arrays of all the position of the spider
      * @param board of the game
@@ -121,9 +121,9 @@ public abstract class Animal {
     }
 
     /**
-     * Verifie if the animal on the next Square of the board must still be on
-     * the board if yes return false or true Simply verify if the animal boolean
-     * is true of false
+     * Verify if the animal on the next Square of the board must still be on the
+     * board if yes return false or true Simply verify if the animal boolean is
+     * true of false
      *
      * @param position nextPosition that need to be compare
      * @param animals arrays of the animals
@@ -252,7 +252,7 @@ public abstract class Animal {
     }
 
     /**
-     * return the nextposition of all the animals of the game
+     * return the next Position of all the animals of the game
      *
      * @param board of the game
      * @param direction of the animal
@@ -338,7 +338,7 @@ public abstract class Animal {
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Bumblebee) {
-                var bumblebeeNextPosition = BumblebeeNextPosition(board,
+                var bumblebeeNextPosition = bumblebeeNextPosition(board,
                         direction, animals);
                 if (bumblebeeNextPosition != null) {
                     if (hasWall(bumblebeeNextPosition, direction, board)) {
@@ -353,6 +353,23 @@ public abstract class Animal {
                     break;
                 }
 
+            }
+            if (animal.getPositionOnBoard().equals(positionOnBoard)
+                    && animal instanceof Butterfly) {
+                var butterflyNextPosition = butterflyNextPosition(board,
+                        direction, animals);
+                if (butterflyNextPosition != null) {
+                    if (hasWall(butterflyNextPosition, direction, board)) {
+                        animalNextPosition = butterflyNextPosition;
+                        break;
+                    } else {
+                        animalNextPosition = butterflyNextPosition;
+                        break;
+                    }
+                } else {
+                    animalNextPosition = null;
+                    break;
+                }
             }
 
         }
@@ -480,7 +497,7 @@ public abstract class Animal {
      * @param animals arrays of animals
      * @return grassHopper next position
      */
-    private Position BumblebeeNextPosition(Board board,
+    private Position bumblebeeNextPosition(Board board,
             Direction direction, Animal... animals) {
         Position bumblebeeNextPos = positionOnBoard.next(direction).
                 next(direction);
@@ -503,6 +520,38 @@ public abstract class Animal {
         }
 
         return bumblebeeNextPos;
+    }
+
+    /**
+     * return the next Position of the butterfly
+     *
+     * @param board of the game
+     * @param direction direction of the butterfly
+     * @param animals arrays that contain the animals on the board
+     * @return null / new position who's the next position
+     */
+    private Position butterflyNextPosition(Board board, Direction direction,
+            Animal... animals) {
+        Position butterflyNextPosition = positionOnBoard.next(direction).
+                next(direction).next(direction);
+        if (isInside(board, butterflyNextPosition)) {
+            if (isFree(butterflyNextPosition, animals)) {
+                if (!animalsIsOnStar(butterflyNextPosition, animals)) {
+                    return butterflyNextPosition;
+                }
+            } else {
+                if (!animalsIsOnStar(butterflyNextPosition, animals)) {
+                    return butterflyNextPosition.next(direction);
+                } else {
+                    return butterflyNextPosition;
+                }
+            }
+        } else {
+            butterflyNextPosition = null;
+        }
+
+        return butterflyNextPosition;
+
     }
 
     /**

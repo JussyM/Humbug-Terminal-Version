@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package g53554.humbug.model;
 
 import static g53554.humbug.model.SquareType.GRASS;
@@ -9,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author jj
  */
-public class BumblebeeTest {
+public class ButterflyTest {
 
     private Animal[] animals;
     private Board board;
@@ -26,10 +31,10 @@ public class BumblebeeTest {
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),};
+            new Butterfly(new Position(0, 0)),};
         System.out.println("move_general");
-        Bumblebee instance = (Bumblebee) animals[0];
-        Position expResult = new Position(0, 2); //.next(Direction.EAST);
+        Butterfly instance = (Butterfly) animals[0];
+        Position expResult = new Position(0, 3); //.next(Direction.EAST);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
@@ -42,16 +47,16 @@ public class BumblebeeTest {
     public void testMove_next_final_SquareBusy() {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS),
-                new Square(GRASS)},
+                new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),
-            new LadyBird(new Position(0, 2)),};
+            new Butterfly(new Position(0, 0)),
+            new LadyBird(new Position(0, 3)),};
         System.out.println("move next case when final Square is busy");
-        Bumblebee instance = (Bumblebee) animals[0];
-        Position expResult = new Position(0, 3);
+        Butterfly instance = (Butterfly) animals[0];
+        Position expResult = new Position(0, 4);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
@@ -64,13 +69,14 @@ public class BumblebeeTest {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 1)),};
+            new Butterfly(new Position(0, 1)),};
         System.out.println("move next on star");
-        Bumblebee instance = (Bumblebee) animals[0];
-        Position expResult = new Position(2, 1);
+        Butterfly instance = (Butterfly) animals[0];
+        Position expResult = new Position(3, 1);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
         assertTrue(instance.isOnStar());
@@ -88,9 +94,9 @@ public class BumblebeeTest {
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),};
+            new Butterfly(new Position(0, 0)),};
         System.out.println("move next case null");
-        Bumblebee instance = (Bumblebee) animals[0];
+        Butterfly instance = (Butterfly) animals[0];
         Position expResult = null; // move and fall
         Position result = instance.move(board, Direction.WEST, animals);
         assertEquals(expResult, result);
@@ -108,10 +114,10 @@ public class BumblebeeTest {
         });
         System.out.println("testMove_next_When_Next_isNull");
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),
+            new Butterfly(new Position(0, 0)),
             new Snail(new Position(0, 1)),
             new GrassHopper(new Position(0, 2)),};
-        Bumblebee instance = (Bumblebee) animals[0];
+        Butterfly instance = (Butterfly) animals[0];
         Position expResult = null;
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -127,15 +133,16 @@ public class BumblebeeTest {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS),},
             {null, new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         System.out.println("testMove_Fly_Above_null");
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),
+            new Butterfly(new Position(0, 0)),
             new Snail(new Position(0, 1)),
             new GrassHopper(new Position(0, 2)),};
-        Bumblebee instance = (Bumblebee) animals[0];
-        Position expResult = new Position(2, 0);
+        Butterfly instance = (Butterfly) animals[0];
+        Position expResult = new Position(3, 0);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
 
@@ -149,16 +156,17 @@ public class BumblebeeTest {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),};
+            new Butterfly(new Position(0, 0)),};
         System.out.println("test_When_animal_hasWall");
-        Bumblebee instance = (Bumblebee) animals[0];
+        Butterfly instance = (Butterfly) animals[0];
         board.getSquares()[instance.getPositionOnBoard().
                 getRow()][instance.getPositionOnBoard().
                         getColumn()].setSouthWall(true);
-        Position expResult = new Position(2, 0);
+        Position expResult = new Position(3, 0);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
     }
@@ -172,18 +180,21 @@ public class BumblebeeTest {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Bumblebee(new Position(0, 0)),};
-        Bumblebee instance = (Bumblebee) animals[0];
+            new Butterfly(new Position(0, 0)),};
+        Butterfly instance = (Butterfly) animals[0];
 
         board.getSquares()[instance.getPositionOnBoard().
                 next(Direction.SOUTH).next(Direction.SOUTH).
+                next(Direction.SOUTH).
                 getRow()][instance.getPositionOnBoard().
                         next(Direction.SOUTH).next(Direction.SOUTH).
+                        next(Direction.SOUTH).
                         getColumn()].setNorthWall(true);
-        Position expResult = new Position(2, 0);
+        Position expResult = new Position(3, 0);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
     }
@@ -201,11 +212,11 @@ public class BumblebeeTest {
             new Square(GRASS)}};
         Board boards = new Board(squares);
         animals = new Animal[2];
-        animals[0] = new Bumblebee(new Position(0, 0));
-        animals[1] = new Snail(new Position(0, 2));
+        animals[0] = new Butterfly(new Position(0, 0));
+        animals[1] = new Snail(new Position(0, 3));
         animals[1].setOnStar(true);
 
-        Position expResult = new Position(0, 2);
+        Position expResult = new Position(0, 3);
         Position result = animals[0].move(boards, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
