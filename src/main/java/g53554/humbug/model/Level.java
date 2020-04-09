@@ -2,13 +2,17 @@ package g53554.humbug.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
+ * Represent the level of the game level class
  *
  * @author jj
  */
 public class Level {
+
+    private Board board;
+    private Animal[] animals;
+    private int nMoves;
 
     /**
      * Return the level of the game
@@ -25,15 +29,28 @@ public class Level {
         return null;
     }
 
-    private Board board;
-    private Animal[] animals;
-    private int nMoves;
+    /**
+     * read the level from the json file given
+     *
+     * @param i reprensente the level of the game
+     * @return Level
+     * @throws IOException Exception throws if error occure
+     */
+    private static Level readLevel(int i) throws IOException {
+        var objectMapper = new ObjectMapper();
+        var inputStream = Level.class.getResourceAsStream(
+                "/data/level-" + i + ".json");
+        var level = objectMapper.readValue(inputStream, Level.class);
+        return level;
+
+    }
 
     /**
+     * Contructor of Level with all the tree attribut as argument
      *
-     * @param board
-     * @param animals
-     * @param nMoves
+     * @param board of the game
+     * @param animals arrays that contain all the animals of the game
+     * @param nMoves number of move autorized
      */
     public Level(Board board, Animal[] animals, int nMoves) {
         this.board = board;
@@ -42,42 +59,36 @@ public class Level {
     }
 
     /**
+     * Default constructor to initiazed the level
+     */
+    public Level() {
+    }
+
+    /**
+     * getter of board
      *
-     * @return
+     * @return board of the game
      */
     public Board getBoard() {
         return board;
     }
 
     /**
+     * getter of animals
      *
-     * @return
+     * @return animals of the games
      */
     public Animal[] getAnimals() {
         return animals;
     }
 
     /**
+     * getter of nMoves
      *
-     * @return
+     * @return number of movement allow
      */
     public int getnMoves() {
         return nMoves;
-    }
-
-    /**
-     *
-     * @param i
-     * @return
-     * @throws IOException
-     */
-    private static Level readLevel(int i) throws IOException {
-        var objectMapper = new ObjectMapper();
-        var inputStream = Level.class.getResourceAsStream(
-                "data/level-" + i + ".json");
-        var level = objectMapper.readValue(inputStream, Level.class);
-        return level;
-
     }
 
 }

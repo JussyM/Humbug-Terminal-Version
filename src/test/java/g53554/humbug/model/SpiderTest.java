@@ -197,13 +197,14 @@ public class SpiderTest {
                 .getRow()][expResult.next(Direction.EAST).getColumn()]
                 .setWestWall(true);
         Position result = instance.move(board, Direction.EAST, animals);
+        System.out.println(result.getRow());
+        System.out.println(result.getColumn());
         assertEquals(expResult, result);
     }
 
     /**
      *
      */
-
     @Test
     public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
         System.out.println("The animal can be moved to "

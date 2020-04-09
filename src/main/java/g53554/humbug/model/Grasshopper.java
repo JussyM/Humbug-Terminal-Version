@@ -1,6 +1,7 @@
 package g53554.humbug.model;
 
 /**
+ * GrassHopper class
  *
  * @author jj
  */
@@ -17,6 +18,13 @@ public class Grasshopper extends Animal {
     }
 
     /**
+     * Default constructor of grasshopper
+     */
+    public Grasshopper() {
+        super();
+    }
+
+    /**
      * return a new postion of the grassHopper according to the direction if a
      * animal can stop him if any animal can't stop him the method return null
      *
@@ -27,7 +35,7 @@ public class Grasshopper extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-       
+
         return animalsMove(board, direction, animals);
     }
 

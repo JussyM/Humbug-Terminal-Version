@@ -27,7 +27,8 @@ public class SquareTest {
         assertEquals(expResult, result);
 
     }
-      /**
+
+    /**
      * Test of hasWall method, of class Square.
      */
     @Test
@@ -41,6 +42,5 @@ public class SquareTest {
         assertEquals(expResult, result);
 
     }
-
 
 }

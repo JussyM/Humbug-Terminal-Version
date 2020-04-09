@@ -35,31 +35,40 @@ public class Controller {
     /**
      * Start game method he initialized all the animals on the board initialized
      * the board and display it
+     *
      * @param nLevel
      */
     public void startGame(int nLevel) {
-        game.startLevel(1);
         view.displayHelp();
-        try {
-            do {
+        int i = nLevel;
+        while (i <= 40) {
+            try {
+                game.startLevel(i);
+                view.displayError("NIVEAU: " + game.getCurrentLevel() + "\n");
+
+                do {
+                    view.displayremainingMove(game.getRemainingMoves());
+                    view.displayBoard(game.getBoard(), game.animals());
+                    Position position = view.askPosition();
+                    while (!positionValable(position, game.animals())) {
+                        view.displayError("Pas d'animal à cette case " + "\n");
+                        position = view.askPosition();
+
+                    }
+                    Direction direction = view.askDirection();
+                    game.move(position, direction);
+
+                } while (game.getLevelStatus() != LevelStatus.WIN);
+                i++;
                 view.displayBoard(game.getBoard(), game.animals());
-                Position position = view.askPosition();
-                while (!positionValable(position, game.animals())) {
-                    view.displayError("Pas d'animal à cette case " + "\n");
-                    position = view.askPosition();
+                view.displayWinner();
 
-                }
-                Direction direction = view.askDirection();
-                game.move(position, direction);
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException
+                    | IllegalStateException e) {
 
-            } while (game.getLevelStatus()==LevelStatus.WIN);
+                view.displayError(e.getMessage() + "\n");
 
-            view.displayBoard(game.getBoard(), game.animals());
-            view.displayWinner();
-
-        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-
-            view.displayError("L'animal est sortie du jeu");
+            }
 
         }
 
@@ -82,4 +91,5 @@ public class Controller {
         return false;
 
     }
+
 }

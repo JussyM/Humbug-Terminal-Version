@@ -138,7 +138,6 @@ public class SnailTest {
     /**
      *
      */
-
     @Test
     public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
         System.out.println("The animal can be moved to "

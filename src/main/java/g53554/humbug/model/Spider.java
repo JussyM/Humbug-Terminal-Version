@@ -18,6 +18,13 @@ public class Spider extends Animal {
     }
 
     /**
+     * Default spider constructor
+     */
+    public Spider() {
+        super();
+    }
+
+    /**
      * return a new postion of the spider according to the direction if a animal
      * can stop him if any animal can't stop him the method return null
      *

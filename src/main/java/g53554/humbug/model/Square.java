@@ -28,6 +28,12 @@ public class Square {
     }
 
     /**
+     * Default square constructorgetter for each attribut of square
+     */
+    public Square() {
+    }
+
+    /**
      * Setter for northWall
      *
      * @param northWall boolean that change the attribut
@@ -103,34 +109,37 @@ public class Square {
     }
 
     /**
+     * getter for each attribut of square
      *
-     * @return
+     * @return northWall attribut
      */
     public boolean isNorthWall() {
         return northWall;
     }
 
     /**
+     * getter for each attribut of square
      *
-     * @return
+     * @return eastWall attribut
      */
     public boolean isEastWall() {
         return eastWall;
     }
 
     /**
+     * getter for each attribut of square
      *
-     * @return
+     * @return southWall attribut
      */
     public boolean isSouthWall() {
         return southWall;
     }
 
     /**
+     * getter for each attribut of square
      *
-     * @return
+     * @return westWall attribut
      */
-
     public boolean isWestWall() {
         return westWall;
     }

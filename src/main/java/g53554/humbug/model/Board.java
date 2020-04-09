@@ -10,40 +10,20 @@ import static g53554.humbug.model.SquareType.*;
  */
 public class Board {
 
-    /**
-     * return a new board of 3 row and 3 column with some SquareType initialized
-     * at some certain position according to the first level of the game
-     *
-     * @return board of the game
-     */
-    public static Board getInitBoard() {
-        Square[][] squares = {
-        {new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS)},
-        {null, null, new Square(GRASS), new Square(GRASS)},
-        {null, null, new Square(GRASS), new Square(STAR)},
-        {null, null, new Square(STAR), null},
-        {null, null, new Square(GRASS), new Square(STAR)}};
-
-        Board board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
-        
-        board.getSquares()[0][0].setEastWall(true);board.getSquares()[0][1].setWestWall(true);
-//        board.getSquares()[3][2].setNorthWall(true);
-
-        return new Board(squares);
-    }
-
     private Square[][] squares;
 
     /**
-     * Board constructor
+     * defaut constructor to initialized the board
+     */
+    public Board() {
+    }
+
+    /**
+     * Board constructor with argument
      *
      * @param squares represente each square of the board
      */
-   public Board(Square[][] squares) {
+    public Board(Square[][] squares) {
         this.squares = squares;
     }
 
@@ -69,7 +49,7 @@ public class Board {
             throw new IllegalArgumentException("La postion est null  On ne peut"
                     + " pas savoir si le squareType est une Star ou pas");
         }
-        if (position.getRow() < 0 || position.getRow() >= squares.length) {
+        if (position.getRow() < 0 || position.getRow() >=squares.length) {
             return false;
 
         }

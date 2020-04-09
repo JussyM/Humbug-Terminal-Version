@@ -37,14 +37,23 @@ public interface Model {
     void move(Position position, Direction direction);
 
     /**
+     * getter of level status
      *
-     * @return
+     * @return levelStatus of the game
      */
     LevelStatus getLevelStatus();
 
     /**
+     * getter for the current level
      *
-     * @return
+     * @return level value
+     */
+    int getCurrentLevel();
+
+    /**
+     * return the remaining moves of the games also a getter
+     *
+     * @return remainingMoves
      */
     int getRemainingMoves();
 }

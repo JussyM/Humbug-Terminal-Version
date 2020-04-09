@@ -32,7 +32,8 @@ public class View implements InterfaceView {
     /**
      * DisplayBoard Code
      *
-     * @param boardArrays
+     * @param boardArrays is the board of the game converted to arrays of String
+     * for the print
      */
     private void displayBoardMethod(String[][] boardArrays) {
         int line;
@@ -57,12 +58,12 @@ public class View implements InterfaceView {
                                     + "{   }" + TerminalColor.toDefault);
                             break;
 
-                        case "grass_left":
+                        case "grass_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#  }" + TerminalColor.toDefault);
                             break;
-                        case "grass_right":
+                        case "grass_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{  #}" + TerminalColor.toDefault);
@@ -87,12 +88,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ E }" + TerminalColor.toDefault);
                             break;
-                        case "snail_left":
+                        case "snail_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#E }" + TerminalColor.toDefault);
                             break;
-                        case "snail_right":
+                        case "snail_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ E#}" + TerminalColor.toDefault);
@@ -112,12 +113,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ A }" + TerminalColor.toDefault);
                             break;
-                        case "spider_left":
+                        case "spider_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#A }" + TerminalColor.toDefault);
                             break;
-                        case "spider_right":
+                        case "spider_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ A#}" + TerminalColor.toDefault);
@@ -143,12 +144,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ G }" + TerminalColor.toDefault);
                             break;
-                        case "grassHopper_left":
+                        case "grassHopper_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#G }" + TerminalColor.toDefault);
                             break;
-                        case "grassHopper_right":
+                        case "grassHopper_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ G#}" + TerminalColor.toDefault);
@@ -184,12 +185,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ L }" + TerminalColor.toDefault);
                             break;
-                        case "ladyBird_left":
+                        case "ladyBird_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#L }" + TerminalColor.toDefault);
                             break;
-                        case "ladyBird_right":
+                        case "ladyBird_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ L#}" + TerminalColor.toDefault);
@@ -218,12 +219,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ B }" + TerminalColor.toDefault);
                             break;
-                        case "bumblebee_left":
+                        case "bumblebee_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#B }" + TerminalColor.toDefault);
                             break;
-                        case "bumblebee_right":
+                        case "bumblebee_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ B#}" + TerminalColor.toDefault);
@@ -252,12 +253,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ P }" + TerminalColor.toDefault);
                             break;
-                        case "butterfly_left":
+                        case "butterfly_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#P }" + TerminalColor.toDefault);
                             break;
-                        case "butterfly_right":
+                        case "butterfly_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ P#}" + TerminalColor.toDefault);
@@ -304,12 +305,12 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ * }" + TerminalColor.toDefault);
                             break;
-                        case "star_left":
+                        case "star_right":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{#* }" + TerminalColor.toDefault);
                             break;
-                        case "star_right":
+                        case "star_left":
                             System.out.print(TerminalColor.toDefault
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{ *#}" + TerminalColor.toDefault);
@@ -405,6 +406,10 @@ public class View implements InterfaceView {
             case 13:
                 System.out.printf(" " + TerminalColor.CYAN_BACKGROUND + "[%02d]"
                         + TerminalColor.toDefault, 4);
+                break;
+            case 16:
+                System.out.printf(" " + TerminalColor.CYAN_BACKGROUND + "[%02d]"
+                        + TerminalColor.toDefault, 5);
                 break;
 
         }
@@ -1115,6 +1120,16 @@ public class View implements InterfaceView {
             return 'W';
         }
         return 0;
+    }
+
+    /**
+     * Display the number of moves remaining for game
+     *
+     * @param getMoves number of moves remains
+     */
+    @Override
+    public void displayremainingMove(int getMoves) {
+        System.out.println("Nombre de déplacement: " + getMoves + "\n");
     }
 
 }

@@ -27,24 +27,9 @@ public class GameTest {
             {null, new Square(GRASS), new Square(STAR)}
         });
         animals = new Animal[]{
-            new Spider(new Position(0, 1)), new Snail(new Position(2, 1))};
+            new Spider(new Position(0, 1))};
 
         instance = new Game();
-    }
-
-    /**
-     * Test of getBoard method, of class Game.
-     */
-    @Test
-    public void testGetBoard() {
-        setUp();
-        System.out.println("getBoard");
-        Game ins = new Game();
-        ins.startLevel(0);
-        Board expResult = Board.getInitBoard();
-        Board result = ins.getBoard();
-        assertEquals(expResult.getClass(), result.getClass());
-
     }
 
     /**
@@ -55,7 +40,7 @@ public class GameTest {
         setUp();
         System.out.println("animals");
         Game ins = new Game();
-        ins.startLevel(0);
+        ins.startLevel(1);
         Animal[] expResult = animals;
         Animal[] result = ins.animals();
         assertEquals(expResult.getClass(), result.getClass()
@@ -70,8 +55,8 @@ public class GameTest {
     public void testStartLevel() {
         System.out.println("startLevel");
         int level = 1;
-        Game instance = new Game();
-        instance.startLevel(level);
+        Game ins = new Game();
+        ins.startLevel(level);
 
     }
 
@@ -96,26 +81,13 @@ public class GameTest {
     public void testMoveNotNullSnail() {
         System.out.println("move to position");
         Position expResult = new Position(0, 1);
-        Game instance = new Game();
-        instance.startLevel(1);
-        Position position = instance.animals()[0].getPositionOnBoard();
+        Game ins = new Game();
+        ins.startLevel(1);
+        Position position = ins.animals()[0].getPositionOnBoard();
         Direction direction = Direction.EAST;
-        instance.move(position, direction);
-        assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
+        ins.move(position, direction);
+        assertEquals(expResult, ins.animals()[0].getPositionOnBoard());
 
     }
-//     @Test
-//    public void testMoveNotNullSpider() {
-////        setUp();
-//        System.out.println("move to position");
-//        Position expResult = new Position(1, 1);
-//        Game instance = new Game();
-//        instance.startLevel(1);
-//        Position position = instance.animals()[0].getPositionOnBoard();
-//        Direction direction = Direction.SOUTH;
-//        instance.move(position, direction);
-//        assertEquals(expResult, instance.animals()[0].getPositionOnBoard());
-//
-//    }
 
 }

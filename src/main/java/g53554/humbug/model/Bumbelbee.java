@@ -1,6 +1,7 @@
 package g53554.humbug.model;
 
 /**
+ * Bumbelbee class
  *
  * @author jj
  */
@@ -14,6 +15,13 @@ public class Bumbelbee extends Animal {
     public Bumbelbee(Position positionOnBoard) {
         super(positionOnBoard);
 
+    }
+
+    /**
+     * Default bumbelbee constructor to initialized the animal
+     */
+    public Bumbelbee() {
+        super();
     }
 
     /**

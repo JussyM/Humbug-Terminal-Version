@@ -61,7 +61,7 @@ public class TerminalColor {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public static  String toBlue(String a) {
+    public static String toBlue(String a) {
         return "\033[34m" + a + toDefault();
     }
 
@@ -71,7 +71,7 @@ public class TerminalColor {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public static  String toPurple(String a) {
+    public static String toPurple(String a) {
         return "\033[35m" + a + toDefault();
     }
 
@@ -81,7 +81,7 @@ public class TerminalColor {
      * @param a La chaine à colorer.
      * @return La chaine colorée.
      */
-    public static  String toCyan(String a) {
+    public static String toCyan(String a) {
         return "\033[36m" + a + toDefault();
     }
 
@@ -142,7 +142,7 @@ public class TerminalColor {
     // Bold High Intensity
     public String BLACK_BOLD_BRIGHT = "\033[1;90m"; // BLACK
     public String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
-    public  String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
+    public String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
     public String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
     public String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
@@ -161,6 +161,6 @@ public class TerminalColor {
 
     //Color Back_ground
     public String WhiteBackground = "\u001b[47m";
-    public  static String toDefault = "\u001b[0m";
+    public static String toDefault = "\u001b[0m";
 
 }

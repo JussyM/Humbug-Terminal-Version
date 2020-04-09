@@ -47,24 +47,27 @@ public class Game implements Model {
     /**
      * Start the game according to the level
      *
-     * @param level of each games
+     * @param nlevel
      */
     @Override
-    public void startLevel(int level) {
-        Level.getLevel(level);
-
+    public void startLevel(int nlevel) {
+        Level level = Level.getLevel(nlevel);
+        remainingMove = level.getnMoves();
+        board = level.getBoard();
+        animals = level.getAnimals();
+        currentLevel = nlevel;
     }
 
     /**
-     * Remove the animal of which the position is null cause thy ain't on board
-     * anymore
+     * Remove the animal of which the isOnStar field is true cause they ain't on
+     * board anymore
      *
      * @param animals List of all the animals of the game
-     * @return Arrays of animals whose position ain't null
+     * @return new Arrays of animals
      */
     private Animal[] animalStillOnBoard(List<Animal> animals) {
         List<Animal> listNoNull = animals.stream().filter(x -> {
-            return x.getPositionOnBoard() != null;
+            return !x.isOnStar();
         }).collect(Collectors.toList());
         Animal[] animalStillPresent
                 = listNoNull.stream().toArray(x -> new Animal[x]);
@@ -83,7 +86,7 @@ public class Game implements Model {
         if (position == null || direction == null) {
             throw new IllegalArgumentException("Position ou direction null");
         }
-        if (getLevelStatus() != LevelStatus.IN_PROGRESS) {
+        if (getLevelStatus() == LevelStatus.FAIL) {
             throw new IllegalStateException("Jeu pas en cours");
 
         }
@@ -91,10 +94,16 @@ public class Game implements Model {
         boolean move = false;
         while (i < animals().length && !move) {
             if (position.equals(animals()[i].getPositionOnBoard())) {
+
                 Position movePos = animals()[i].move(board,
                         direction, animals());
+                remainingMove--;
+                if (getLevelStatus() == LevelStatus.FAIL) {
+                    throw new IllegalStateException("Déplacement épuisé");
+                }
+
                 if (movePos == null) {
-                    move = true;
+                    throw new NullPointerException("L'animal est sortie du jeu");
                 } else {
 
                     move = true;
@@ -107,22 +116,57 @@ public class Game implements Model {
     }
 
     /**
+     * return true or false if all the animal boolean turn to true
      *
-     * @return
+     * @return true/false
+     */
+    private boolean levelIsOver() {
+        int i = 0;
+        while (i < animals().length && animals()[i].isOnStar()) {
+            i++;
+        }
+        return animals().length == i;
+    }
+
+    /**
+     * return the level status of the game according to it state
+     *
+     * @return levelStatus(enum)
      */
     @Override
     public LevelStatus getLevelStatus() {
+        if (!levelIsOver() && getRemainingMoves() == 0) {
+            return LevelStatus.FAIL;
+        }
+        if (!levelIsOver()) {
+            return LevelStatus.IN_PROGRESS;
+        }
+        if (getRemainingMoves() == 0 && levelIsOver()) {
+            return LevelStatus.WIN;
+        }
 
         return null;
     }
 
     /**
+     * return the remaining move of the game getter for remainingMove
      *
-     * @return
+     * @return int remainingMove
      */
     @Override
     public int getRemainingMoves() {
-        return 0;
+
+        return remainingMove;
+    }
+
+    /**
+     * getter for currentLevel of the game
+     *
+     * @return currentLevel
+     */
+    @Override
+    public int getCurrentLevel() {
+        return currentLevel;
     }
 
 }

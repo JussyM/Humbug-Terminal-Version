@@ -47,9 +47,15 @@ public interface InterfaceView {
     void displayHelp();
 
     /**
-     *Display win message 
+     * Display win message
      */
-
     void displayWinner();
+
+    /**
+     * Display the remaining move of the game
+     *
+     * @param getMoves moves of the game
+     */
+    void displayremainingMove(int getMoves);
 
 }

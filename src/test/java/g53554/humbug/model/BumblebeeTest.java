@@ -36,7 +36,7 @@ public class BumblebeeTest {
 
     /**
      * Test of move method, of class Bumbelbee move next case when final Square
- is busy
+     * is busy
      */
     @Test
     public void testMove_next_final_SquareBusy() {

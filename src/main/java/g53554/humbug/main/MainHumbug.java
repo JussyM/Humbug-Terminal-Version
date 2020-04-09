@@ -5,14 +5,15 @@ import g53554.humbug.model.Game;
 import g53554.humbug.view.text.View;
 
 /**
- * Main method for humbug
+ * Main method for humbug to run the game
  *
  * @author jj
  */
 public class MainHumbug {
 
     public static void main(String[] args) {
-       
+        Controller controller = new Controller(new Game(), new View());
+        controller.startGame(6);
     }
 
 }

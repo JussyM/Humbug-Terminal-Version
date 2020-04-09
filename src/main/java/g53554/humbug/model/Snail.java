@@ -19,6 +19,13 @@ public class Snail extends Animal {
     }
 
     /**
+     * Default constructor of snail
+     */
+    public Snail() {
+        super();
+    }
+
+    /**
      * this method apply the move according to snail capacity return a new
      * postion if he can move return a null if he falls out and also return his
      * old position if an animal is on his new position

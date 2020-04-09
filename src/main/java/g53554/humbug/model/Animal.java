@@ -12,15 +12,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @author jj
  */
 @JsonTypeInfo(use = Id.NAME,
-include = JsonTypeInfo.As.PROPERTY,
-property = "type")
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
 @JsonSubTypes({
-@Type(value = Bumbelbee.class),
-@Type(value = Grasshopper.class),
-@Type(value = Ladybird.class),
-@Type(value = Snail.class),
-@Type(value = Spider.class),
-})
+    @Type(value = Bumbelbee.class),
+    @Type(value = Grasshopper.class),
+    @Type(value = Ladybird.class),
+    @Type(value = Snail.class),
+    @Type(value = Spider.class),})
 public abstract class Animal {
 
     private Position positionOnBoard;
@@ -34,6 +33,12 @@ public abstract class Animal {
     public Animal(Position positionOnBoard) {
         this.positionOnBoard = positionOnBoard;
         this.onStar = false;
+    }
+
+    /**
+     * default constructor to initialized the animals
+     */
+    public Animal() {
     }
 
     /**
@@ -120,19 +125,29 @@ public abstract class Animal {
             Direction direction,
             Animal... animals) {
         for (int i = 0; i < position.length; i++) {
-            for (Animal animal1 : animals) {
-                if (position[i].equals(animal1.getPositionOnBoard())) {
-                    if (i - 1 < 0) {
-                        return position[i];
+            Position instance = position[i];
+            if (hasWall(instance, direction, board)) {
+                return positionOnBoard;
+            } else {
+                for (Animal animal1 : animals) {
+                    if (instance.equals(animal1.getPositionOnBoard())) {
+                        if (i - 1 < 0) {
+                            return position[i];
+                        }
+                        return position[i - 1];
+
                     }
-                    return position[i - 1];
+                    if (!instance.equals(animal1.getPositionOnBoard())
+                            && hasWallMove(instance, direction, board)) {
+                        return instance;
+                    }
 
                 }
+
             }
+
         }
-
         return null;
-
     }
 
     /**
@@ -219,13 +234,9 @@ public abstract class Animal {
      *
      * @param board of the game
      * @param position next Position of the animal
-     * @param direction next animal direction
-     * @param animals arrays of all the animals
      * @return true / false
      */
-    private boolean insideAndStar(Board board, Position position,
-            Direction direction,
-            Animal... animals) {
+    private boolean insideAndStar(Board board, Position position) {
         return isInside(board, position)
                 && board.getSquareType(position) == SquareType.STAR;
 
@@ -267,6 +278,27 @@ public abstract class Animal {
     }
 
     /**
+     * verifie if the square has wall according to the right and the opposite
+     * direction
+     *
+     * @param position next Position of the board
+     * @param direction of animal
+     * @param board of the game
+     * @return true\false
+     */
+    private boolean hasWallMove(Position position, Direction direction,
+            Board board) {
+        if (board.isInside(position)) {
+            return board.getSquares()[position.
+                    getRow()][position.
+                            getColumn()].hasWall(direction);
+
+        }
+        return false;
+
+    }
+
+    /**
      * return the next Position of all the animals of the game
      *
      * @param board of the game
@@ -300,20 +332,15 @@ public abstract class Animal {
                 var spiderNextPos = allPositionAreFree(spiderParcours,
                         board, direction, animals);
                 if (spiderNextPos != null) {
-                    if (hasWall(spiderNextPos, direction, board)) {
-                        animalNextPosition = positionOnBoard;
-                        break;
-                    } else {
-                        animalNextPosition = spiderNextPos;
-                        break;
-                    }
+                    animalNextPosition = spiderNextPos;
+                    break;
 
                 } else {
                     animalNextPosition = null;
                     break;
                 }
-
             }
+
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Grasshopper) {
                 var grassHopperNextpos = grassHopperNextPosition(board,
@@ -433,7 +460,7 @@ public abstract class Animal {
      */
     private Position[] spiderParcoursCol(Board board,
             Direction direction, Position spiderPosActuelle) {
-        Position[] spider = new Position[board.getNbColumn()];
+        Position[] spider = new Position[board.getNbColumn() - 1];
         for (int i = 0; i < spider.length; i++) {
             spider[i] = spiderPosActuelle.next(direction);
             spiderPosActuelle = spider[i];
@@ -452,7 +479,7 @@ public abstract class Animal {
      */
     private Position[] spiderParcoursRow(Board board,
             Direction direction, Position spiderPosActuelle) {
-        Position[] spider = new Position[board.getNbRow()];
+        Position[] spider = new Position[board.getNbRow() - 1];
         for (int i = 0; i < spider.length; i++) {
             spider[i] = spiderPosActuelle.next(direction);
             spiderPosActuelle = spider[i];
@@ -570,8 +597,8 @@ public abstract class Animal {
     }
 
     /**
-     * Return the nextPosition of each animals according to the animal that call
-     * him
+     * Return or apply the nextPosition of each animals according to the animal
+     * that call him
      *
      * @param board of the game
      * @param direction of the animal
@@ -600,7 +627,7 @@ public abstract class Animal {
 
             }
 
-            if (insideAndStar(board, animalsNextPosition, direction, animals)) {
+            if (insideAndStar(board, animalsNextPosition)) {
                 setAnimalState(animalsNextPosition, board);
                 return this.getPositionOnBoard();
             }

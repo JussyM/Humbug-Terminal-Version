@@ -21,6 +21,11 @@ public class Position {
         this.column = column;
     }
 
+    public Position() {
+        this.row = 0;
+        this.column = 0;
+    }
+
     /**
      * Getter for column
      *

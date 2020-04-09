@@ -16,6 +16,13 @@ public class Butterfly extends Animal {
     }
 
     /**
+     * Butterfly default constructor
+     */
+    public Butterfly() {
+        super();
+    }
+
+    /**
      * Apply the move for the butterfly
      *
      * @param board of the game

@@ -1,6 +1,7 @@
 package g53554.humbug.model;
 
 /**
+ * Represent game status
  *
  * @author jj
  */
