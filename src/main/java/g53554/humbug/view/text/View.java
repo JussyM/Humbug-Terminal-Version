@@ -491,14 +491,14 @@ public class View implements InterfaceView {
                         && animal1 instanceof Spider) {
                     boardArrays[row][col] = "SPIDER";
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof GrassHopper) {
+                        && animal1 instanceof Grasshopper) {
                     boardArrays[row][col] = "GRASSHOPPER";
 
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof LadyBird) {
+                        && animal1 instanceof Ladybird) {
                     boardArrays[row][col] = "LADYBIRD";
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof Bumblebee) {
+                        && animal1 instanceof Bumbelbee) {
                     boardArrays[row][col] = "BUMBLEBEE";
 
                 } else if (animal1.getPositionOnBoard().equals(position)
@@ -614,7 +614,7 @@ public class View implements InterfaceView {
                             break;
                     }
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof GrassHopper) {
+                        && animal1 instanceof Grasshopper) {
                     switch (wall) {
                         case 'N':
                             boardArrays[row][col] = "grassHopper_up";
@@ -634,7 +634,7 @@ public class View implements InterfaceView {
                     }
 
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof LadyBird) {
+                        && animal1 instanceof Ladybird) {
                     switch (wall) {
                         case 'N':
                             boardArrays[row][col] = "ladyBird_up";
@@ -653,7 +653,7 @@ public class View implements InterfaceView {
                             break;
                     }
                 } else if (animal1.getPositionOnBoard().equals(position)
-                        && animal1 instanceof Bumblebee) {
+                        && animal1 instanceof Bumbelbee) {
                     switch (wall) {
                         case 'N':
                             boardArrays[row][col] = "bumblebee_up";

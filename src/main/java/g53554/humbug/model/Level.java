@@ -1,5 +1,9 @@
 package g53554.humbug.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jj
@@ -9,12 +13,16 @@ public class Level {
     /**
      * Return the level of the game
      *
-     * @param nMoves the number of move remaining 
+     * @param n the number of level
      * @return new level of the game
      */
-    public static Level getLevel(int nMoves) {
-        Game jeu = new Game();
-        return new Level(jeu.getBoard(), jeu.animals(), nMoves);
+    public static Level getLevel(int n) {
+        try {
+            return readLevel(n);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     private Board board;
@@ -55,6 +63,21 @@ public class Level {
      */
     public int getnMoves() {
         return nMoves;
+    }
+
+    /**
+     *
+     * @param i
+     * @return
+     * @throws IOException
+     */
+    private static Level readLevel(int i) throws IOException {
+        var objectMapper = new ObjectMapper();
+        var inputStream = Level.class.getResourceAsStream(
+                "data/level-" + i + ".json");
+        var level = objectMapper.readValue(inputStream, Level.class);
+        return level;
+
     }
 
 }

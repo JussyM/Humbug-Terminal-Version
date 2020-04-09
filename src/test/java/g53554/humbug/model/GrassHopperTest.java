@@ -26,11 +26,11 @@ public class GrassHopperTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 3)),
+            new Grasshopper(new Position(0, 3)),
             new Snail(new Position(1, 2))
         };
         System.out.println("move and fall");
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = null; // fall
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -50,11 +50,11 @@ public class GrassHopperTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 3)),
+            new Grasshopper(new Position(0, 3)),
             new Snail(new Position(1, 2))
         };
 
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = null;
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -73,10 +73,10 @@ public class GrassHopperTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(1, 2))
         };
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 1);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -94,11 +94,11 @@ public class GrassHopperTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 1))
         };
         System.out.println("move next jump from on animal");
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 2); // move
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -116,12 +116,12 @@ public class GrassHopperTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 1)),
             new Snail(new Position(0, 2))
         };
         System.out.println("move next case null and fall");
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 3);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -140,10 +140,10 @@ public class GrassHopperTest {
             {null, null, new Square(STAR), null}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 3))
         };
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 1);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -165,10 +165,10 @@ public class GrassHopperTest {
             {null, null, new Square(STAR), null}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 1))
         };
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 2);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -188,11 +188,11 @@ public class GrassHopperTest {
             {null, null, new Square(STAR), null}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 3))
         };
         System.out.println("Test when has wall on east");
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 1);
         board.getSquares()[expResult.getRow()][expResult.getColumn()]
                 .setEastWall(true);
@@ -212,11 +212,11 @@ public class GrassHopperTest {
             {null, null, new Square(STAR), null}
         });
         animals = new Animal[]{
-            new GrassHopper(new Position(0, 0)),
+            new Grasshopper(new Position(0, 0)),
             new Snail(new Position(0, 2))
         };
         System.out.println("Test when has wall on opposite direction");
-        GrassHopper instance = (GrassHopper) animals[0];
+        Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 1);
         board.getSquares()[expResult.next(Direction.EAST)
                 .getRow()][expResult.next(Direction.EAST).getColumn()]
@@ -240,7 +240,7 @@ public class GrassHopperTest {
         Board boards = new Board(squares);
         animals = new Animal[3];
 
-        animals[0] = new GrassHopper(new Position(0, 0));
+        animals[0] = new Grasshopper(new Position(0, 0));
         animals[1] = new Snail(new Position(0, 1));
         animals[2] = new Snail(new Position(0, 2));
         animals[2].setOnStar(true);

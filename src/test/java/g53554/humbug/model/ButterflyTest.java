@@ -53,7 +53,7 @@ public class ButterflyTest {
         });
         animals = new Animal[]{
             new Butterfly(new Position(0, 0)),
-            new LadyBird(new Position(0, 3)),};
+            new Ladybird(new Position(0, 3)),};
         System.out.println("move next case when final Square is busy");
         Butterfly instance = (Butterfly) animals[0];
         Position expResult = new Position(0, 4);
@@ -116,7 +116,7 @@ public class ButterflyTest {
         animals = new Animal[]{
             new Butterfly(new Position(0, 0)),
             new Snail(new Position(0, 1)),
-            new GrassHopper(new Position(0, 2)),};
+            new Grasshopper(new Position(0, 2)),};
         Butterfly instance = (Butterfly) animals[0];
         Position expResult = null;
         Position result = instance.move(board, Direction.EAST, animals);
@@ -140,7 +140,7 @@ public class ButterflyTest {
         animals = new Animal[]{
             new Butterfly(new Position(0, 0)),
             new Snail(new Position(0, 1)),
-            new GrassHopper(new Position(0, 2)),};
+            new Grasshopper(new Position(0, 2)),};
         Butterfly instance = (Butterfly) animals[0];
         Position expResult = new Position(3, 0);
         Position result = instance.move(board, Direction.SOUTH, animals);

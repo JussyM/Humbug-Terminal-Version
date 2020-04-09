@@ -3,23 +3,22 @@ package g53554.humbug.model;
 /**
  *
  * @author jj
- *
  */
-public class LadyBird extends Animal {
+public class Grasshopper extends Animal {
 
     /**
-     * LadyBird Constructor
+     * GrassHopper Constructor
      *
-     * @param positionOnBoard position of the ladayBird
+     * @param positionOnBoard of the animal on the board
      */
-    public LadyBird(Position positionOnBoard) {
+    public Grasshopper(Position positionOnBoard) {
         super(positionOnBoard);
 
     }
 
     /**
-     * return a new postion of the LadyBird according to the direction if a
-     * animal can stop him  if any animal can't stop him the method return null
+     * return a new postion of the grassHopper according to the direction if a
+     * animal can stop him if any animal can't stop him the method return null
      *
      * @param board of the game
      * @param direction of the animal

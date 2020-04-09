@@ -12,8 +12,7 @@ import g53554.humbug.view.text.View;
 public class MainHumbug {
 
     public static void main(String[] args) {
-        Controller controller = new Controller(new Game(), new View());
-        controller.startGame();
+       
     }
 
 }

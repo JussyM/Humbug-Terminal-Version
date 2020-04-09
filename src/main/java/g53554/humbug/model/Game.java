@@ -51,10 +51,7 @@ public class Game implements Model {
      */
     @Override
     public void startLevel(int level) {
-        board = Board.getInitBoard();
-        animals = new Animal[]{
-            new Snail(new Position(0, 0)),
-            new GrassHopper(new Position(0, 1))};
+        Level.getLevel(level);
 
     }
 
@@ -86,6 +83,10 @@ public class Game implements Model {
         if (position == null || direction == null) {
             throw new IllegalArgumentException("Position ou direction null");
         }
+        if (getLevelStatus() != LevelStatus.IN_PROGRESS) {
+            throw new IllegalStateException("Jeu pas en cours");
+
+        }
         int i = 0;
         boolean move = false;
         while (i < animals().length && !move) {
@@ -105,11 +106,20 @@ public class Game implements Model {
 
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public LevelStatus getLevelStatus() {
+
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getRemainingMoves() {
         return 0;

@@ -2,6 +2,7 @@ package g53554.humbug.controller;
 
 import g53554.humbug.model.Animal;
 import g53554.humbug.model.Direction;
+import g53554.humbug.model.LevelStatus;
 import g53554.humbug.model.Model;
 import g53554.humbug.model.Position;
 import g53554.humbug.view.text.InterfaceView;
@@ -34,8 +35,9 @@ public class Controller {
     /**
      * Start game method he initialized all the animals on the board initialized
      * the board and display it
+     * @param nLevel
      */
-    public void startGame() {
+    public void startGame(int nLevel) {
         game.startLevel(1);
         view.displayHelp();
         try {
@@ -50,7 +52,7 @@ public class Controller {
                 Direction direction = view.askDirection();
                 game.move(position, direction);
 
-            } while (getClass().desiredAssertionStatus());
+            } while (game.getLevelStatus()==LevelStatus.WIN);
 
             view.displayBoard(game.getBoard(), game.animals());
             view.displayWinner();

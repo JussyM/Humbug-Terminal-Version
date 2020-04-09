@@ -4,14 +4,14 @@ package g53554.humbug.model;
  *
  * @author jj
  */
-public class Bumblebee extends Animal {
+public class Bumbelbee extends Animal {
 
     /**
      * Simple constructor of bumblebee
      *
      * @param positionOnBoard bumblebee position on the board
      */
-    public Bumblebee(Position positionOnBoard) {
+    public Bumbelbee(Position positionOnBoard) {
         super(positionOnBoard);
 
     }

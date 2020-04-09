@@ -1,11 +1,26 @@
 package g53554.humbug.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 /**
  * these are the animal that will be on the board an animal know where he is on
  * the board but do not know were is the star
  *
  * @author jj
  */
+@JsonTypeInfo(use = Id.NAME,
+include = JsonTypeInfo.As.PROPERTY,
+property = "type")
+@JsonSubTypes({
+@Type(value = Bumbelbee.class),
+@Type(value = Grasshopper.class),
+@Type(value = Ladybird.class),
+@Type(value = Snail.class),
+@Type(value = Spider.class),
+})
 public abstract class Animal {
 
     private Position positionOnBoard;
@@ -300,7 +315,7 @@ public abstract class Animal {
 
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
-                    && animal instanceof GrassHopper) {
+                    && animal instanceof Grasshopper) {
                 var grassHopperNextpos = grassHopperNextPosition(board,
                         direction, animals);
                 if (grassHopperNextpos != null) {
@@ -320,7 +335,7 @@ public abstract class Animal {
 
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
-                    && animal instanceof LadyBird) {
+                    && animal instanceof Ladybird) {
                 animalNextPosition = positionOnBoard.
                         next(direction).next(direction);
                 if (hasWall(animalNextPosition, direction, board)
@@ -337,7 +352,7 @@ public abstract class Animal {
                 }
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
-                    && animal instanceof Bumblebee) {
+                    && animal instanceof Bumbelbee) {
                 var bumblebeeNextPosition = bumblebeeNextPosition(board,
                         direction, animals);
                 if (bumblebeeNextPosition != null) {
@@ -490,7 +505,7 @@ public abstract class Animal {
     }
 
     /**
-     * Return the next Position of Bumblebee
+     * Return the next Position of Bumbelbee
      *
      * @param board of the game
      * @param direction of the animal

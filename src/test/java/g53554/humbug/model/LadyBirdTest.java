@@ -27,10 +27,10 @@ public class LadyBirdTest {
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new LadyBird(new Position(0, 0)),
-            new LadyBird(new Position(0, 1)),
-            new LadyBird(new Position(2, 0)),
-            new LadyBird(new Position(1, 2))
+            new Ladybird(new Position(0, 0)),
+            new Ladybird(new Position(0, 1)),
+            new Ladybird(new Position(2, 0)),
+            new Ladybird(new Position(1, 2))
         };
     }
 
@@ -41,7 +41,7 @@ public class LadyBirdTest {
     public void testMove() {
         setUp();
         System.out.println("move_general");
-        LadyBird instance = (LadyBird) animals[0];
+        Ladybird instance = (Ladybird) animals[0];
         Position expResult = new Position(0, 2); //.next(Direction.EAST);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
@@ -55,7 +55,7 @@ public class LadyBirdTest {
     public void testMove_next_final_SquareBusy() {
         setUp();
         System.out.println("move next case when final Square is busy");
-        LadyBird instance = (LadyBird) animals[0];
+        Ladybird instance = (Ladybird) animals[0];
         animals[1].setPositionOnBoard(new Position(0, 2));
         Position expResult = new Position(0, 1); //don't move
         Position result = instance.move(board, Direction.EAST, animals);
@@ -69,7 +69,7 @@ public class LadyBirdTest {
     public void testMove_next_onstar() {
         setUp();
         System.out.println("move next on star");
-        LadyBird instance = (LadyBird) animals[1];
+        Ladybird instance = (Ladybird) animals[1];
         Position expResult = new Position(2, 1);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
@@ -84,7 +84,7 @@ public class LadyBirdTest {
     public void testMove_next_notinside_2() {
         setUp();
         System.out.println("move next case null");
-        LadyBird instance = (LadyBird) animals[0];
+        Ladybird instance = (Ladybird) animals[0];
         Position expResult = null; // move and fall
         Position result = instance.move(board, Direction.WEST, animals);
         assertEquals(expResult, result);
@@ -98,10 +98,10 @@ public class LadyBirdTest {
         setUp();
         System.out.println("move next when animal isPresent");
         animals = new Animal[]{
-            new LadyBird(new Position(0, 0)),
+            new Ladybird(new Position(0, 0)),
             new Snail(new Position(0, 1)),
-            new GrassHopper(new Position(0, 2)),};
-        LadyBird instance = (LadyBird) animals[0];
+            new Grasshopper(new Position(0, 2)),};
+        Ladybird instance = (Ladybird) animals[0];
         animals[1].setOnStar(true);
         animals[2].setOnStar(true);
         Position expResult = new Position(0, 2);
@@ -117,7 +117,7 @@ public class LadyBirdTest {
     public void test_When_animal_hasWall() {
         setUp();
         System.out.println("test_When_animal_hasWall");
-        LadyBird instance = (LadyBird) animals[0];
+        Ladybird instance = (Ladybird) animals[0];
         board.getSquares()[instance.getPositionOnBoard().
                 getRow()][instance.getPositionOnBoard().
                         getColumn()].setEastWall(true);
@@ -138,8 +138,8 @@ public class LadyBirdTest {
             {new Square(GRASS), new Square(STAR), new Square(STAR)}
         });
         animals = new Animal[]{
-            new LadyBird(new Position(0, 0)),};
-        LadyBird instance = (LadyBird) animals[0];
+            new Ladybird(new Position(0, 0)),};
+        Ladybird instance = (Ladybird) animals[0];
 
         board.getSquares()[instance.getPositionOnBoard().
                 next(Direction.EAST).next(Direction.EAST).
@@ -164,7 +164,7 @@ public class LadyBirdTest {
             new Square(GRASS)}};
         Board boards = new Board(squares);
         animals = new Animal[2];
-        animals[0] = new LadyBird(new Position(0, 0));
+        animals[0] = new Ladybird(new Position(0, 0));
         animals[1] = new Snail(new Position(0, 2));
         animals[1].setOnStar(true);
 
