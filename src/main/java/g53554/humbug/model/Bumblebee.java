@@ -7,8 +7,9 @@ package g53554.humbug.model;
 public class Bumblebee extends Animal {
 
     /**
+     * Simple constructor of bumblebee
      *
-     * @param positionOnBoard
+     * @param positionOnBoard bumblebee position on the board
      */
     public Bumblebee(Position positionOnBoard) {
         super(positionOnBoard);

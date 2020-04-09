@@ -50,7 +50,7 @@ public class Controller {
                 Direction direction = view.askDirection();
                 game.move(position, direction);
 
-            } while (!game.levelIsOver());
+            } while (getClass().desiredAssertionStatus());
 
             view.displayBoard(game.getBoard(), game.animals());
             view.displayWinner();

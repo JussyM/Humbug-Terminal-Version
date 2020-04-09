@@ -17,14 +17,23 @@ public class Board {
      * @return board of the game
      */
     public static Board getInitBoard() {
+        Square[][] squares = {
+        {new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+        {null, null, new Square(GRASS), new Square(GRASS)},
+        {null, null, new Square(GRASS), new Square(STAR)},
+        {null, null, new Square(STAR), null},
+        {null, null, new Square(GRASS), new Square(STAR)}};
 
         Board board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
+        
+        board.getSquares()[0][0].setEastWall(true);board.getSquares()[0][1].setWestWall(true);
+//        board.getSquares()[3][2].setNorthWall(true);
 
-        return board;
+        return new Board(squares);
     }
 
     private Square[][] squares;
@@ -34,7 +43,7 @@ public class Board {
      *
      * @param squares represente each square of the board
      */
-    Board(Square[][] squares) {
+   public Board(Square[][] squares) {
         this.squares = squares;
     }
 

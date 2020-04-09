@@ -16,13 +16,13 @@ public class Butterfly extends Animal {
     }
 
     /**
-     *s
-     * @param board
-     * @param direction
-     * @param animals
-     * @return
+     * Apply the move for the butterfly
+     *
+     * @param board of the game
+     * @param direction of the butterfly
+     * @param animals arrays that contain all the animals of the game
+     * @return next Position
      */
-
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         return animalsMove(board, direction, animals);

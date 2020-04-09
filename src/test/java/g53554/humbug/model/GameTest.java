@@ -76,36 +76,6 @@ public class GameTest {
     }
 
     /**
-     * Test of levelIsOver method, of class Game.
-     */
-    @Test
-    public void testLevelIsNotOver() {
-        setUp();
-        System.out.println("levelIsNotOver");
-        instance.startLevel(1);
-        boolean expResult = false;
-        boolean result = instance.levelIsOver();
-        assertEquals(expResult, result);
-
-    }
-
-    /**
-     * Test of levelIsOver method, of class Game.
-     */
-    @Test
-    public void testLevelIsOver() {
-        setUp();
-        System.out.println("levelIsOver");
-        Game ins = new Game();
-        ins.startLevel(0);
-        ins.animals()[0].setOnStar(true);
-        boolean expResult = true;
-        boolean result = ins.levelIsOver();
-        assertEquals(expResult, result);
-
-    }
-
-    /**
      * Test of move method, of class Game.
      */
     @Test

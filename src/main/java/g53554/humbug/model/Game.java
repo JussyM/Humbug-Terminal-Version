@@ -13,6 +13,7 @@ public class Game implements Model {
     private Board board;
 
     private Animal[] animals;
+    private int remainingMove, currentLevel;
 
     /**
      * return the board of the game
@@ -52,7 +53,8 @@ public class Game implements Model {
     public void startLevel(int level) {
         board = Board.getInitBoard();
         animals = new Animal[]{
-            new Snail(new Position(0, 0)),};
+            new Snail(new Position(0, 0)),
+            new GrassHopper(new Position(0, 1))};
 
     }
 
@@ -71,20 +73,6 @@ public class Game implements Model {
                 = listNoNull.stream().toArray(x -> new Animal[x]);
 
         return animalStillPresent;
-    }
-
-    /**
-     * return a boolean if all the animal are on star the they win
-     *
-     * @return boolean true of false if the game is over or not
-     */
-    @Override
-    public boolean levelIsOver() {
-        int i = 0;
-        while (i < animals().length && animals()[i].isOnStar()) {
-            i++;
-        }
-        return animals().length == i;
     }
 
     /**
@@ -115,6 +103,16 @@ public class Game implements Model {
             i++;
         }
 
+    }
+
+    @Override
+    public LevelStatus getLevelStatus() {
+        return null;
+    }
+
+    @Override
+    public int getRemainingMoves() {
+        return 0;
     }
 
 }

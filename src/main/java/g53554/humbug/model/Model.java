@@ -29,17 +29,22 @@ public interface Model {
     void startLevel(int level);
 
     /**
-     * return a boolean if the level is over or not
-     *
-     * @return boolean
-     */
-    boolean levelIsOver();
-
-    /**
      * Apply a move for an animal according to the direction
      *
      * @param position
      * @param direction
      */
     void move(Position position, Direction direction);
+
+    /**
+     *
+     * @return
+     */
+    LevelStatus getLevelStatus();
+
+    /**
+     *
+     * @return
+     */
+    int getRemainingMoves();
 }

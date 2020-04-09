@@ -26,6 +26,7 @@ public class View implements InterfaceView {
         System.out.println("");
         System.out.println("");
         displayBoardMethod(boardArrays);
+
     }
 
     /**
@@ -45,19 +46,221 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
+                        case "grass_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "grass_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+
+                        case "grass_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#  }" + TerminalColor.toDefault);
+                            break;
+                        case "grass_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{  #}" + TerminalColor.toDefault);
+                            break;
+
                         case "STAR":
                             System.out.print(TerminalColor.YELLOW_BACKGROUND
                                     + "{ * }" + TerminalColor.toDefault);
                             break;
-                        case "Snail":
+                        case "SNAIL":
                             System.out.print(TerminalColor.YELLOW_BACKGROUND
                                     + "{ E }" + TerminalColor.toDefault);
 
                             break;
-                        case "Spider":
+                        case "snail_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ E }" + TerminalColor.toDefault);
+                            break;
+                        case "snail_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ E }" + TerminalColor.toDefault);
+                            break;
+                        case "snail_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#E }" + TerminalColor.toDefault);
+                            break;
+                        case "snail_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ E#}" + TerminalColor.toDefault);
+                            break;
+                        case "SPIDER":
                             System.out.print(TerminalColor.YELLOW_BACKGROUND
                                     + "{ A }" + TerminalColor.toDefault);
 
+                            break;
+                        case "spider_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ A }" + TerminalColor.toDefault);
+                            break;
+                        case "spider_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ A }" + TerminalColor.toDefault);
+                            break;
+                        case "spider_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#A }" + TerminalColor.toDefault);
+                            break;
+                        case "spider_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ A#}" + TerminalColor.toDefault);
+                            break;
+                        case "GRASSHOPPER":
+                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                                    + "{ G }" + TerminalColor.toDefault);
+
+                            break;
+                        case "GRASSHOPPER_T":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+
+                            break;
+                        case "grassHopper_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ G }" + TerminalColor.toDefault);
+                            break;
+                        case "grassHopper_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ G }" + TerminalColor.toDefault);
+                            break;
+                        case "grassHopper_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#G }" + TerminalColor.toDefault);
+                            break;
+                        case "grassHopper_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ G#}" + TerminalColor.toDefault);
+                            break;
+                        case "GRASSHOPPER_T_D":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+
+                            break;
+                        case "LADYBIRD":
+                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                                    + "{ L }" + TerminalColor.toDefault);
+
+                            break;
+                        case "LADYBIRD_T":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "LADYBIRD_T_D":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "ladyBird_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ L }" + TerminalColor.toDefault);
+                            break;
+                        case "ladyBird_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ L }" + TerminalColor.toDefault);
+                            break;
+                        case "ladyBird_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#L }" + TerminalColor.toDefault);
+                            break;
+                        case "ladyBird_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ L#}" + TerminalColor.toDefault);
+                            break;
+                        case "BUMBLEBEE":
+                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                                    + "{ B }" + TerminalColor.toDefault);
+                            break;
+                        case "BUMBLEBEE_T":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "BUMBLEBEE_T_D":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "bumblebee_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ B }" + TerminalColor.toDefault);
+                            break;
+                        case "bumblebee_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ B }" + TerminalColor.toDefault);
+                            break;
+                        case "bumblebee_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#B }" + TerminalColor.toDefault);
+                            break;
+                        case "bumblebee_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ B#}" + TerminalColor.toDefault);
+                            break;
+                        case "BUTTERFLY":
+                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                                    + "{ P }" + TerminalColor.toDefault);
+                            break;
+                        case "BUTTERFLY_T":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "BUTTERFLY_T_D":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{   }" + TerminalColor.toDefault);
+                            break;
+                        case "butterfly_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ P }" + TerminalColor.toDefault);
+                            break;
+                        case "butterfly_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ P }" + TerminalColor.toDefault);
+                            break;
+                        case "butterfly_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#P }" + TerminalColor.toDefault);
+                            break;
+                        case "butterfly_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ P#}" + TerminalColor.toDefault);
                             break;
 
                         case "GRASS_A_T":
@@ -91,6 +294,37 @@ public class View implements InterfaceView {
                                     + TerminalColor.YELLOW_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
+                        case "star_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ * }" + TerminalColor.toDefault);
+                            break;
+                        case "star_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ * }" + TerminalColor.toDefault);
+                            break;
+                        case "star_left":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{#* }" + TerminalColor.toDefault);
+                            break;
+                        case "star_right":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ *#}" + TerminalColor.toDefault);
+                            break;
+                        case "GRASS_A_T_up":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ # }" + TerminalColor.toDefault);
+                            break;
+                        case "GRASS_A_T_D_dwn":
+                            System.out.print(TerminalColor.toDefault
+                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + "{ # }" + TerminalColor.toDefault);
+                            break;
+
                         default:
                             System.out.print(TerminalColor.WHITE_BACKGROUND
                                     + "     " + TerminalColor.toDefault);
@@ -135,7 +369,7 @@ public class View implements InterfaceView {
      * need to be printOut
      *
      * @param boardArrays will be the arrays use for verification
-     * @return boolean true if emply false if not
+     * @return boolean true if empty false if not
      */
     private boolean emptyBoard(String[] boardArrays) {
         int i = 0;
@@ -206,31 +440,17 @@ public class View implements InterfaceView {
             for (int col = 0; col < boardArrays[row].length; col++) {
                 Position position = new Position(row, col);
                 boolean animalIsPresent = animalIsPresent(position, animals);
-                if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.STAR
-                        && !animalIsPresent) {
-                    boardArrays[row][col] = "STAR";
-                } else if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.GRASS
-                        && !animalIsPresent) {
-                    boardArrays[row][col] = "GRASS";
-
-                } else if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.GRASS
-                        && animalIsPresent) {
-                    for (Animal animal1 : animals) {
-                        if (animal1.getPositionOnBoard().equals(position)
-                                && animal1 instanceof Snail) {
-                            boardArrays[row][col] = "Snail";
-                        } else if (animal1.getPositionOnBoard().equals(position)
-                                && animal1 instanceof Spider) {
-                            boardArrays[row][col] = "Spider";
-                        }
-                    }
+                boolean hasWall = hasWall(position, board);
+                if (!hasWall) {
+                    displayNoWall(board, boardArrays, position, animalIsPresent,
+                            row, col,
+                            animals);
 
                 } else {
-                    boardArrays[row][col] = "null";
+                    displayWithWall(board, boardArrays,
+                            position, animalIsPresent, row, col, animals);
                 }
+
             }
         }
         return boardArrays;
@@ -238,17 +458,247 @@ public class View implements InterfaceView {
     }
 
     /**
+     * Insert each value according to the position with a board without wall
      *
-     * @param board
-     * @param position
-     * @param direction
-     * @return
+     * @param board of the game
+     * @param boardArrays arrays of String that will printOut the game
+     * @param position each square position
+     * @param animalIsPresent boolean that determine if animal is present or not
+     * @param row position row
+     * @param col position column
+     * @param animals arrays that contain all the animal of the game
      */
+    private void displayNoWall(Board board, String[][] boardArrays,
+            Position position,
+            boolean animalIsPresent, int row, int col, Animal... animals) {
+        if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.STAR
+                && !animalIsPresent) {
+            boardArrays[row][col] = "STAR";
+        } else if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.GRASS
+                && !animalIsPresent) {
+            boardArrays[row][col] = "GRASS";
 
-    private boolean hasWall(Board board, Position position,
-            Direction direction) {
-        return board.getSquares()[position.
-                getRow()][position.getColumn()].hasWall(direction);
+        } else if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.GRASS
+                && animalIsPresent) {
+            for (Animal animal1 : animals) {
+                if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Snail) {
+                    boardArrays[row][col] = "SNAIL";
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Spider) {
+                    boardArrays[row][col] = "SPIDER";
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof GrassHopper) {
+                    boardArrays[row][col] = "GRASSHOPPER";
+
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof LadyBird) {
+                    boardArrays[row][col] = "LADYBIRD";
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Bumblebee) {
+                    boardArrays[row][col] = "BUMBLEBEE";
+
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Butterfly) {
+                    boardArrays[row][col] = "BUTTERFLY";
+
+                }
+            }
+        } else {
+            boardArrays[row][col] = "null";
+        }
+
+    }
+
+    /**
+     * Insert each value according to the position with a board with wall
+     *
+     * @param board of the game
+     * @param boardArrays arrays of String that will printOut the game
+     * @param position each square position
+     * @param animalIsPresent boolean that determine if animal is present or not
+     * @param row position row
+     * @param col position column
+     * @param animals arrays that contain all the animal of the game
+     */
+    private void displayWithWall(Board board, String[][] boardArrays,
+            Position position,
+            boolean animalIsPresent, int row, int col, Animal... animals) {
+        char wall = squareHasWall(board, position);
+        if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.STAR
+                && !animalIsPresent) {
+            switch (wall) {
+                case 'N':
+                    boardArrays[row][col] = "star_up";
+                    break;
+                case 'S':
+                    boardArrays[row][col] = "star_dwn";
+                    break;
+                case 'E':
+                    boardArrays[row][col] = "star_left";
+                    break;
+                case 'W':
+                    boardArrays[row][col] = "star_right";
+                    break;
+                default:
+                    boardArrays[row][col] = "STAR";
+                    break;
+            }
+
+        } else if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.GRASS
+                && !animalIsPresent) {
+            switch (wall) {
+                case 'N':
+                    boardArrays[row][col] = "grass_up";
+                    break;
+                case 'S':
+                    boardArrays[row][col] = "grass_dwn";
+                    break;
+                case 'E':
+                    boardArrays[row][col] = "grass_left";
+                    break;
+                case 'W':
+                    boardArrays[row][col] = "grass_right";
+                    break;
+                default:
+                    boardArrays[row][col] = "GRASS";
+                    break;
+            }
+
+        } else if (board.isInside(position)
+                && board.getSquareType(position) == SquareType.GRASS
+                && animalIsPresent) {
+            for (Animal animal1 : animals) {
+                if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Snail) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "snail_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "snail_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "snail_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "snail_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "SNAIL";
+                            break;
+                    }
+
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Spider) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "spider_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "spider_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "spider_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "spider_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "SPIDER";
+                            break;
+                    }
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof GrassHopper) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "grassHopper_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "grassHopper_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "grassHopper_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "grassHopper_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "GRASSHOPPER";
+                            break;
+                    }
+
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof LadyBird) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "ladyBird_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "ladyBird_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "ladyBird_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "ladyBird_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "LADYBIRD";
+                            break;
+                    }
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Bumblebee) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "bumblebee_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "bumblebee_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "bumblebee_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "bumblebee_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "BUMBLEBEE";
+                            break;
+                    }
+
+                } else if (animal1.getPositionOnBoard().equals(position)
+                        && animal1 instanceof Butterfly) {
+                    switch (wall) {
+                        case 'N':
+                            boardArrays[row][col] = "butterfly_up";
+                            break;
+                        case 'S':
+                            boardArrays[row][col] = "butterfly_dwn";
+                            break;
+                        case 'E':
+                            boardArrays[row][col] = "butterfly_left";
+                            break;
+                        case 'W':
+                            boardArrays[row][col] = "butterfly_right";
+                            break;
+                        default:
+                            boardArrays[row][col] = "BUTTERFLY";
+                            break;
+                    }
+
+                }
+
+            }
+
+        } else {
+            boardArrays[row][col] = "null";
+        }
     }
 
     /**
@@ -265,22 +715,169 @@ public class View implements InterfaceView {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 switch (board[i][j]) {
-                    case "Spider":
+                    case "SPIDER":
                         board[i - 1][j] = "GRASS_A_T";
                         board[i + 1][j] = "GRASS_A_T_D";
                         break;
-                    case "Snail":
+                    case "spider_right":
                         board[i - 1][j] = "GRASS_A_T";
                         board[i + 1][j] = "GRASS_A_T_D";
                         break;
+                    case "spider_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "spider_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "spider_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+
+                    case "SNAIL":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "snail_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "snail_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "snail_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "snail_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+
                     case "GRASS":
                         board[i - 1][j] = "GRASS_T";
                         board[i + 1][j] = "GRASS_T_D";
+                        break;
+                    case "grass_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grass_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grass_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grass_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
                         break;
                     case "STAR":
                         board[i - 1][j] = "STAR_T";
                         board[i + 1][j] = "STAR_T_D";
                         break;
+                    case "star_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "star_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "star_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "star_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+                    case "GRASSHOPPER":
+                        board[i - 1][j] = "GRASSHOPPER_T";
+                        board[i + 1][j] = "GRASSHOPPER_T_D";
+                        break;
+                    case "grassHopper_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grassHopper_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grassHopper_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "grassHopper_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+                    case "LADYBIRD":
+                        board[i - 1][j] = "LADYBIRD_T";
+                        board[i + 1][j] = "LADYBIRD_T_D";
+                        break;
+                    case "ladyBird_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "ladyBird_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "ladyBird_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "ladyBird_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+                    case "BUMBLEBEE":
+                        board[i - 1][j] = "BUMBLEBEE_T";
+                        board[i + 1][j] = "BUMBLEBEE_T_D";
+                        break;
+                    case "bumblebee_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "bumblebee_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "bumblebee_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "bumblebee_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+                    case "BUTTERFLY":
+                        board[i - 1][j] = "BUTTERFLY_T";
+                        board[i + 1][j] = "BUTTERFLY_T_D";
+                        break;
+                    case "butterfly_right":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "butterfly_left":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "butterfly_up":
+                        board[i - 1][j] = "GRASS_A_T_up";
+                        board[i + 1][j] = "GRASS_A_T_D";
+                        break;
+                    case "butterfly_dwn":
+                        board[i - 1][j] = "GRASS_A_T";
+                        board[i + 1][j] = "GRASS_A_T_D_dwn";
+                        break;
+
                     default:
                         break;
                 }
@@ -463,6 +1060,61 @@ public class View implements InterfaceView {
     @Override
     public void displayWinner() {
         System.out.println(TerminalColor.toBlue("WIN"));
+    }
+
+    /**
+     * return a boolean if a squaree hasWall
+     *
+     * @param position at a certain position on the board
+     * @param board of the game
+     * @return true or false;
+     */
+    private boolean hasWall(Position position, Board board) {
+        Square[][] boardSquare = board.getSquares();
+        if (board.isInside(position)) {
+            return boardSquare[position.getRow()][position.getColumn()].
+                    isEastWall()
+                    || boardSquare[position.getRow()][position.getColumn()].
+                            isNorthWall()
+                    || boardSquare[position.getRow()][position.getColumn()].
+                            isSouthWall()
+                    || boardSquare[position.getRow()][position.getColumn()].
+                            isWestWall();
+        }
+        return false;
+    }
+
+    /**
+     * return a caracter that dertermine which direction wall the square has
+     *
+     * @param board of the game
+     * @param position of the square
+     * @return caracter according to the direction
+     */
+    private char squareHasWall(Board board, Position position) {
+        Square[][] boardSquare = board.getSquares();
+        boolean[] arraysWalls = {boardSquare[position.getRow()][position.
+            getColumn()].
+            isEastWall(), boardSquare[position.getRow()][position
+            .getColumn()].
+            isNorthWall(),
+            boardSquare[position.getRow()][position.getColumn()].
+            isSouthWall(),
+            boardSquare[position.getRow()][position.getColumn()].
+            isWestWall()};
+        if (arraysWalls[0]) {
+            return 'E';
+        }
+        if (arraysWalls[1]) {
+            return 'N';
+        }
+        if (arraysWalls[2]) {
+            return 'S';
+        }
+        if (arraysWalls[3]) {
+            return 'W';
+        }
+        return 0;
     }
 
 }
