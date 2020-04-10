@@ -1132,4 +1132,19 @@ public class View implements InterfaceView {
         System.out.println("Nombre de déplacement: " + getMoves + "\n");
     }
 
+    /**
+     * Display the animals sigle
+     */
+    @Override
+    public void displayAnimalSigle() {
+        System.out.println(TerminalColor.toPurple("E ==> Pour escargot")
+                + "\n" + TerminalColor.toPurple("A ==> Pour araignée")
+                + "\n" + TerminalColor.toPurple("G ==> Pour sauterrelle")
+                + "\n"
+                + TerminalColor.toPurple("L ==> Pour coccinelle")
+                + "\n" + TerminalColor.toPurple("B ==> Pour le Bourbon")
+                + "\n" + TerminalColor.toPurple("P ==> Pour le papillion")
+                + "\n");
+    }
+
 }

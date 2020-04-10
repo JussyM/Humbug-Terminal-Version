@@ -40,9 +40,11 @@ public class Controller {
      */
     public void startGame(int nLevel) {
         view.displayHelp();
+
         int i = nLevel;
         while (i <= 40) {
             try {
+                view.displayAnimalSigle();
                 game.startLevel(i);
                 view.displayError("NIVEAU: " + game.getCurrentLevel() + "\n");
 

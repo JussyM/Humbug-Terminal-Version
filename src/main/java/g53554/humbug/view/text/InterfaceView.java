@@ -58,4 +58,9 @@ public interface InterfaceView {
      */
     void displayremainingMove(int getMoves);
 
+    /**
+     * Display the animals sigle
+     */
+    void displayAnimalSigle();
+
 }

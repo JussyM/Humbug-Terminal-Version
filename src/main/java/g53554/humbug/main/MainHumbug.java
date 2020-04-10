@@ -13,7 +13,7 @@ public class MainHumbug {
 
     public static void main(String[] args) {
         Controller controller = new Controller(new Game(), new View());
-        controller.startGame(6);
+        controller.startGame(1);
     }
 
 }
