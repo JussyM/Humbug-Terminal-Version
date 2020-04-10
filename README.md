@@ -24,3 +24,7 @@ Le princide est déplace les animaux jusqu'a une case contenant une étoile pour
 uniquement quand tout les animaux du plateau gagne une étoile 
 Déplacement : il se fait en choisissant l'animal qu'on eux en entrant la position de l'animal 
 et mettre la direction ou l'on veux que l'animal aille 
+
+
+
+![humbugView](../master/humbugView/appercu.png)
