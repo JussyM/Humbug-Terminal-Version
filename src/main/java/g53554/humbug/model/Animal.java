@@ -92,7 +92,8 @@ public abstract class Animal {
             Direction direction, Animal... animals);
 
     /**
-     * return a boolean true if the animal is on the board and false if not
+     * return a boolean true if an animal is on the next square is on the board
+     * and false if not
      *
      * @param position is the nextPosition of the animal
      * @param animals arrays of animals
@@ -121,26 +122,16 @@ public abstract class Animal {
      * @param animals arrays of the animals
      * @return position where the spider will stop at
      */
-    private Position allPositionAreFree(Position[] position, Board board,
-            Direction direction,
+    private Position allPositionAreFree(Position[] position,
             Animal... animals) {
         for (int i = 0; i < position.length; i++) {
             Position instance = position[i];
-            if (hasWall(instance, direction, board)) {
-                return positionOnBoard;
-            } else {
-                for (Animal animal1 : animals) {
-                    if (instance.equals(animal1.getPositionOnBoard())) {
-                        if (i - 1 < 0) {
-                            return position[i];
-                        }
-                        return position[i - 1];
-
+            for (Animal animal1 : animals) {
+                if (instance.equals(animal1.getPositionOnBoard())) {
+                    if (i - 1 < 0) {
+                        return position[i];
                     }
-                    if (!instance.equals(animal1.getPositionOnBoard())
-                            && hasWallMove(instance, direction, board)) {
-                        return instance;
-                    }
+                    return position[i - 1];
 
                 }
 
@@ -151,25 +142,45 @@ public abstract class Animal {
     }
 
     /**
-     * Verify if the animal on the next Square of the board must still be on the
-     * board if yes return false or true Simply verify if the animal boolean is
-     * true of false
+     * Return the position of the spider if a wall can block him
      *
-     * @param position nextPosition that need to be compare
-     * @param animals arrays of the animals
-     * @return boolean found true/false
+     * @param position arrays of all the next Position of the spider
+     * @param board bor of tht game
+     * @param direction where the spider is going
+     * @return new position
      */
-    private boolean animalsIsOnStar(Position position, Animal... animals) {
-        int i = 0;
-        boolean found = false;
-        while (i < animals.length && !found) {
-            if (animals[i].getPositionOnBoard().equals(position)
-                    && animals[i].isOnStar()) {
-                found = true;
+    private Position wallBloc(Position[] position,
+            Board board, Direction direction) {
+        for (Position position1 : position) {
+            int hasWall = hasWall(position1, direction, board);
+            int hasWallMove = hasWallMove(position1, direction, board);
+            if (hasWall == 1) {
+                return positionOnBoard;
             }
-            i++;
+            if (hasWallMove == 1) {
+                return position1;
+            }
+            if (hasWallMove == 2) {
+                if (directionValue(direction)) {
+                    return position1.next(direction.opposite());
+                } else {
+                    return position1.next(direction.opposite());
+                }
+
+            }
+
         }
-        return found;
+        return null;
+    }
+
+    /**
+     * return true if the direction is north or south
+     *
+     * @param direction direction of the animal
+     * @return true/ false
+     */
+    private boolean directionValue(Direction direction) {
+        return direction == Direction.NORTH || direction == Direction.SOUTH;
     }
 
     /**
@@ -263,17 +274,19 @@ public abstract class Animal {
      * @param board of the game
      * @return true\false
      */
-    private boolean hasWall(Position position, Direction direction,
+    private int hasWall(Position position, Direction direction,
             Board board) {
-        if (board.isInside(position)) {
-            return board.getSquares()[positionOnBoard.
-                    getRow()][positionOnBoard.getColumn()].hasWall(direction)
-                    || board.getSquares()[position.
-                            getRow()][position.
-                                    getColumn()].hasWall(direction.opposite());
+        if (board.isInside(position) && board.getSquares()[positionOnBoard.
+                getRow()][positionOnBoard.getColumn()].hasWall(direction)) {
+            return 1;
+        }
+        if (board.isInside(position) && board.getSquares()[position.
+                getRow()][position.getColumn()].hasWall(direction.
+                opposite())) {
+            return 2;
 
         }
-        return false;
+        return 0;
 
     }
 
@@ -286,15 +299,19 @@ public abstract class Animal {
      * @param board of the game
      * @return true\false
      */
-    private boolean hasWallMove(Position position, Direction direction,
+    private int hasWallMove(Position position, Direction direction,
             Board board) {
-        if (board.isInside(position)) {
-            return board.getSquares()[position.
-                    getRow()][position.
-                            getColumn()].hasWall(direction);
+        if (board.isInside(position) && board.getSquares()[position.
+                getRow()][position.
+                        getColumn()].hasWall(direction)) {
+            return 1;
 
+        } else if (board.isInside(position) && board.getSquares()[position.
+                getRow()][position.
+                        getColumn()].hasWall(direction.opposite())) {
+            return 2;
         }
-        return false;
+        return 0;
 
     }
 
@@ -314,8 +331,9 @@ public abstract class Animal {
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Snail) {
-                if (hasWall(positionOnBoard.next(direction),
-                        direction, board)) {
+                int hasWall = hasWall(positionOnBoard.next(direction),
+                        direction, board);
+                if (hasWall == 1 || hasWall == 2) {
                     animalNextPosition = positionOnBoard;
                     break;
 
@@ -329,15 +347,27 @@ public abstract class Animal {
 
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Spider) {
-                var spiderNextPos = allPositionAreFree(spiderParcours,
-                        board, direction, animals);
+                var spiderNextPos = allPositionAreFree(spiderParcours, animals);
                 if (spiderNextPos != null) {
-                    animalNextPosition = spiderNextPos;
-                    break;
+                    if (hasWall(spiderNextPos, direction, board) == 1
+                            || hasWall(spiderNextPos, direction, board) == 2) {
+                        animalNextPosition = wallBloc(spiderParcours,
+                                board, direction);
+                        break;
+                    } else {
+                        animalNextPosition = spiderNextPos;
+                        break;
+                    }
 
                 } else {
-                    animalNextPosition = null;
-                    break;
+                    spiderNextPos = wallBloc(spiderParcours, board, direction);
+                    if (spiderNextPos != null) {
+                        animalNextPosition = spiderNextPos;
+                        break;
+                    } else {
+                        animalNextPosition = null;
+                        break;
+                    }
                 }
             }
 
@@ -346,7 +376,9 @@ public abstract class Animal {
                 var grassHopperNextpos = grassHopperNextPosition(board,
                         direction, animals);
                 if (grassHopperNextpos != null) {
-                    if (hasWall(grassHopperNextpos, direction, board)) {
+                    var hasWall = hasWall(grassHopperNextpos,
+                            direction, board);
+                    if (hasWall == 1 || hasWall == 2) {
                         animalNextPosition = grassHopperNextpos;
                         break;
 
@@ -363,27 +395,16 @@ public abstract class Animal {
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Ladybird) {
-                animalNextPosition = positionOnBoard.
-                        next(direction).next(direction);
-                if (hasWall(animalNextPosition, direction, board)
-                        || !isFree(animalNextPosition, animals)
-                        && !animalsIsOnStar(animalNextPosition, animals)) {
-                    animalNextPosition = positionOnBoard.next(direction);
-                    if (hasWall(animalNextPosition, direction, board)
-                            || !isFree(animalNextPosition, animals)
-                            && !animalsIsOnStar(animalNextPosition, animals)) {
-                        animalNextPosition = positionOnBoard;
-                        break;
-                    }
-
-                }
+                animalNextPosition = ladybirdNextPosition(positionOnBoard,
+                        board, direction, animals);
             }
             if (animal.getPositionOnBoard().equals(positionOnBoard)
                     && animal instanceof Bumbelbee) {
                 var bumblebeeNextPosition = bumblebeeNextPosition(board,
                         direction, animals);
                 if (bumblebeeNextPosition != null) {
-                    if (hasWall(bumblebeeNextPosition, direction, board)) {
+                    var hasWall = hasWall(bumblebeeNextPosition, direction, board);
+                    if (hasWall == 1 || hasWall == 2) {
                         animalNextPosition = bumblebeeNextPosition;
                         break;
                     } else {
@@ -401,7 +422,8 @@ public abstract class Animal {
                 var butterflyNextPosition = butterflyNextPosition(board,
                         direction, animals);
                 if (butterflyNextPosition != null) {
-                    if (hasWall(butterflyNextPosition, direction, board)) {
+                    var hasWall = hasWall(butterflyNextPosition, direction, board);
+                    if (hasWall == 1 || hasWall == 2) {
                         animalNextPosition = butterflyNextPosition;
                         break;
                     } else {
@@ -514,16 +536,11 @@ public abstract class Animal {
         for (Position grassHopperPos : grassHopperParcours) {
             if (isInside(board, grassHopperPos)) {
                 if (isFree(grassHopperPos, animals)) {
-                    if (!animalsIsOnStar(grassHopperPos, animals)) {
-                        return grassHopperPos;
-                    }
 
-                } else {
-                    if (animalsIsOnStar(grassHopperPos, animals)) {
-                        return grassHopperPos;
+                    return grassHopperPos;
 
-                    }
                 }
+
             }
 
         }
@@ -541,27 +558,20 @@ public abstract class Animal {
      */
     private Position bumblebeeNextPosition(Board board,
             Direction direction, Animal... animals) {
-        Position bumblebeeNextPos = positionOnBoard.next(direction).
+        Position instance = positionOnBoard.next(direction).
                 next(direction);
-        if (isInside(board, bumblebeeNextPos)) {
-            if (isFree(bumblebeeNextPos, animals)) {
-                if (!animalsIsOnStar(bumblebeeNextPos, animals)) {
-                    return bumblebeeNextPos;
-                }
-
-            } else {
-                if (!animalsIsOnStar(bumblebeeNextPos, animals)) {
-                    return bumblebeeNextPos.next(direction);
-
-                } else {
-                    return bumblebeeNextPos;
-                }
+        if (isInside(board, instance)) {
+            while (!isFree(instance, animals)
+                    && isInside(board, instance)) {
+                instance = instance.next(direction);
             }
+            return instance;
+
         } else {
-            bumblebeeNextPos = null;
+            instance = null;
         }
 
-        return bumblebeeNextPos;
+        return instance;
     }
 
     /**
@@ -578,21 +588,92 @@ public abstract class Animal {
                 next(direction).next(direction);
         if (isInside(board, butterflyNextPosition)) {
             if (isFree(butterflyNextPosition, animals)) {
-                if (!animalsIsOnStar(butterflyNextPosition, animals)) {
-                    return butterflyNextPosition;
-                }
+
+                return butterflyNextPosition;
+
             } else {
-                if (!animalsIsOnStar(butterflyNextPosition, animals)) {
-                    return butterflyNextPosition.next(direction);
-                } else {
-                    return butterflyNextPosition;
-                }
+
+                return butterflyNextPosition.next(direction);
+
             }
         } else {
             butterflyNextPosition = null;
         }
 
         return butterflyNextPosition;
+
+    }
+
+    /**
+     * return the next position of the lady bird
+     *
+     * @param position where ladybird is on the board
+     * @param board of the game
+     * @param direction where the animal is going to
+     * @param animals arrays that contain all the animal of the game
+     * @return next Position of ladybird
+     */
+    private Position ladybirdNextPosition(Position position,
+            Board board, Direction direction, Animal... animals) {
+        var instance = position.next(direction).next(direction);
+        if (board.isInside(instance)) {
+            if (isFree(instance, animals)) {
+                var hasWall = hasWall(instance, direction, board);
+                var hasWallMove = hasWallMove(instance, direction, board);
+                if (hasWall == 1) {
+                    return position;
+                }
+                if (hasWall == 2) {
+                    return position.next(direction);
+                }
+                if (hasWallMove == 1) {
+                    return instance;
+                }
+                if (hasWallMove == 2) {
+                    return position.next(direction);
+                }
+                if (hasWall == 0 || hasWallMove == 0) {
+                    return instance;
+                }
+            } else {
+                instance = position.next(direction);
+                if (isFree(instance, animals)) {
+                    var hasWall = hasWall(instance, direction, board);
+                    var hasWallMove = hasWallMove(instance, direction, board);
+                    if (hasWall == 1 || hasWall == 2) {
+                        return position;
+                    }
+                    if (hasWallMove == 1) {
+                        return instance;
+                    }
+                    if (hasWallMove == 2) {
+                        return instance;
+                    }
+                    if (hasWall == 0 || hasWallMove == 0) {
+                        return instance;
+                    }
+
+                }
+
+            }
+        } else {
+            instance = position.next(direction);
+            if (isFree(instance, animals)) {
+                var hasWall = hasWall(instance, direction, board);
+                var hasWallMove = hasWallMove(instance, direction, board);
+                if (hasWall == 1 || hasWall == 2) {
+                    return position;
+                }
+                if (hasWallMove == 1) {
+                    return instance;
+                }
+                if (hasWallMove == 2) {
+                    return instance;
+                }
+
+            }
+        }
+        return null;
 
     }
 
@@ -633,16 +714,9 @@ public abstract class Animal {
             }
 
             if (!insideAndFreeGrass(board, animalsNextPosition,
-                    animals)
-                    && !animalsIsOnStar(animalsNextPosition, animals)) {
+                    animals)) {
                 return this.getPositionOnBoard();
 
-            }
-            if (!insideAndFreeGrass(board, animalsNextPosition,
-                    animals)
-                    && animalsIsOnStar(animalsNextPosition, animals)) {
-                setAnimalStates(animalsNextPosition, animals);
-                return this.getPositionOnBoard();
             }
 
         }

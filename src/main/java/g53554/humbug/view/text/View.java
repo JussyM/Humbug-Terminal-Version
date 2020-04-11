@@ -44,285 +44,285 @@ public class View implements InterfaceView {
                     switch (boardArrays[line][col]) {
                         case "GRASS":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "grass_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "grass_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
 
                         case "grass_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#  }" + TerminalColor.toDefault);
                             break;
                         case "grass_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{  #}" + TerminalColor.toDefault);
                             break;
 
                         case "STAR":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ * }" + TerminalColor.toDefault);
                             break;
                         case "SNAIL":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ E }" + TerminalColor.toDefault);
 
                             break;
                         case "snail_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ E }" + TerminalColor.toDefault);
                             break;
                         case "snail_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ E }" + TerminalColor.toDefault);
                             break;
                         case "snail_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#E }" + TerminalColor.toDefault);
                             break;
                         case "snail_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ E#}" + TerminalColor.toDefault);
                             break;
                         case "SPIDER":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ A }" + TerminalColor.toDefault);
 
                             break;
                         case "spider_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ A }" + TerminalColor.toDefault);
                             break;
                         case "spider_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ A }" + TerminalColor.toDefault);
                             break;
                         case "spider_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#A }" + TerminalColor.toDefault);
                             break;
                         case "spider_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ A#}" + TerminalColor.toDefault);
                             break;
                         case "GRASSHOPPER":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ G }" + TerminalColor.toDefault);
 
                             break;
                         case "GRASSHOPPER_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
 
                             break;
                         case "grassHopper_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ G }" + TerminalColor.toDefault);
                             break;
                         case "grassHopper_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ G }" + TerminalColor.toDefault);
                             break;
                         case "grassHopper_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#G }" + TerminalColor.toDefault);
                             break;
                         case "grassHopper_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ G#}" + TerminalColor.toDefault);
                             break;
                         case "GRASSHOPPER_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
 
                             break;
                         case "LADYBIRD":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ L }" + TerminalColor.toDefault);
 
                             break;
                         case "LADYBIRD_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "LADYBIRD_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "ladyBird_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ L }" + TerminalColor.toDefault);
                             break;
                         case "ladyBird_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ L }" + TerminalColor.toDefault);
                             break;
                         case "ladyBird_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#L }" + TerminalColor.toDefault);
                             break;
                         case "ladyBird_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ L#}" + TerminalColor.toDefault);
                             break;
                         case "BUMBLEBEE":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ B }" + TerminalColor.toDefault);
                             break;
                         case "BUMBLEBEE_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "BUMBLEBEE_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "bumblebee_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ B }" + TerminalColor.toDefault);
                             break;
                         case "bumblebee_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ B }" + TerminalColor.toDefault);
                             break;
                         case "bumblebee_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#B }" + TerminalColor.toDefault);
                             break;
                         case "bumblebee_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ B#}" + TerminalColor.toDefault);
                             break;
                         case "BUTTERFLY":
-                            System.out.print(TerminalColor.YELLOW_BACKGROUND
+                            System.out.print(TerminalColor.GREEN_BACKGROUND
                                     + "{ P }" + TerminalColor.toDefault);
                             break;
                         case "BUTTERFLY_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "BUTTERFLY_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "butterfly_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ P }" + TerminalColor.toDefault);
                             break;
                         case "butterfly_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ P }" + TerminalColor.toDefault);
                             break;
                         case "butterfly_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#P }" + TerminalColor.toDefault);
                             break;
                         case "butterfly_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ P#}" + TerminalColor.toDefault);
                             break;
 
                         case "GRASS_A_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "GRASS_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "GRASS_A_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
 
                             break;
                         case "GRASS_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "STAR_T_D":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "STAR_T":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{   }" + TerminalColor.toDefault);
                             break;
                         case "star_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ * }" + TerminalColor.toDefault);
                             break;
                         case "star_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ * }" + TerminalColor.toDefault);
                             break;
                         case "star_right":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{#* }" + TerminalColor.toDefault);
                             break;
                         case "star_left":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ *#}" + TerminalColor.toDefault);
                             break;
                         case "GRASS_A_T_up":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ # }" + TerminalColor.toDefault);
                             break;
                         case "GRASS_A_T_D_dwn":
                             System.out.print(TerminalColor.toDefault
-                                    + TerminalColor.YELLOW_BACKGROUND
+                                    + TerminalColor.GREEN_BACKGROUND
                                     + "{ # }" + TerminalColor.toDefault);
                             break;
 
@@ -1145,6 +1145,17 @@ public class View implements InterfaceView {
                 + "\n" + TerminalColor.toPurple("B ==> Pour le Bourbon")
                 + "\n" + TerminalColor.toPurple("P ==> Pour le papillion")
                 + "\n");
+    }
+
+    /**
+     * Display the message given as argument
+     *
+     * @param message to print the number of level or something else
+     */
+
+    @Override
+    public void displayMessage(String message) {
+        System.out.println(TerminalColor.toRed(message));
     }
 
 }

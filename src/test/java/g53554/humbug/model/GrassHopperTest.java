@@ -101,6 +101,8 @@ public class GrassHopperTest {
         Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = new Position(0, 2); // move
         Position result = instance.move(board, Direction.EAST, animals);
+        System.out.println(result.getRow());
+        System.out.println(result.getColumn());
         assertEquals(expResult, result);
     }
 
@@ -222,31 +224,6 @@ public class GrassHopperTest {
                 .getRow()][expResult.next(Direction.EAST).getColumn()]
                 .setWestWall(true);
         Position result = instance.move(board, Direction.EAST, animals);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of move method, of class GrassHopper when the animal with the field
-     * isOnStar==true;
-     */
-    @Test
-    public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
-        System.out.println("The animal can be moved to "
-                + "the Square where is an animal with the field IsOnStar==true");
-        Square[][] squares = {{new Square(GRASS), new Square(GRASS),
-            new Square(GRASS), new Square(GRASS)},
-        {new Square(GRASS), new Square(GRASS), new Square(GRASS),
-            new Square(GRASS)}};
-        Board boards = new Board(squares);
-        animals = new Animal[3];
-
-        animals[0] = new Grasshopper(new Position(0, 0));
-        animals[1] = new Snail(new Position(0, 1));
-        animals[2] = new Snail(new Position(0, 2));
-        animals[2].setOnStar(true);
-
-        Position expResult = new Position(0, 2);
-        Position result = animals[0].move(boards, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
 

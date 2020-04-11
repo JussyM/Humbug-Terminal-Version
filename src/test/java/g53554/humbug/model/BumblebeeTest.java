@@ -188,26 +188,4 @@ public class BumblebeeTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     *
-     */
-    @Test
-    public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
-        System.out.println("The animal can be moved to "
-                + "the Square where is an animal with the field IsOnStar==true");
-        Square[][] squares = {{new Square(GRASS), new Square(GRASS),
-            new Square(GRASS), new Square(GRASS)},
-        {new Square(GRASS), new Square(GRASS), new Square(GRASS),
-            new Square(GRASS)}};
-        Board boards = new Board(squares);
-        animals = new Animal[2];
-        animals[0] = new Bumbelbee(new Position(0, 0));
-        animals[1] = new Snail(new Position(0, 2));
-        animals[1].setOnStar(true);
-
-        Position expResult = new Position(0, 2);
-        Position result = animals[0].move(boards, Direction.EAST, animals);
-        assertEquals(expResult, result);
-    }
-
 }

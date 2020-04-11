@@ -10,7 +10,7 @@ import g53554.humbug.view.text.InterfaceView;
 /**
  * Controller method interact with the player
  *
- * @author jj
+ * @author 53554 
  */
 public class Controller {
 
@@ -36,7 +36,7 @@ public class Controller {
      * Start game method he initialized all the animals on the board initialized
      * the board and display it
      *
-     * @param nLevel
+     * @param nLevel number the represent the level of the game
      */
     public void startGame(int nLevel) {
         view.displayHelp();
@@ -46,13 +46,13 @@ public class Controller {
             try {
                 view.displayAnimalSigle();
                 game.startLevel(i);
-                view.displayError("NIVEAU: " + game.getCurrentLevel() + "\n");
+                view.displayMessage("NIVEAU: " + game.getCurrentLevel() + "\n");
 
                 do {
                     view.displayremainingMove(game.getRemainingMoves());
                     view.displayBoard(game.getBoard(), game.animals());
                     Position position = view.askPosition();
-                    while (!positionValable(position, game.animals())) {
+                    while (!validPosition(position, game.animals())) {
                         view.displayError("Pas d'animal à cette case " + "\n");
                         position = view.askPosition();
 
@@ -62,6 +62,7 @@ public class Controller {
 
                 } while (game.getLevelStatus() != LevelStatus.WIN);
                 i++;
+
                 view.displayBoard(game.getBoard(), game.animals());
                 view.displayWinner();
 
@@ -73,6 +74,7 @@ public class Controller {
             }
 
         }
+        view.displayMessage("Félicitation vous avez finit le jeu");
 
     }
 
@@ -84,7 +86,7 @@ public class Controller {
      * @param animals arrays of all the animals of the game
      * @return boolean true if correct false if not
      */
-    private boolean positionValable(Position position, Animal... animals) {
+    private boolean validPosition(Position position, Animal... animals) {
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {
                 return true;

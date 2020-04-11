@@ -9,11 +9,6 @@ import java.io.IOException;
  * @author jj
  */
 public class Level {
-
-    private Board board;
-    private Animal[] animals;
-    private int nMoves;
-
     /**
      * Return the level of the game
      *
@@ -28,7 +23,6 @@ public class Level {
         }
         return null;
     }
-
     /**
      * read the level from the json file given
      *
@@ -44,6 +38,11 @@ public class Level {
         return level;
 
     }
+
+    private Board board;
+    private Animal[] animals;
+    private int nMoves;
+
 
     /**
      * Contructor of Level with all the tree attribut as argument

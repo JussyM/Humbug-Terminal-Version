@@ -82,7 +82,13 @@ public class LadyBirdTest {
      */
     @Test
     public void testMove_next_notinside_2() {
-        setUp();
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, new Square(STAR), new Square(STAR)}
+        });
+        animals = new Animal[]{
+            new Ladybird(new Position(0, 0)),};
         System.out.println("move next case null");
         Ladybird instance = (Ladybird) animals[0];
         Position expResult = null; // move and fall
@@ -91,31 +97,17 @@ public class LadyBirdTest {
     }
 
     /**
-     * Test move when animal is present but their field isOnStar ==true;
-     */
-    @Test
-    public void testMove_next_animalIsInside() {
-        setUp();
-        System.out.println("move next when animal isPresent");
-        animals = new Animal[]{
-            new Ladybird(new Position(0, 0)),
-            new Snail(new Position(0, 1)),
-            new Grasshopper(new Position(0, 2)),};
-        Ladybird instance = (Ladybird) animals[0];
-        animals[1].setOnStar(true);
-        animals[2].setOnStar(true);
-        Position expResult = new Position(0, 2);
-        Position result = instance.move(board, Direction.EAST, animals);
-        assertEquals(expResult, result);
-
-    }
-
-    /**
      * Test when animal has wall on the east
      */
     @Test
     public void test_When_animal_hasWall() {
-        setUp();
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {new Square(GRASS), new Square(STAR), new Square(STAR)}
+        });
+        animals = new Animal[]{
+            new Ladybird(new Position(0, 0)),};
         System.out.println("test_When_animal_hasWall");
         Ladybird instance = (Ladybird) animals[0];
         board.getSquares()[instance.getPositionOnBoard().
@@ -150,27 +142,4 @@ public class LadyBirdTest {
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
-
-    /**
-     *
-     */
-    @Test
-    public void testMove_To_Square_With_Animal_With_IsOnStar_True() {
-        System.out.println("The animal can be moved to "
-                + "the Square where is an animal with the field IsOnStar==true");
-        Square[][] squares = {{new Square(GRASS), new Square(GRASS),
-            new Square(GRASS), new Square(GRASS)},
-        {new Square(GRASS), new Square(GRASS), new Square(GRASS),
-            new Square(GRASS)}};
-        Board boards = new Board(squares);
-        animals = new Animal[2];
-        animals[0] = new Ladybird(new Position(0, 0));
-        animals[1] = new Snail(new Position(0, 2));
-        animals[1].setOnStar(true);
-
-        Position expResult = new Position(0, 2);
-        Position result = animals[0].move(boards, Direction.EAST, animals);
-        assertEquals(expResult, result);
-    }
-
 }

@@ -36,5 +36,7 @@ public class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         return animalsMove(board, direction, animals);
+
     }
+
 }

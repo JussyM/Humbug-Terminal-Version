@@ -63,4 +63,11 @@ public interface InterfaceView {
      */
     void displayAnimalSigle();
 
+    /**
+     * Display the message given as argument
+     *
+     * @param message to print the number of level or something else
+     */
+    void displayMessage(String message);
+
 }
